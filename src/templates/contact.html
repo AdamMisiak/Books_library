@@ -5,4 +5,11 @@
 numer do
 {{ request.user }} a
 
+<p>{{ my_list }}</p>
+<ul>
+{%for item in my_list%}
+    <li> {{ item }}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
