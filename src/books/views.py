@@ -5,10 +5,7 @@ from .models import Book
 def book_detail_view(request):
 	book = Book.objects.get(id=1)
 	contex = {
-		'title': book.title,
-		'author': book.author,
-		'sites': book.sites,
-
+		'book':book
 
 	}
-	return render(request, 'book.html', contex)
+	return render(request, 'books/book_detail.html', contex)
