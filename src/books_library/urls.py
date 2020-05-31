@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pages.views import home_view, contact_view
-from books.views import book_detail_view
+from books.views import book_detail_view, book_create_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', contact_view),
     path('book/', book_detail_view),
+    path('create/', book_create_view),
     path('', home_view, name='home'),
 ]
