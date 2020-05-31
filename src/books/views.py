@@ -3,7 +3,7 @@ from .models import Book
 from .forms import BookForm
 
 
-def book_create_view(request):
+def find_book_view(request):
 	form = BookForm(request.POST or None)
 	if form.is_valid():
 		form.save()
@@ -12,7 +12,7 @@ def book_create_view(request):
 	contex = {
 		'form':form
 	}
-	return render(request, 'books/book_create.html', contex)
+	return render(request, 'books/find_book.html', contex)
 
 
 def book_detail_view(request):

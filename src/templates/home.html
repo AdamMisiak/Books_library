@@ -2,9 +2,11 @@
 
 {% block content %}
 
-HEJ
-{{ request.user }}
-{{ my_text }}
-
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, {{ request.user }}!</h1>
+        <p class="lead">This is a Books Library home page. Click "Find books" in navigation bar to add books to your's library.</p>
+    </div>
+</div>
 
 {% endblock %}
