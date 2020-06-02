@@ -22,7 +22,7 @@ from books.views import book_results_view, find_book_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', contact_view),
-    path('book_results/', book_results_view),
+    path('book_result/', book_results_view, name='book_result'),
     path('find_book/', find_book_view, name='find_book'),
     path('', home_view, name='home'),
 ]
