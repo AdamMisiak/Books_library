@@ -15,10 +15,10 @@ def find_book_view(request):
 	return render(request, 'books/find_book.html', contex)
 
 
-def book_detail_view(request):
+def book_results_view(request):
 	book = Book.objects.get(id=1)
 	contex = {
 		'book':book
 
 	}
-	return render(request, 'books/book_detail.html', contex)
+	return render(request, 'books/book_results.html', contex)
