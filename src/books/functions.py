@@ -16,9 +16,11 @@ def books_finder(title):
 		title = book.title
 		author = book.authors[0]
 		description = book.description
+		image = book.image_url
 
 		book_dict['title'] = title
 		book_dict['author'] = author
+		book_dict['image'] = image
 		book_dict['description'] = description
 		result_list.append(book_dict)
 		book_dict = {}
