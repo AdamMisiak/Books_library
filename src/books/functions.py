@@ -8,12 +8,18 @@ gc = client.GoodreadsClient(key, secret)
 
 
 def books_finder(title):
+	book_dict = {}
+	result_list = []
 	books = gc.search_books(title)
-	title = books[0]
-	author = books[0].authors[0]
-	description = books[0].description[:200]
+	counter = len(books)
+	for index, book in enumerate(books):
+		title = book.title
+		author = book.authors[0]
+		description = book.description
 
-	print(title)
-	print(description)
-
-books_finder('harry potter')
+		book_dict['title'] = title
+		book_dict['author'] = author
+		book_dict['description'] = description
+		result_list.append(book_dict)
+		book_dict = {}
+	return result_list

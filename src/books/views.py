@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import Book
 from .forms import BookForm, SearchingForm
+from .functions import books_finder
 
 
 
@@ -21,8 +21,10 @@ def find_book_view(request):
 def book_results_view(request):
 	#book = Book.objects.get(id=1)
 	form = request.session['form']
+	print(form)
+	results = books_finder(form['title'])
 	contex = {
 		'form':form,
-
+		'results':results
 	}
 	return render(request, 'books/book_result.html', contex)
