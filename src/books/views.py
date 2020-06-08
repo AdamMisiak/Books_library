@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Book
-from .forms import BookForm
+from .forms import BookForm, SearchingForm
 
 
 
 def find_book_view(request):
-	form = BookForm(request.POST or None)
+	form = SearchingForm(request.POST or None)
 	if form.is_valid():
 		request.session['form'] = form.cleaned_data
 		#form.save()
