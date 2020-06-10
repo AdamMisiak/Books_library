@@ -10,6 +10,6 @@ def register_view(request):
 		form = RegisterForm()
 		#return HttpResponseRedirect('/book_result/')
 	contex = {
-		# 'form':form
+		'form':form
 	}
 	return render(request, 'users/register.html', contex)
