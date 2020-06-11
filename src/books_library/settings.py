@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     'books',
     'pages',
-    'users',
 
     'crispy_forms',
 ]

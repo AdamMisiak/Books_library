@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from pages.views import home_view, contact_view
 from books.views import book_results_view, find_book_view
-from users.views import register_view
+from pages.views import register_view
 
 
 urlpatterns = [
