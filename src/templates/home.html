@@ -4,8 +4,39 @@
 
 <div class="container">
     <div class="jumbotron">
+        {% if user.get_username == '' %}
+        <h1 class="display-4">Hello, New awesome books reader!</h1>
+        {% else %}
         <h1 class="display-4">Hello, {{ request.user }}!</h1>
-        <p class="lead">This is a Books Library home page. Click "Find books" in navigation bar to add books to your's library.</p>
+        {% endif %}
+        <h2>This is a Books Library home page. </h2>
+        <p class="lead">Couple of Reading Challange rules: </p>
+        <ul>
+            <li>
+                You need to choose a book (or books) you want to read in current mounth.
+            </li>
+            <li>
+                App will calculate how many pages per day you should to read.
+            </li>
+            <li>
+                Invite your family,boyfriend or wife to challenge.
+            </li>
+            <li>
+                If you don't make it, you should choose some thing you need to do (for example donate some $ to charity,
+                give food to homeless people or take your boyfriend/girlfriend to nice dinner. It's all up to you.
+            </li>
+            <li>
+                You can check other player's profiles and find some inspiration on next month.
+            </li>
+
+
+
+        </ul>
+        <hr class="my-4">
+        <p>You need to register to start your challange!</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register!</a>
+        </p>
     </div>
 </div>
 
