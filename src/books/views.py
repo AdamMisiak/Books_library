@@ -28,7 +28,7 @@ def book_results_view(request):
 	# print(request.user.id)
 	book = Book(title=results[0]['title'], author=results[0]['author'], image=results[0]['image'], user_id=request.user)
 	book.save()
-	#print(book.author, book.title, book.image, book.user_id)	
+	#print(book.author, book.title, book.image, book.user_id)
 	contex = {
 		'form':form,
 		'results':results

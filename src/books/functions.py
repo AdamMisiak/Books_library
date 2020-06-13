@@ -17,7 +17,7 @@ def books_finder(title):
 		author = book.authors[0]
 		description = book.description
 		image = book.image_url
-
+		
 		book_dict['title'] = title
 		book_dict['author'] = author
 		book_dict['image'] = image
