@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .forms import BookForm, SearchingForm
 from .functions import books_finder
+from .models import Book
 
 
 @login_required(login_url="login")
@@ -21,10 +22,13 @@ def find_book_view(request):
 
 @login_required(login_url="login")
 def book_results_view(request):
-	#book = Book.objects.get(id=1)
 	form = request.session['form']
-	print(form)
 	results = books_finder(form['title'])
+	# print(results[0]['title'])
+	# print(request.user.id)
+	book = Book(title=results[0]['title'], author=results[0]['author'], image=results[0]['image'], user_id=request.user)
+	book.save()
+	#print(book.author, book.title, book.image, book.user_id)	
 	contex = {
 		'form':form,
 		'results':results

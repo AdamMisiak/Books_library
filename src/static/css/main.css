@@ -8,3 +8,7 @@ center {
 body {
 background: white;
 }
+
+.btn btn-primary btn-lg right {
+float: right;
+}

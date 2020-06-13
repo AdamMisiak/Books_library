@@ -1,10 +1,13 @@
 from django import forms
+from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
 class RegisterForm(UserCreationForm):
 	email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+	#book_id = models.ForeignKey(User, default=None, on_delete=models.DO_NOTHING)
 
 	class Meta:
 		model = User
