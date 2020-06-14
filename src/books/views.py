@@ -24,8 +24,6 @@ def find_book_view(request):
 def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
-	# print(results[0]['title'])
-	# print(request.user.id)
 	book = Book(title=results[0]['title'], author=results[0]['author'], image=results[0]['image'], user_id=request.user)
 	book.save()
 	#print(book.author, book.title, book.image, book.user_id)
