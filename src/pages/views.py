@@ -59,14 +59,16 @@ def account_view(request):
 
 
 def update_view(request):
-	user = User.objects.get(pk=request.user.id)
-	form = UpdateForm(request.POST)
-	if form.is_valid():
-		user.username = form.cleaned_data.get('username')
-		user.email = form.cleaned_data.get('email')
-		form.save()
-		return redirect('/account')
-
+	if request.method == 'POST':
+		user = User.objects.get(pk=request.user.id)
+		form = UpdateForm(request.POST, instance=request.user)
+		if form.is_valid():
+			# user.username = form.cleaned_data.get('username')
+			# user.email = form.cleaned_data.get('email')
+			form.save()
+			return redirect('/account')
+	else:
+		form = UpdateForm(instance=request.user)
 	contex = {
 		'form': form
 	}
