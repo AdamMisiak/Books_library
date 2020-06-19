@@ -18,7 +18,11 @@
                 <small class="text-muted">{{ book.author }}</small>
               </div>
             </div>
+            {% if book.description == None %}
+            There is no description :(
+            {% else %}
             {{ book.description }}
+            {% endif %}
             <p>
                 <br>
                 <a class="btn btn-primary btn-lg right" href="{{ add_book }}" role="button">Add</a>
