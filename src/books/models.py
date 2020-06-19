@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Book(models.Model):
-	id = models.AutoField(primary_key=True)
 	#dodac swoje id z API
 	title = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
@@ -12,4 +11,5 @@ class Book(models.Model):
 	image = models.CharField(max_length=300, default='https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png')
 	genre_1 = models.CharField(max_length=100, blank=True)
 	genre_2 = models.CharField(max_length=100, blank=True)
-	user_id = models.ForeignKey(User, default=None, on_delete=models.DO_NOTHING)#NIE DAWAC ID DO NAZWY BO DJANGO ROBI TO SAMO
+	#user = models.ForeignKey(User, default=None, on_delete=models.DO_NOTHING)#NIE DAWAC ID DO NAZWY BO DJANGO ROBI TO SAMO
+	user = models.ManyToManyField(User)

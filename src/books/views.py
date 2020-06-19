@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
 from .functions import books_finder
 from .models import Book
@@ -25,9 +26,11 @@ def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
 	#SOME JQUERY NEEDED
-	book = Book(title=results[0]['title'], author=results[0]['author'], image=results[0]['image'], user_id=request.user)
+
+	book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'])
 	book.save()
-	#print(book.author, book.title, book.image, book.user_id)
+	book.user.add(request.user)
+
 	contex = {
 		'form':form,
 		'results':results

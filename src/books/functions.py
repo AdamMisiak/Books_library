@@ -11,17 +11,22 @@ def books_finder(title):
 	book_dict = {}
 	result_list = []
 	books = gc.search_books(title)
-	counter = len(books)
+
 	for index, book in enumerate(books):
+		id = book.gid
 		title = book.title
 		author = book.authors[0]
 		description = book.description
 		image = book.image_url
 
+		book_dict['id'] = id
 		book_dict['title'] = title
 		book_dict['author'] = author
 		book_dict['image'] = image
 		book_dict['description'] = description
+
 		result_list.append(book_dict)
 		book_dict = {}
 	return result_list
+
+
