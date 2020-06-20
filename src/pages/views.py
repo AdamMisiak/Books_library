@@ -60,6 +60,14 @@ def account_view(request):
 	}
 	return render(request, 'users/account.html', contex)
 
+def library_view(request):
+	user = User.objects.get(pk=request.user.id)
+	books = user.books_added.all()
+	contex = {
+		'books': books,
+	}
+	return render(request, 'users/library.html', contex)
+
 
 def update_view(request):
 	if request.method == 'POST':
