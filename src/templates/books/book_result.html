@@ -25,7 +25,11 @@
             {% endif %}
             <p>
                 <br>
-                <a class="btn btn-primary btn-lg right" href="{{ add_book }}" role="button">Add</a>
+                {% if is_added %}
+                {% else %}
+                <a class="btn btn-primary btn-lg right" id="add" href="{{ add_book }}" role="button">Add</a>
+                {% endif %}
+
             </p>
         </div>
     </div>

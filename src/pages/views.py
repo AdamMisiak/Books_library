@@ -52,8 +52,11 @@ def login_view(request):
 
 def account_view(request):
 	user = User.objects.get(pk=request.user.id)
+	books = user.books_added.all()
+	# print(books[0].description)
 	contex = {
-		'user': user
+		'user': user,
+		'books': books,
 	}
 	return render(request, 'users/account.html', contex)
 

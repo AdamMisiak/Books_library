@@ -12,11 +12,11 @@ def find_book_view(request):
 	form = SearchingForm(request.POST or None)
 	if form.is_valid():
 		request.session['form'] = form.cleaned_data
-		#form.save()
-		#form = BookForm()
+		# form.save()
+		# form = BookForm()
 		return HttpResponseRedirect('/book_result/')
 	contex = {
-		'form':form
+		'form': form
 	}
 	return render(request, 'books/find_book.html', contex)
 
@@ -25,14 +25,16 @@ def find_book_view(request):
 def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
-	#SOME JQUERY NEEDED
+	# added = request.POST['add_book']
+	# SOME JQUERY NEEDED
 
-	book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'])
+	book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
+				description=results[0]['description'])
 	book.save()
 	book.user.add(request.user)
 
 	contex = {
-		'form':form,
-		'results':results
+		'form': form,
+		'results': results
 	}
 	return render(request, 'books/book_result.html', contex)
