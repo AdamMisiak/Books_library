@@ -36,11 +36,13 @@
             {% if user.get_username == '' %}
             <p>Register to start your challange!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register!</a>
+<!--                    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register!</a>-->
+                    <input id="register_user" href="{% url 'register' %}" type="Submit" value="Register!">
             {% else %}
             <p>Start with finding a book!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="{% url 'find_book' %}" role="button">Find book!</a>
+<!--                    <a class="btn btn-primary btn-lg" href="{% url 'find_book' %}" role="button">Find book!</a>-->
+                    <input id="find_book" href="{% url 'find_book' %}" type="Submit" value="Find book!">
             {% endif %}
         </p>
     </div>
