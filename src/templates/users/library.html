@@ -14,19 +14,25 @@
                 <img src="{{ book.image }}" class="center">
                 </div>
 
-                    <div class="col-10">
+                     <div class="col-10">
                         <div class="row mb-3">
-                            <div class="col-6">
+                          <div class="col-6">
                             <p><strong class="text-muted">{{ book.title }}</strong></p>
                             <small class="text-muted">{{ book.author }}</small>
+                              <br>
+                          </div>
+                            <div class="col-6" style="text-align:right;">
+                            <small class="text-muted">ID: {{ book.id }}</small>
                             </div>
                         </div>
-                            {% if book.description == None %}
-                            There is no description :(
-                            {% else %}
-                            {{ book.description }}
-                            {% endif %}
-                    </div>
+
+                        {% if book.description == None %}
+                        There is no description :(
+                        {% else %}
+                        {{ book.description }}
+                        {% endif %}
+                        <p>
+                     </div>
             </div>
         </div>
     </div>

@@ -13,20 +13,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-<!--      $(document).on('submit', '#add', function(e){-->
-<!--        e.preventDefault();-->
+      $("#add").submit(function(e){
+        e.preventDefault();
 
-<!--        $ajax({-->
-<!--          type:'POST',-->
-<!--          url:'/book_result/',-->
-<!--          data:{-->
-<!--              add_book:$('#add').val(),-->
-<!--          },-->
-<!--          sucess:function(){-->
-<!--            console.log("hello")-->
-<!--          }-->
-<!--        });-->
-<!--      });-->
+        $ajax({
+          type:'POST',
+          url:"{% url 'book_result' %}",
+          data:{
+              add_book:$('#add').val(),
+          },
+          success:function(response){
+            console.log("hello")
+          },
+          error:function (response) {
+                console.log("error")
+          }
+        });
+      });
 
     </script>
 
