@@ -31,7 +31,7 @@
             <p>
                 <br>
 
-                <form action="{% url 'books:book-added' %}" method="POST" class="ui form">
+                <form action="{% url 'books:book_add' %}" method="POST" class="ui form">
                 {% csrf_token %}
                 <input type="hidden" name="book_id" value="{{ book.id }}">
                 {% if user.id not in book.user.all %}

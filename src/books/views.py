@@ -45,7 +45,7 @@ def book_add_view(request):
 	if request.method == 'POST':
 		book_id = request.POST.get('book_id')
 		book_object = Book.objects.get(id=book_id)
-		
+
 		print(book_object.author)
 
 		if user.id in book_object.user.all():
@@ -63,4 +63,4 @@ def book_add_view(request):
 
 		book_position.save()
 
-	return redirect('books:book-add')
+	return redirect('books:book_list')
