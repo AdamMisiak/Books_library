@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, include
 from pages.views import home_view, contact_view
 from books.views import book_results_view, find_book_view
 from pages.views import register_view, login_view, account_view, update_view, library_view
@@ -26,7 +26,7 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', contact_view, name='contact'),
-    path('book_result/', book_results_view, name='book_result'),
+    #path('book_result/', book_results_view, name='book_result'),
     path('find_book/', find_book_view, name='find_book'),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
@@ -35,9 +35,9 @@ urlpatterns = [
     path('update/', update_view, name='update'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', home_view, name='home'),
+
+    path('book_result/', include('books.urls', namespace='books'), name='book_result')
 ]
-
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

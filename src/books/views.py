@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
 from .functions import books_finder
-from .models import Book
+from .models import Book, BookPosition
 
 
 @login_required(login_url="login")
@@ -38,3 +38,29 @@ def book_results_view(request):
 		'results': results
 	}
 	return render(request, 'books/book_result.html', contex)
+
+
+def book_add_view(request):
+	user = request.user
+	if request.method == 'POST':
+		book_id = request.POST.get('book_id')
+		book_object = Book.objects.get(id=book_id)
+		
+		print(book_object.author)
+
+		if user.id in book_object.user.all():
+			book_object.user.remove(user)
+		else:
+			book_object.user.add(user)
+
+		#book_position, created = BookPosition.objects.get_or_create(user=user, book=book_id)
+		book_position = BookPosition.objects.create(user=user, book=book_object)
+		#if not created:
+		if book_position.value == "Add":
+			book_position.value = "Delete"
+		else:
+			book_position.value = "Add"
+
+		book_position.save()
+
+	return redirect('books:book-add')

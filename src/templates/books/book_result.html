@@ -30,11 +30,19 @@
             {% endif %}
             <p>
                 <br>
-                {% if is_added %}
+
+                <form action="{% url 'books:book-added' %}" method="POST" class="ui form">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                {% if user.id not in book.user.all %}
+                <button type="submit">Add</button>
                 {% else %}
-                <input id="add" href="" type="Submit" value="Add Book">
-<!--                <a class="btn btn-primary btn-lg right" id="add" href="{{ add_book }}" role="button">Add</a>-->
+                <button type="submit">Delete</button>
                 {% endif %}
+                </form>
+
+<!--                <input id="add" href="" type="Submit" value="Add Book">-->
+<!--                <a class="btn btn-primary btn-lg right" id="add" href="{{ add_book }}" role="button">Add</a>-->
 
             </p>
         </div>
