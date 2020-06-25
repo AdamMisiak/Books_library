@@ -17,6 +17,9 @@ def books_finder(title):
 		title = book.title
 		author = book.authors[0]
 		description = book.description
+		if type(book.description) is str:
+			description = book.description.replace('<i>', '').replace('</i>', '')\
+				.replace('<br>', '').replace('<br />', '')
 		image = book.image_url
 
 		book_dict['id'] = id
@@ -28,6 +31,3 @@ def books_finder(title):
 		result_list.append(book_dict)
 		book_dict = {}
 	return result_list
-
-
-books_finder("wspomnienia gracza gieldowego")
