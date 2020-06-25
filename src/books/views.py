@@ -12,8 +12,7 @@ def find_book_view(request):
 	form = SearchingForm(request.POST or None)
 	if form.is_valid():
 		request.session['form'] = form.cleaned_data
-		# form.save()
-		# form = BookForm()
+
 		return HttpResponseRedirect('/book_result/')
 	contex = {
 		'form': form
@@ -25,20 +24,28 @@ def find_book_view(request):
 def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
-	#book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
-				#description=results[0]['description'])
-	book_position = BookPosition.objects.get(user=user, book=book)
-	# added = request.POST['add_book']
-	# SOME JQUERY NEEDED
 
-	# book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
-	# description=results[0]['description'])
-	# book.save()
-	# book.user.add(request.user)
+	if 'book_id' in request.session.keys():
+		contex = {}
+		book_id = request.session['book_id']
+		book = Book.objects.get(id=book_id)
+
+		contex['book_position'] = book.user.all
+
+
+	# SPRAWDZIC TO!
+	# print(request.session.keys())
+	# if 'book' in request.session.keys():
+	# 	contex = {}
+	# 	book = request.session['book']
+	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
+	# 	print(book_position.value)
+	# 	contex['book_position'] = book_position
+
 
 	contex = {
 		'form': form,
-		'results': results
+		'results': results,
 	}
 	return render(request, 'books/book_result.html', contex)
 
@@ -56,14 +63,16 @@ def book_add_view(request):
 					description=book_description)
 		book.save()
 
+		request.session['book_id'] = book.id
+
 		if user in book.user.all():
 			book.user.remove(user)
 		else:
 			book.user.add(user)
 
+		# BOOKS AND USER CONNECTION PART
 		book_position, created = BookPosition.objects.get_or_create(user=user, book=book)
-		#book_position = BookPosition.objects.create(user=user, book=book)
-		# if not created:
+
 		if book_position.value == "Add":
 			book_position.value = "Delete"
 		else:
