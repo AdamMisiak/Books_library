@@ -25,13 +25,16 @@ def find_book_view(request):
 def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
+	#book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
+				#description=results[0]['description'])
+	book_position = BookPosition.objects.get(user=user, book=book)
 	# added = request.POST['add_book']
 	# SOME JQUERY NEEDED
 
-	book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
-				description=results[0]['description'])
-	book.save()
-	book.user.add(request.user)
+	# book = Book(id=results[0]['id'], title=results[0]['title'], author=results[0]['author'], image=results[0]['image'],
+	# description=results[0]['description'])
+	# book.save()
+	# book.user.add(request.user)
 
 	contex = {
 		'form': form,
@@ -48,21 +51,18 @@ def book_add_view(request):
 		book_author = request.POST.get('book_author')
 		book_image = request.POST.get('book_image')
 		book_description = request.POST.get('book_description')
+
 		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
 					description=book_description)
 		book.save()
-		print(book_id)
-		book_object = Book.objects.get(id=book_id)
 
-		print(book_object.author)
-
-		if user.id in book_object.user.all():
-			book_object.user.remove(user)
+		if user in book.user.all():
+			book.user.remove(user)
 		else:
-			book_object.user.add(user)
+			book.user.add(user)
 
-		# book_position, created = BookPosition.objects.get_or_create(user=user, book=book_id)
-		book_position = BookPosition.objects.create(user=user, book=book_object)
+		book_position, created = BookPosition.objects.get_or_create(user=user, book=book)
+		#book_position = BookPosition.objects.create(user=user, book=book)
 		# if not created:
 		if book_position.value == "Add":
 			book_position.value = "Delete"

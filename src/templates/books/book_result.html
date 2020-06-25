@@ -28,22 +28,23 @@
             {% else %}
             {{ book.description }}
             {% endif %}
+            {{ book.user }}
             <p>
-                <br>
+                 <br>
 
                 <form action="{% url 'books:book_add' %}" method="POST" class="ui form">
-                {% csrf_token %}
-                <input type="hidden" name="book_id" value="{{ book.id }}">
-                <input type="hidden" name="book_title" value="{{ book.title }}">
-                <input type="hidden" name="book_author" value="{{ book.author }}">
-                <input type="hidden" name="book_image" value="{{ book.image }}">
-                <input type="hidden" name="book_description" value="{{ book.description }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="book_id" value="{{ book.id }}">
+                    <input type="hidden" name="book_title" value="{{ book.title }}">
+                    <input type="hidden" name="book_author" value="{{ book.author }}">
+                    <input type="hidden" name="book_image" value="{{ book.image }}">
+                    <input type="hidden" name="book_description" value="{{ book.description }}">
 
-                {% if user.id not in book.user.all %}
-                <button type="submit">Add</button>
-                {% else %}
-                <button type="submit">Delete</button>
-                {% endif %}
+                    {% if user not in book.user.all %}
+                        <button id="add" type="submit">Add</button>
+                    {% else %}
+                        <button id="delete" type="submit">Delete</button>
+                    {% endif %}
                 </form>
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->

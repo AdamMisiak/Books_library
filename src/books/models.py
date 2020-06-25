@@ -28,7 +28,7 @@ BOOK_CHOICES = (
 class BookPosition(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
-	value = models.CharField(choices=BOOK_CHOICES, default="Add", max_length=10)
+	value = models.CharField(choices=BOOK_CHOICES, default="Delete", max_length=10)
 
 	def __str__(self):
-		return str(self.title)
+		return str(self.book)
