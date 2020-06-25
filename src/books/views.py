@@ -44,6 +44,14 @@ def book_add_view(request):
 	user = request.user
 	if request.method == 'POST':
 		book_id = request.POST.get('book_id')
+		book_title = request.POST.get('book_title')
+		book_author = request.POST.get('book_author')
+		book_image = request.POST.get('book_image')
+		book_description = request.POST.get('book_description')
+		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
+					description=book_description)
+		book.save()
+		print(book_id)
 		book_object = Book.objects.get(id=book_id)
 
 		print(book_object.author)
@@ -53,9 +61,9 @@ def book_add_view(request):
 		else:
 			book_object.user.add(user)
 
-		#book_position, created = BookPosition.objects.get_or_create(user=user, book=book_id)
+		# book_position, created = BookPosition.objects.get_or_create(user=user, book=book_id)
 		book_position = BookPosition.objects.create(user=user, book=book_object)
-		#if not created:
+		# if not created:
 		if book_position.value == "Add":
 			book_position.value = "Delete"
 		else:
