@@ -13,7 +13,7 @@ class Book(models.Model):
 	description = models.CharField(max_length=2000, default=None)
 	genre_1 = models.CharField(max_length=100, blank=True)
 	genre_2 = models.CharField(max_length=100, blank=True)
-	user = models.ManyToManyField(User, related_name='books_added')
+	user = models.ManyToManyField(User, related_name='books_added', blank=True)
 
 	def __str__(self):
 		return str(self.title)
