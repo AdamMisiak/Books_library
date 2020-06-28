@@ -19,7 +19,7 @@ def books_finder(title):
 		description = book.description
 		if type(book.description) is str:
 			description = book.description.replace('<i>', '').replace('</i>', '')\
-				.replace('<br>', '').replace('<br />', '')
+				.replace('<br>', '').replace('<br />', '').replace('<b>', '').replace('</b>', '')
 		image = book.image_url
 
 		book_dict['id'] = id

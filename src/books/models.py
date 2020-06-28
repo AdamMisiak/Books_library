@@ -10,7 +10,7 @@ class Book(models.Model):
 	image = models.CharField(max_length=300,
 							 default='https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png')
 	sites = models.IntegerField(blank=True, default=0)
-	description = models.CharField(max_length=2000, default=None)
+	description = models.CharField(max_length=2000, default=None, blank=True)
 	genre_1 = models.CharField(max_length=100, blank=True)
 	genre_2 = models.CharField(max_length=100, blank=True)
 	user = models.ManyToManyField(User, related_name='books_added', blank=True)

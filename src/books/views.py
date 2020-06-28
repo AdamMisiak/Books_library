@@ -24,6 +24,19 @@ def find_book_view(request):
 def book_results_view(request):
 	form = request.session['form']
 	results = books_finder(form['title'])
+	for book in results:
+		book_id = book['id']
+		book_title = book['title']
+		book_author = book['author']
+		book_image = book['image']
+		if book['description'] is None:
+			book_description = 'There is no description :('
+		else:
+			book_description = book['description']
+
+		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
+					description=book_description)
+		book.save()
 
 	if 'book_id' in request.session.keys():
 		contex = {}
