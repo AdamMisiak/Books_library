@@ -22,3 +22,4 @@ class UpdateForm(UserChangeForm):
 			'username',
 			'email',
 		]
+
