@@ -60,6 +60,7 @@ def account_view(request):
 	}
 	return render(request, 'users/account.html', contex)
 
+
 def library_view(request):
 	user = User.objects.get(pk=request.user.id)
 	books = user.books_added.all()
