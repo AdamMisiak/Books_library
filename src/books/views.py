@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
@@ -45,7 +45,6 @@ def book_results_view(request):
 
 		contex['book_position'] = book.user.all
 
-
 	# SPRAWDZIC TO!
 	# print(request.session.keys())
 	# if 'book' in request.session.keys():
@@ -55,7 +54,6 @@ def book_results_view(request):
 	# 	print(book_position.value)
 	# 	contex['book_position'] = book_position
 
-
 	contex = {
 		'form': form,
 		'results': results,
@@ -63,19 +61,15 @@ def book_results_view(request):
 	return render(request, 'books/book_result.html', contex)
 
 
-@login_required
-def like_category(request):
-	book_id = None
+def like(request):
 	if request.method == 'GET':
 		book_id = request.GET['book_id']
-		likes = 0
-		if book_id:
-			book = Book.objects.get(id=int(book_id))
-			if book:
-			#likes = cat.likes + 1
-			#cat.likes = likes
-			book.save()
-	return HttpResponseRedirect(likes)
+		book = Book.objects.get(id=book_id)
+		m = BookPosition(user=request.user, book=book)
+		m.save()
+		return HttpResponse('success')
+	else:
+		return HttpResponse("unsuccesful")
 
 
 def book_add_view(request):

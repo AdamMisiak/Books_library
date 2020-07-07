@@ -38,7 +38,9 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('__debug__', include(debug_toolbar.urls)),
 
-    path('book_result/', include('books.urls', namespace='books'), name='book_result')
+    path('book_result/', include('books.urls', namespace='books'), name='book_result'),
+    path('ajax/', include('books.urls')),
+
 ]
 
 if settings.DEBUG:

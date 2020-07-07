@@ -40,15 +40,6 @@
                     <input type="hidden" name="book_image" value="{{ book.image }}">
                     <input type="hidden" name="book_description" value="{{ book.description }}">
 
-                <div>
-                <strong id="like_count">   </strong>
-
-                <button id="likes" data-catid="{{ book.id }}"
-                class="btn btn-primary btn-sm" type="button">
-                Like
-                </button>
-
-                </div>
 
                     {% if user not in book_position %}
                         <button id="add" type="submit">Add</button>
@@ -56,6 +47,12 @@
                         <button id="delete" type="submit">Delete</button>
                     {% endif %}
                 </form>
+
+            <div type="text/css" class = "container"></div>
+            <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Like</a>
+            </p><p id="message{{book.id}}"></p>
+            </div>
+
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->
 <!--                <a class="btn btn-primary btn-lg right" id="add" href="{{ add_book }}" role="button">Add</a>-->
@@ -67,5 +64,22 @@
 </div>
 
 {% endfor %}
+
+                <script type="text/javascript">
+                    $('.likebutton').click(function(){
+                    var id;
+                    id = $(this).attr("data-catid");
+                    $.ajax(
+                    {
+                        type:"GET",
+                        url: "like",
+                        data:{
+                                 book_id: id
+                    },
+                    success: function( data )
+                    {
+                        $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
+                        $( '#like'+ id ).addClass('btn btn-success btn-lg'); } }) });
+                </script>
 
 {% endblock %}
