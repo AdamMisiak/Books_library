@@ -47,15 +47,18 @@
 <!--                        <button id="delete" type="submit">Delete</button>-->
 <!--                    {% endif %}-->
 <!--                </form>-->
-
-<!--            {% if user not in book.user %}-->
-<!--            dupa-->
-<!--            {% else %}-->
-            <div type="text/css" class = "container"></div>
-            <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
-            </p><p id="message{{book.id}}"></p>
-            </div>
-<!--            {% endif %}-->
+            {% for user_book in user.books_added.all %}
+                {{ user_book.id }}
+                {{ book.id }}
+                {% ifequal book.id|stringformat:"s" user_book.id|stringformat:"s" %}
+                dupa
+                {% else %}
+                <div type="text/css" class = "container"></div>
+                <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
+                </p><p id="message{{book.id}}"></p>
+                </div>
+                {% endifequal %}
+            {% endfor %}
 
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->

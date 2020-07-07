@@ -40,7 +40,8 @@ def book_results_view(request):
 
 		if book not in Book.objects.all():
 			book.save()
-
+		u1 = request.user
+		print(u1.books_added.all())
 
 
 		#book_position = BookPosition.objects.get(user=request.user, book=book)
