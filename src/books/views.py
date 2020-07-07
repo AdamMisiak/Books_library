@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
@@ -29,6 +29,7 @@ def book_results_view(request):
 		book_title = book['title']
 		book_author = book['author']
 		book_image = book['image']
+
 		if book['description'] is None:
 			book_description = 'There is no description :('
 		else:
@@ -36,15 +37,19 @@ def book_results_view(request):
 
 		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
 					description=book_description)
-		book.save()
 
-	if 'book_id' in request.session.keys():
-		contex = {}
-		book_id = request.session['book_id']
-		book = Book.objects.get(id=book_id)
+		if book not in Book.objects.all():
+			book.save()
 
-		contex['book_position'] = book.user.all
 
+		#book_position = BookPosition.objects.get(user=request.user, book=book)
+
+	# if 'book_id' in request.session.keys():
+	# 	contex = {}
+	# 	book_id = request.session['book_id']
+	# 	book = Book.objects.get(id=book_id)
+	#
+	# 	contex['book_position'] = book.user.all
 
 	# SPRAWDZIC TO!
 	# print(request.session.keys())
@@ -55,42 +60,32 @@ def book_results_view(request):
 	# 	print(book_position.value)
 	# 	contex['book_position'] = book_position
 
-
 	contex = {
 		'form': form,
 		'results': results,
+
 	}
 	return render(request, 'books/book_result.html', contex)
 
 
 def book_add_view(request):
-	user = request.user
-	if request.method == 'POST':
-		book_id = request.POST.get('book_id')
-		book_title = request.POST.get('book_title')
-		book_author = request.POST.get('book_author')
-		book_image = request.POST.get('book_image')
-		book_description = request.POST.get('book_description')
-
-		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
-					description=book_description)
-		book.save()
-
-		request.session['book_id'] = book.id
-
-		if user in book.user.all():
-			book.user.remove(user)
+	if request.method == 'GET':
+		book_id = request.GET['book_id']
+		book = Book.objects.get(id=book_id)
+		if request.user in book.user.all():
+			book.user.remove(request.user)
 		else:
-			book.user.add(user)
+			book.user.add(request.user)
 
-		# BOOKS AND USER CONNECTION PART
-		book_position, created = BookPosition.objects.get_or_create(user=user, book=book)
-
+		# BOOKS AND USER CONNECTION
+		book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
 		if book_position.value == "Add":
 			book_position.value = "Delete"
 		else:
 			book_position.value = "Add"
-
 		book_position.save()
 
-	return redirect('books:book_list')
+		return HttpResponse('success')
+	else:
+		return HttpResponse("unsuccesful")
+
