@@ -32,26 +32,30 @@
             <p>
                  <br>
 
-                <form action="{% url 'books:book_add' %}" method="POST" class="ui form">
-                    {% csrf_token %}
-                    <input type="hidden" name="book_id" value="{{ book.id }}">
-                    <input type="hidden" name="book_title" value="{{ book.title }}">
-                    <input type="hidden" name="book_author" value="{{ book.author }}">
-                    <input type="hidden" name="book_image" value="{{ book.image }}">
-                    <input type="hidden" name="book_description" value="{{ book.description }}">
+<!--                <form action="{% url 'books:book_add' %}" method="POST" class="ui form">-->
+<!--                    {% csrf_token %}-->
+<!--                    <input type="hidden" name="book_id" value="{{ book.id }}">-->
+<!--                    <input type="hidden" name="book_title" value="{{ book.title }}">-->
+<!--                    <input type="hidden" name="book_author" value="{{ book.author }}">-->
+<!--                    <input type="hidden" name="book_image" value="{{ book.image }}">-->
+<!--                    <input type="hidden" name="book_description" value="{{ book.description }}">-->
 
 
-                    {% if user not in book_position %}
-                        <button id="add" type="submit">Add</button>
-                    {% else %}
-                        <button id="delete" type="submit">Delete</button>
-                    {% endif %}
-                </form>
+<!--                    {% if user not in book_position %}-->
+<!--                        <button id="add" type="submit">Add</button>-->
+<!--                    {% else %}-->
+<!--                        <button id="delete" type="submit">Delete</button>-->
+<!--                    {% endif %}-->
+<!--                </form>-->
 
+<!--            {% if user not in book.user %}-->
+<!--            dupa-->
+<!--            {% else %}-->
             <div type="text/css" class = "container"></div>
-            <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Like</a>
+            <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
             </p><p id="message{{book.id}}"></p>
             </div>
+<!--            {% endif %}-->
 
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->
@@ -72,14 +76,17 @@
                     $.ajax(
                     {
                         type:"GET",
-                        url: "like",
+                        url: "book_add_view",
                         data:{
                                  book_id: id
                     },
                     success: function( data )
                     {
                         $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
-                        $( '#like'+ id ).addClass('btn btn-success btn-lg'); } }) });
+                        $( '#like'+ id ).addClass('btn btn-success btn-lg');
+                     }
+                     })
+                     });
                 </script>
 
 {% endblock %}
