@@ -31,34 +31,26 @@
             {{ book.user }}
             <p>
                  <br>
-
-<!--                <form action="{% url 'books:book_add' %}" method="POST" class="ui form">-->
-<!--                    {% csrf_token %}-->
-<!--                    <input type="hidden" name="book_id" value="{{ book.id }}">-->
-<!--                    <input type="hidden" name="book_title" value="{{ book.title }}">-->
-<!--                    <input type="hidden" name="book_author" value="{{ book.author }}">-->
-<!--                    <input type="hidden" name="book_image" value="{{ book.image }}">-->
-<!--                    <input type="hidden" name="book_description" value="{{ book.description }}">-->
-
-
-<!--                    {% if user not in book_position %}-->
-<!--                        <button id="add" type="submit">Add</button>-->
-<!--                    {% else %}-->
-<!--                        <button id="delete" type="submit">Delete</button>-->
-<!--                    {% endif %}-->
-<!--                </form>-->
-            {% for user_book in user.books_added.all %}
-                {{ user_book.id }}
-                {{ book.id }}
-                {% ifequal book.id|stringformat:"s" user_book.id|stringformat:"s" %}
-                dupa
-                {% else %}
+            {% if user.books_added.all %}
+                {% for user_book in user.books_added.all %}
+                    {% ifequal book.id|stringformat:"s" user_book.id|stringformat:"s" %}
+                         <div type="text/css" class = "container"></div>
+                        <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
+                        </p><p id="message{{book.id}}"></p>
+                        </div>
+                    {% else %}
+                        <div type="text/css" class = "container"></div>
+                        <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
+                        </p><p id="message{{book.id}}"></p>
+                        </div>
+                    {% endifequal %}
+                {% endfor %}
+            {% else %}
                 <div type="text/css" class = "container"></div>
                 <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
                 </p><p id="message{{book.id}}"></p>
                 </div>
-                {% endifequal %}
-            {% endfor %}
+            {% endif %}
 
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->
@@ -85,8 +77,16 @@
                     },
                     success: function( data )
                     {
+                        if( $( '#like'+ id ).hasClass( "btn btn-primary btn-lg" ) )
+                        {
                         $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
-                        $( '#like'+ id ).addClass('btn btn-success btn-lg');
+                        $( '#like'+ id ).addClass('btn btn-danger btn-lg');
+                        }
+                        if( $( '#like'+ id ).hasClass( "btn btn-danger btn-lg" ) )
+                        {
+                        $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
+                        $( '#like'+ id ).addClass('btn btn-primary btn-lg');
+                        }
                      }
                      })
                      });
