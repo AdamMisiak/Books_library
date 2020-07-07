@@ -63,6 +63,21 @@ def book_results_view(request):
 	return render(request, 'books/book_result.html', contex)
 
 
+@login_required
+def like_category(request):
+	book_id = None
+	if request.method == 'GET':
+		book_id = request.GET['book_id']
+		likes = 0
+		if book_id:
+			book = Book.objects.get(id=int(book_id))
+			if book:
+			#likes = cat.likes + 1
+			#cat.likes = likes
+			book.save()
+	return HttpResponseRedirect(likes)
+
+
 def book_add_view(request):
 	user = request.user
 	if request.method == 'POST':

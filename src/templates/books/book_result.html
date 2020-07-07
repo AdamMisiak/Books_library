@@ -40,9 +40,15 @@
                     <input type="hidden" name="book_image" value="{{ book.image }}">
                     <input type="hidden" name="book_description" value="{{ book.description }}">
 
-                    {{ user }}
-                    {{ book_position }}
-                    {{ form }}
+                <div>
+                <strong id="like_count">   </strong>
+
+                <button id="likes" data-catid="{{ book.id }}"
+                class="btn btn-primary btn-sm" type="button">
+                Like
+                </button>
+
+                </div>
 
                     {% if user not in book_position %}
                         <button id="add" type="submit">Add</button>
