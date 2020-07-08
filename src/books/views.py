@@ -48,29 +48,9 @@ def book_results_view(request):
 		if book not in Book.objects.all():
 			book.save()
 
-
-		#book_position = BookPosition.objects.get(user=request.user, book=book)
-
-	# if 'book_id' in request.session.keys():
-	# 	contex = {}
-	# 	book_id = request.session['book_id']
-	# 	book = Book.objects.get(id=book_id)
-	#
-	# 	contex['book_position'] = book.user.all
-
-	# SPRAWDZIC TO!
-	# print(request.session.keys())
-	# if 'book' in request.session.keys():
-	# 	contex = {}
-	# 	book = request.session['book']
-	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
-	# 	print(book_position.value)
-	# 	contex['book_position'] = book_position
-
 	contex = {
 		'form': form,
 		'results': results,
-		'id_added': id_added,
 
 	}
 	return render(request, 'books/book_result.html', contex)

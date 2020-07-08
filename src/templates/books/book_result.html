@@ -33,24 +33,17 @@
             <p>
                  <br>
 
-
-                    {% ifequal book.status|stringformat:"s" "added" %}
-                        <div type="text/css" class = "container"></div>
-                        <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
-                        </p><p id="message{{book.id}}"></p>
-                        </div>
-                    {% else %}
-                        <div type="text/css" class = "container"></div>
-                        <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
-                        </p><p id="message{{book.id}}"></p>
-                        </div>
-                    {% endifequal %}
-
-
-
-
-<!--                <input id="add" href="" type="Submit" value="Add Book">-->
-<!--                <a class="btn btn-primary btn-lg right" id="add" href="{{ add_book }}" role="button">Add</a>-->
+                {% ifequal book.status|stringformat:"s" "added" %}
+                    <div type="text/css" class = "container"></div>
+                    <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
+                    </p><p id="message{{book.id}}"></p>
+                    </div>
+                {% else %}
+                    <div type="text/css" class = "container"></div>
+                    <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
+                    </p><p id="message{{book.id}}"></p>
+                    </div>
+                {% endifequal %}
 
             </p>
         </div>
@@ -73,11 +66,16 @@
                     },
                     success: function( data )
                     {
-
-                        $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
-                        $( '#like'+ id ).addClass('btn btn-danger btn-lg');
-
-
+                        if($( '#like'+ id ).text() == 'Add'){
+                            $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
+                            $( '#like'+ id ).text('Delete');
+                            $( '#like'+ id ).addClass('btn btn-danger btn-lg');
+                        }
+                        if($( '#like'+ id ).text() == 'Delete'){
+                            $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
+                            $( '#like'+ id ).text('Add');
+                            $( '#like'+ id ).addClass('btn btn-primary btn-lg');
+                        }
                      }
                      })
                      });
