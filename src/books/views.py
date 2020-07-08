@@ -37,15 +37,10 @@ def book_results_view(request):
 		else:
 			book_description = book['description']
 
+		results[number]['status'] = 'deleted'
 		for book_added in request.user.books_added.all():
-			print(str(book_id))
-			print(str(book_added.id))
-			print('cc')
 			if str(book_id) == str(book_added.id):
 				results[number]['status'] = 'added'
-			else:
-				results[number]['status'] = 'deleted'
-
 
 		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
 					description=book_description)
