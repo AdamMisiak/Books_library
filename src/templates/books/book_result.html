@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% load define_added %}
 
 {% for book in results %}
 <div class="card mb-2" style="margin-left:10%; margin-right:10%;">
@@ -31,10 +32,10 @@
             {{ book.user }}
             <p>
                  <br>
-            {% if user.books_added.all %}
-                {% for user_book in user.books_added.all %}
-                    {% ifequal book.id|stringformat:"s" user_book.id|stringformat:"s" %}
-                         <div type="text/css" class = "container"></div>
+
+
+                    {% ifequal book.status|stringformat:"s" "added" %}
+                        <div type="text/css" class = "container"></div>
                         <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
                         </p><p id="message{{book.id}}"></p>
                         </div>
@@ -44,13 +45,8 @@
                         </p><p id="message{{book.id}}"></p>
                         </div>
                     {% endifequal %}
-                {% endfor %}
-            {% else %}
-                <div type="text/css" class = "container"></div>
-                <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
-                </p><p id="message{{book.id}}"></p>
-                </div>
-            {% endif %}
+
+
 
 
 <!--                <input id="add" href="" type="Submit" value="Add Book">-->
@@ -77,16 +73,11 @@
                     },
                     success: function( data )
                     {
-                        if( $( '#like'+ id ).hasClass( "btn btn-primary btn-lg" ) )
-                        {
+
                         $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
                         $( '#like'+ id ).addClass('btn btn-danger btn-lg');
-                        }
-                        if( $( '#like'+ id ).hasClass( "btn btn-danger btn-lg" ) )
-                        {
-                        $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
-                        $( '#like'+ id ).addClass('btn btn-primary btn-lg');
-                        }
+
+
                      }
                      })
                      });

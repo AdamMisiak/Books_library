@@ -22,9 +22,11 @@ def find_book_view(request):
 
 @login_required(login_url="login")
 def book_results_view(request):
+	id_added = []
 	form = request.session['form']
 	results = books_finder(form['title'])
-	for book in results:
+
+	for number, book in enumerate(results):
 		book_id = book['id']
 		book_title = book['title']
 		book_author = book['author']
@@ -34,6 +36,16 @@ def book_results_view(request):
 			book_description = 'There is no description :('
 		else:
 			book_description = book['description']
+
+		for book_added in request.user.books_added.all():
+			print(str(book_id))
+			print(str(book_added.id))
+			print('cc')
+			if str(book_id) == str(book_added.id):
+				results[number]['status'] = 'added'
+			else:
+				results[number]['status'] = 'deleted'
+
 
 		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
 					description=book_description)
@@ -63,6 +75,7 @@ def book_results_view(request):
 	contex = {
 		'form': form,
 		'results': results,
+		'id_added': id_added,
 
 	}
 	return render(request, 'books/book_result.html', contex)
