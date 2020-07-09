@@ -30,18 +30,18 @@
             {{ book.user }}
             <p>
                  <br>
-
+                {% load define_action %}
                 {% ifequal book.status|stringformat:"s" "added" %}
-                    <div type="text/css" class = "container"></div>
-                    <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
-                    </p><p id="message{{book.id}}"></p>
-                    </div>
+                    {% define "Delete" as action %}
+                    {% define "danger" as color %}
                 {% else %}
+                    {% define "Add" as action %}
+                    {% define "primary" as color %}
+                {% endifequal %}
                     <div type="text/css" class = "container"></div>
-                    <a class="likebutton btn btn-primary btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Add</a>
+                    <a class="addbutton btn btn-{{ color }} btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">{{ action }}</a>
                     </p><p id="message{{book.id}}"></p>
                     </div>
-                {% endifequal %}
 
             </p>
         </div>
@@ -52,7 +52,7 @@
 {% endfor %}
 
         <script type="text/javascript">
-            $('.likebutton').click(function(){
+            $('.addbutton').click(function(){
             var id;
             id = $(this).attr("data-catid");
             $.ajax(
@@ -69,7 +69,7 @@
                     $( '#like'+ id ).text('Delete');
                     $( '#like'+ id ).addClass('btn btn-danger btn-lg');
                 }
-                if($( '#like'+ id ).text() == 'Delete'){
+                else if($( '#like'+ id ).text() == 'Delete'){
                     $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
                     $( '#like'+ id ).text('Add');
                     $( '#like'+ id ).addClass('btn btn-primary btn-lg');

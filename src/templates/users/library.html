@@ -58,7 +58,7 @@
                         <br>
 
                     <div type="text/css" class = "container"></div>
-                    <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
+                    <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
                     </p><p id="message{{book.id}}"></p>
                     </div>
 
@@ -71,7 +71,7 @@
 {% endif %}
 
         <script type="text/javascript">
-            $('.likebutton').click(function(){
+            $('.addbutton').click(function(){
             var id;
             id = $(this).attr("data-catid");
             console.log(id);
