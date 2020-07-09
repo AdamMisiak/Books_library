@@ -32,14 +32,18 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('account/', account_view, name='account'),
+
     path('library/', library_view, name='library'),
+
     path('update/', update_view, name='update'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', home_view, name='home'),
     path('__debug__', include(debug_toolbar.urls)),
+    #path('ajax/', include('books.urls')),
 
     path('book_result/', include('books.urls', namespace='books'), name='book_result'),
-    path('ajax/', include('books.urls')),
+    path('library/', include('pages.urls', namespace='pages'), name='library'),
+
 
 ]
 
