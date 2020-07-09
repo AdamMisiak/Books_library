@@ -23,7 +23,10 @@ def find_book_view(request):
 @login_required(login_url="login")
 def book_results_view(request):
 	form = request.session['form']
-	results = books_finder(form['title'])
+	try:
+		results = books_finder(form['title'])
+	except:
+		return render(request, 'books/finding_failed.html')
 
 	for number, book in enumerate(results):
 		book_id = book['id']
@@ -68,3 +71,6 @@ def book_add_view(request):
 	else:
 		return HttpResponse("unsuccesful")
 
+
+def finding_failed(request, *args, **kwargs):
+	return render(request, 'finding_failed.html', {})
