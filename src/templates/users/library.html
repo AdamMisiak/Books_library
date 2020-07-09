@@ -55,12 +55,43 @@
                         {{ book.description }}
                         {% endif %}
                         <p>
-                     </div>
+                        <br>
+
+                    <div type="text/css" class = "container"></div>
+                    <a class="likebutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
+                    </p><p id="message{{book.id}}"></p>
+                    </div>
+
+                 </div>
             </div>
         </div>
     </div>
 
 {% endfor %}
 {% endif %}
+
+        <script type="text/javascript">
+            $('.likebutton').click(function(){
+            var id;
+            id = $(this).attr("data-catid");
+            console.log(id);
+            $.ajax(
+            {
+                type:"GET",
+                url: "book_add_view",
+                data:{
+                         book_id: id
+            },
+            success: function( data )
+            {
+                if($( '#like'+ id ).text() == 'Delete'){
+                    $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
+                    $( '#like'+ id ).text('Add');
+                    $( '#like'+ id ).addClass('btn btn-primary btn-lg');
+                }
+             }
+             })
+             });
+        </script>
 
 {% endblock %}

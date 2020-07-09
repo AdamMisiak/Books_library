@@ -1,8 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, UpdateForm
+from django.apps import apps
+Book = apps.get_model('books', 'Book')
 
 
 def home_view(request, *args, **kwargs):
@@ -85,3 +88,17 @@ def update_view(request):
 		'form': form
 	}
 	return render(request, 'users/update.html', contex)
+
+
+def book_add_view(request):
+	if request.method == 'GET':
+		book_id = request.GET['book_id']
+		book = Book.objects.get(id=book_id)
+		if request.user in book.user.all():
+			book.user.remove(request.user)
+		else:
+			book.user.add(request.user)
+
+		return HttpResponse('success')
+	else:
+		return HttpResponse("unsuccesful")

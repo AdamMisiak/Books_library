@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
 from .functions import books_finder
-from .models import Book, BookPosition
+from .models import Book
 
 
 @login_required(login_url="login")
@@ -22,7 +22,6 @@ def find_book_view(request):
 
 @login_required(login_url="login")
 def book_results_view(request):
-	id_added = []
 	form = request.session['form']
 	results = books_finder(form['title'])
 
@@ -51,8 +50,8 @@ def book_results_view(request):
 	contex = {
 		'form': form,
 		'results': results,
-
 	}
+
 	return render(request, 'books/book_result.html', contex)
 
 
@@ -64,14 +63,6 @@ def book_add_view(request):
 			book.user.remove(request.user)
 		else:
 			book.user.add(request.user)
-
-		# BOOKS AND USER CONNECTION
-		book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
-		if book_position.value == "Add":
-			book_position.value = "Delete"
-		else:
-			book_position.value = "Add"
-		book_position.save()
 
 		return HttpResponse('success')
 	else:
