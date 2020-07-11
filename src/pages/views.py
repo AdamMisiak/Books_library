@@ -5,7 +5,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, UpdateForm
 from django.apps import apps
+
 Book = apps.get_model('books', 'Book')
+BookPosition = apps.get_model('books', 'BookPosition')
 
 
 def home_view(request, *args, **kwargs):
@@ -78,8 +80,6 @@ def update_view(request):
 		user = User.objects.get(pk=request.user.id)
 		form = UpdateForm(request.POST, instance=request.user)
 		if form.is_valid():
-			# user.username = form.cleaned_data.get('username')
-			# user.email = form.cleaned_data.get('email')
 			form.save()
 			return redirect('/account')
 	else:
@@ -96,8 +96,13 @@ def book_add_view(request):
 		book = Book.objects.get(id=book_id)
 		if request.user in book.user.all():
 			book.user.remove(request.user)
+			book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
+			book_position.value = "Delete"
 		else:
 			book.user.add(request.user)
+			book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
+			book_position.value = "Add"
+		book_position.save()
 
 		return HttpResponse('success')
 	else:
