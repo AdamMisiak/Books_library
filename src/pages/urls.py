@@ -5,5 +5,6 @@ app_name = 'pages'
 
 urlpatterns = [
 	path('delete_book/', book_add_view, name='book_add'),
+	path('book_options/', book_options_view, name='book_options'),
 
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm
+from .forms import RegisterForm, UpdateForm, BookOptions
 from django.apps import apps
 
 Book = apps.get_model('books', 'Book')
@@ -109,5 +109,26 @@ def book_add_view(request):
 
 
 def book_options_view(request):
+
+	if request.method == 'POST':
+		form = BookOptions(data=request.POST)
+		print('dupa')
+		if form.is_valid():
+			form.save()
+			book_id = form.cleaned_data.get('id')
+			book = Book.objects.get(id=book_id)
+			book_position = BookPosition.objects.get(user=request.user, book=book)
+			print(book_position)
+			print('dupa')
+			return redirect('/book_options')
+	# if request.method == 'GET':
+	# 	book_id = request.GET['book_id']
+	# 	book = Book.objects.get(id=book_id)
+	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
+	# 	print(book_position)
+	# 	return HttpResponse('success')
+
 	return render(request, 'users/book_options.html')
+
+
 
