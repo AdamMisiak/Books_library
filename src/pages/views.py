@@ -28,7 +28,6 @@ def register_view(request):
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
-			# login(request, user)
 			return redirect('/login')
 	else:
 		form = RegisterForm()
@@ -107,3 +106,8 @@ def book_add_view(request):
 		return HttpResponse('success')
 	else:
 		return HttpResponse("unsuccesful")
+
+
+def book_options_view(request):
+	return render(request, 'users/book_options.html')
+

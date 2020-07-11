@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from pages.views import home_view, contact_view
 from books.views import book_results_view, find_book_view, finding_failed
-from pages.views import register_view, login_view, account_view, update_view, library_view
+from pages.views import register_view, login_view, account_view, update_view, library_view, book_options_view
 from django.contrib.auth.views import LogoutView
 import debug_toolbar
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('contact/', contact_view, name='contact'),
     #path('book_result/', book_results_view, name='book_result'),
     path('find_book/', find_book_view, name='find_book'),
+    path('book_options/', book_options_view, name='book_options'),
     path('finding_failed/', finding_failed, name='finding_failed'),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),

@@ -79,3 +79,4 @@ def book_add_view(request):
 
 def finding_failed(request, *args, **kwargs):
 	return render(request, 'finding_failed.html', {})
+
