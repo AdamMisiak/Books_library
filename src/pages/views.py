@@ -109,26 +109,36 @@ def book_add_view(request):
 
 
 def book_options_view(request):
+	# try:
+	# 	book = Book.objects.get(pk=book_id)
+	# except book.DoesNotExist:
+	# 	print('failed')
+	# return render(request, 'detail.html', {'school': school})
+
+	# if request.method == 'POST':
+	# 	form = BookOptions(data=request.POST)
+	#
+	# 	if form.is_valid():
+	# 		form.save()
+	# 		book_id = form.cleaned_data.get('id')
+	# 		book = Book.objects.get(id=book_id)
+	# 		book_position = BookPosition.objects.get(user=request.user, book=book)
+	# 		print(book_position)
+	# 		return redirect('/book_options')
+
 
 	if request.method == 'POST':
-		form = BookOptions(data=request.POST)
-		print('dupa')
-		if form.is_valid():
-			form.save()
-			book_id = form.cleaned_data.get('id')
-			book = Book.objects.get(id=book_id)
-			book_position = BookPosition.objects.get(user=request.user, book=book)
-			print(book_position)
-			print('dupa')
-			return redirect('/book_options')
-	# if request.method == 'GET':
-	# 	book_id = request.GET['book_id']
-	# 	book = Book.objects.get(id=book_id)
-	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
-	# 	print(book_position)
-	# 	return HttpResponse('success')
+		book_id = request.POST['book_id']
+		book = Book.objects.get(id=book_id)
+		book_position = BookPosition.objects.get(user=request.user, book=book)
+	#return HttpResponse('success')
 
-	return render(request, 'users/book_options.html')
+	contex = {
+		'book': book,
+		'book_position': book_position,
+	}
+
+	return render(request, 'users/book_options.html', contex)
 
 
 

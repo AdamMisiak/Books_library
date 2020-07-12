@@ -98,12 +98,12 @@
             $('.infobutton').click(function(){
             var id;
             id = $(this).attr("data-catid");
-            console.log(id);
             $.ajax(
             {
-                type:"GET",
-                url: "book_options",
+                type:"POST",
+                url: "{% url 'book_options' %}",
                 data:{
+                        "csrfmiddlewaretoken": "{{ csrf_token }}",
                          book_id: id
             },
             success: function( data )
