@@ -150,5 +150,3 @@ def book_update_view(request):
 	}
 
 	return render(request, 'users/book_update.html', context)
-
-# URL PATTERS NA ID NA BOOK OPTIONS ZEBY MOGL COFNAC PO UPDATE!!!!
