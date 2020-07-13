@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm, BookOptionsForm
+from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm
 from django.apps import apps
 
 # MODELS IMPORTED
@@ -34,10 +34,10 @@ def register_view(request):
 	else:
 		form = RegisterForm()
 
-	contex = {
+	context = {
 		'form': form
 	}
-	return render(request, 'users/register.html', contex)
+	return render(request, 'users/register.html', context)
 
 
 def login_view(request):
@@ -50,30 +50,30 @@ def login_view(request):
 	else:
 		form = AuthenticationForm()
 
-	contex = {
+	context = {
 		'form': form
 	}
-	return render(request, 'users/login.html', contex)
+	return render(request, 'users/login.html', context)
 
 
 def account_view(request):
 	user = User.objects.get(pk=request.user.id)
 	books = user.books_added.all()
 
-	contex = {
+	context = {
 		'user': user,
 		'books': books,
 	}
-	return render(request, 'users/account.html', contex)
+	return render(request, 'users/account.html', context)
 
 
 def library_view(request):
 	user = User.objects.get(pk=request.user.id)
 	books = user.books_added.all()
-	contex = {
+	context = {
 		'books': books,
 	}
-	return render(request, 'users/library.html', contex)
+	return render(request, 'users/library.html', context)
 
 
 def update_view(request):
@@ -85,10 +85,10 @@ def update_view(request):
 			return redirect('/account')
 	else:
 		form = UpdateForm(instance=request.user)
-	contex = {
+	context = {
 		'form': form
 	}
-	return render(request, 'users/update.html', contex)
+	return render(request, 'users/update.html', context)
 
 
 def book_add_view(request):
@@ -115,7 +115,40 @@ def book_options_view(request):
 		form = BookOptionsForm(request.POST)
 		if form.is_valid():
 			book_id = form.cleaned_data.get('id')
+			request.session['book_id'] = book_id
+
 			book = Book.objects.get(id=book_id)
 			book_position = BookPosition.objects.get(user=request.user, book=book)
 
+			book_title = book.title
+			request.session['book_title'] = book_title
+
 			return render(request, 'users/book_options.html', {'book': book, 'book_position': book_position})
+
+
+def book_update_view(request):
+	if request.method == 'POST':
+		form = BookUpdateForm(request.POST)
+		if form.is_valid():
+			book_id = request.session['book_id']
+			book = Book.objects.get(id=book_id)
+			book_position = BookPosition.objects.get(user=request.user, book=book)
+
+			genre = form.cleaned_data.get('genre')
+			month = form.cleaned_data.get('month')
+			book_position.month = month
+			book.genre_1 = genre
+
+			book_position.save()
+			book.save()
+			return redirect('/library')
+	else:
+		form = BookUpdateForm()
+
+	context = {
+		'form': form,
+	}
+
+	return render(request, 'users/book_update.html', context)
+
+# URL PATTERS NA ID NA BOOK OPTIONS ZEBY MOGL COFNAC PO UPDATE!!!!

@@ -14,10 +14,10 @@ def find_book_view(request):
 		request.session['form'] = form.cleaned_data
 
 		return HttpResponseRedirect('/book_result/')
-	contex = {
+	context = {
 		'form': form
 	}
-	return render(request, 'books/find_book.html', contex)
+	return render(request, 'books/find_book.html', context)
 
 
 @login_required(login_url="login")
@@ -50,12 +50,12 @@ def book_results_view(request):
 		if book not in Book.objects.all():
 			book.save()
 
-	contex = {
+	context = {
 		'form': form,
 		'results': results,
 	}
 
-	return render(request, 'books/book_result.html', contex)
+	return render(request, 'books/book_result.html', context)
 
 
 def book_add_view(request):
