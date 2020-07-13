@@ -8,25 +8,29 @@
 
    <h1 class="text-center logo my-4">
       Book's Options
-
    </h1>
 
-     <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <p class="lead">Id: {{ book.id }}</p>
-                <hr class="my-4">
-                <p class="lead">Title: {{ book.title }}</p>
-                <hr class="my-4">
-                <p class="lead">Author: {{ book.author }}</p>
-                <hr class="my-4">
-                <p class="lead">Reader: {{ book_position.user }}</p>
-                <hr class="my-4">
-                <a class="btn btn-primary btn-lg" href="{% url 'update' %}" role="button">Update</a>
+
+    <div class="card mb-2" style="margin-left:10%; margin-right:10%;">
+        <div class="card-body p-3" >
+            <div class="row">
+                <div class="col-4" style="margin-top:10%;">
+                    <img src="{{ book.image }}" class="center">
+                </div>
+
+                <div class="col-6">
+                    <p class="lead">Id: {{ book.id }}</p>
+                    <hr class="my-4">
+                    <p class="lead">Title: {{ book.title }}</p>
+                    <hr class="my-4">
+                    <p class="lead">Author: {{ book.author }}</p>
+                    <hr class="my-4">
+                    <p class="lead">Reader: {{ book_position.user }}</p>
+                    <hr class="my-4">
+                    <a class="btn btn-primary btn-lg" href="{% url 'update' %}" role="button">Update</a>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
 

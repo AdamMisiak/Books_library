@@ -6,10 +6,12 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, UpdateForm, BookOptionsForm
 from django.apps import apps
 
+# MODELS IMPORTED
 Book = apps.get_model('books', 'Book')
 BookPosition = apps.get_model('books', 'BookPosition')
 
 
+# HOME PAGE VIEW
 def home_view(request, *args, **kwargs):
 	return render(request, 'home.html', {})
 
@@ -117,30 +119,3 @@ def book_options_view(request):
 			book_position = BookPosition.objects.get(user=request.user, book=book)
 
 			return render(request, 'users/book_options.html', {'book': book, 'book_position': book_position})
-
-			# return redirect('/book_options', {'book': book})
-
-
-
-
-	# if request.method == 'POST':
-	# 	book_id = request.POST['book_id']
-	# 	book = Book.objects.get(id=book_id)
-	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
-	# 	print(book)
-	# 	print(book.id)
-	# 	print(book_position)
-	# 	return redirect('/book_options/', book=book)
-
-
-
-		# contex = {
-		# 	'book': book,
-		# 	'book_position': book_position,
-		# }
-
-	#return HttpResponse('success')
-
-
-
-
