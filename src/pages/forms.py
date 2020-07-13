@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 from django.apps import apps
 Book = apps.get_model('books', 'Book')
+BookPosition = apps.get_model('books', 'BookPosition')
 
 
 class RegisterForm(UserCreationForm):
@@ -27,11 +28,5 @@ class UpdateForm(UserChangeForm):
 		]
 
 
-class BookOptions(forms.ModelForm):
-	id = forms.IntegerField(label='Id', widget=forms.TextInput(attrs={"placeholder": "Book id"}))
-
-	class Meta:
-		model = Book
-		fields = [
-			'id'
-		]
+class BookOptionsForm(forms.Form):
+	id = forms.IntegerField(label='id')

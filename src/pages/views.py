@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm, BookOptions
+from .forms import RegisterForm, UpdateForm, BookOptionsForm
 from django.apps import apps
 
 Book = apps.get_model('books', 'Book')
@@ -109,36 +109,38 @@ def book_add_view(request):
 
 
 def book_options_view(request):
-	# try:
-	# 	book = Book.objects.get(pk=book_id)
-	# except book.DoesNotExist:
-	# 	print('failed')
-	# return render(request, 'detail.html', {'school': school})
+	if request.method == 'POST':
+		form = BookOptionsForm(request.POST)
+		if form.is_valid():
+			book_id = form.cleaned_data.get('id')
+			book = Book.objects.get(id=book_id)
+			book_position = BookPosition.objects.get(user=request.user, book=book)
+
+			return render(request, 'users/book_options.html', {'book': book, 'book_position': book_position})
+
+			# return redirect('/book_options', {'book': book})
+
+
+
 
 	# if request.method == 'POST':
-	# 	form = BookOptions(data=request.POST)
-	#
-	# 	if form.is_valid():
-	# 		form.save()
-	# 		book_id = form.cleaned_data.get('id')
-	# 		book = Book.objects.get(id=book_id)
-	# 		book_position = BookPosition.objects.get(user=request.user, book=book)
-	# 		print(book_position)
-	# 		return redirect('/book_options')
+	# 	book_id = request.POST['book_id']
+	# 	book = Book.objects.get(id=book_id)
+	# 	book_position = BookPosition.objects.get(user=request.user, book=book)
+	# 	print(book)
+	# 	print(book.id)
+	# 	print(book_position)
+	# 	return redirect('/book_options/', book=book)
 
 
-	if request.method == 'POST':
-		book_id = request.POST['book_id']
-		book = Book.objects.get(id=book_id)
-		book_position = BookPosition.objects.get(user=request.user, book=book)
+
+		# contex = {
+		# 	'book': book,
+		# 	'book_position': book_position,
+		# }
+
 	#return HttpResponse('success')
 
-	contex = {
-		'book': book,
-		'book_position': book_position,
-	}
-
-	return render(request, 'users/book_options.html', contex)
 
 
 

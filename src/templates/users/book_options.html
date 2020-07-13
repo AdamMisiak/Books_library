@@ -7,18 +7,24 @@
 <div class="container">
 
    <h1 class="text-center logo my-4">
-      Book {{ book.id }} Options
+      Book's Options
+
    </h1>
 
      <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="card">
-          <div class="card-body">
-            <form method="POST">
-
-            <input type="Submit" value="Update" /> <a href='../'>Cancel</a>
-            </form>
-          </div>
+            <div class="card-body">
+                <p class="lead">Id: {{ book.id }}</p>
+                <hr class="my-4">
+                <p class="lead">Title: {{ book.title }}</p>
+                <hr class="my-4">
+                <p class="lead">Author: {{ book.author }}</p>
+                <hr class="my-4">
+                <p class="lead">Reader: {{ book_position.user }}</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-lg" href="{% url 'update' %}" role="button">Update</a>
+            </div>
         </div>
       </div>
     </div>

@@ -56,13 +56,21 @@
                         {% endif %}
                         <p>
                         <br>
-
-                    <div type="text/css" class = "container"></div>
-                    <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
-                    <a class="infobutton btn btn-secondary btn-lg" id="info{{ book.id }}" href="{% url 'book_options' %}"
-                    data-catid="{{ book.id }}">Update</a>
+                         
+                     <form method="post" action="{% url 'book_options' %}">
+                        {%csrf_token%}
+                        <div type="text/css" class = "container"></div>
+                        <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
+                        <input type="hidden"  name="id" value="{{ book.id }}">
+                        <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
+                    </form>
+<!--                    <a class="infobutton btn btn-secondary btn-lg" id="info{{ book.id }}" href="{% url 'book_options' %}"-->
+<!--                    data-catid="{{ book.id }}" type="submit">Update</a>-->
                     </p><p id="message{{ book.id }}"></p>
                     </div>
+
+
+
 
                  </div>
             </div>
@@ -94,6 +102,9 @@
              }
              })
              });
+        </script>
+
+        <script type="text/javascript">
 
             $('.infobutton').click(function(){
             var id;
@@ -115,7 +126,6 @@
              });
         </script>
 
-# DODAJ KOMENTY WSZEDZIE!!!!
 
 
 {% endblock %}
