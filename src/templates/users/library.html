@@ -4,13 +4,64 @@
 
 {% block content %}
 
+<style>
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: white;
+  margin-left:9.3%;
+  margin-right:9.3%;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  width: 33.3%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+
 
 <h1 class="text-center logo my-4">
   Your Library
 </h1>
+
+<div class="card-body p-3">
+    <div class="tab" >
+      <button class="tablinks" onclick="openCategory(event, 'To do')">To do</button>
+      <button class="tablinks" onclick="openCategory(event, 'In progress')">In progress</button>
+      <button class="tablinks" onclick="openCategory(event, 'Done')">Done</button>
+    </div>
+</div>
+
 {% if books|length == 0 %}
 <div class="container">
-
      <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="card">
@@ -104,26 +155,20 @@
              });
         </script>
 
-        <script type="text/javascript">
-
-            $('.infobutton').click(function(){
-            var id;
-            id = $(this).attr("data-catid");
-            $.ajax(
-            {
-                type:"POST",
-                url: "{% url 'book_options' %}",
-                data:{
-                        "csrfmiddlewaretoken": "{{ csrf_token }}",
-                         book_id: id
-            },
-            success: function( data )
-            {
-
-
-             }
-             })
-             });
+        <script>
+        function openCategory(evt, cityName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
         </script>
 
 
