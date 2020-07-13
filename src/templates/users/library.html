@@ -49,7 +49,7 @@
 
 
 <h1 class="text-center logo my-4">
-  Your Library
+    {{request.user}}'s Library
 </h1>
 
 <div class="card-body p-3">
@@ -84,29 +84,30 @@
     <div class="card mb-2" style="margin-left:10%; margin-right:10%;" id="div{{ book.id }}">
         <div class="card-body p-3">
             <div class="row">
+
                 <div class="col-2">
-                <img src="{{ book.image }}" class="center">
+                    <img src="{{ book.image }}" class="center">
                 </div>
 
                      <div class="col-10">
                         <div class="row mb-3">
-                          <div class="col-6">
-                            <p><strong class="text-muted">{{ book.title }}</strong></p>
-                            <small class="text-muted">{{ book.author }}</small>
-                              <br>
-                          </div>
+                            <div class="col-6">
+                                <p><strong class="text-muted">{{ book.title }}</strong></p>
+                                <small class="text-muted">{{ book.author }}</small>
+                                <br>
+                            </div>
                             <div class="col-6" style="text-align:right;">
-                            <small class="text-muted">ID: {{ book.id }}</small>
+                                <small class="text-muted">ID: {{ book.id }}</small>
                             </div>
                         </div>
 
-                        {% if book.description == None %}
-                        There is no description :(
-                        {% else %}
-                        {{ book.description }}
-                        {% endif %}
-                        <p>
-                        <br>
+                    {% if book.description == None %}
+                    There is no description :(
+                    {% else %}
+                    {{ book.description }}
+                    {% endif %}
+                    <p>
+                    <br>
 
                      <form method="post" action="{% url 'book_options' %}">
                         {%csrf_token%}
@@ -115,22 +116,19 @@
                         <input type="hidden"  name="id" value="{{ book.id }}">
                         <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
                     </form>
-<!--                    <a class="infobutton btn btn-secondary btn-lg" id="info{{ book.id }}" href="{% url 'book_options' %}"-->
-<!--                    data-catid="{{ book.id }}" type="submit">Update</a>-->
-                    </p><p id="message{{ book.id }}"></p>
+
                     </div>
-
-
-
-
-                 </div>
+                </div>
             </div>
         </div>
     </div>
 
 {% endfor %}
+
 {% endif %}
 
+
+<!--AJAX SCRIPT TO SEND BOOK ID TO VIEW AND CHANGE CLASS AND TEXT OF BUTTON-->
         <script type="text/javascript">
             $('.addbutton').click(function(){
             var id;
@@ -155,6 +153,8 @@
              });
         </script>
 
+
+<!--JS SCRIPT FOR CHANING BOOK'S TABS-->
         <script>
         function openCategory(evt, cityName) {
           var i, tabcontent, tablinks;
@@ -170,7 +170,5 @@
           evt.currentTarget.className += " active";
         }
         </script>
-
-
 
 {% endblock %}

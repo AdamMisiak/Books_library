@@ -11,7 +11,6 @@ Book = apps.get_model('books', 'Book')
 BookPosition = apps.get_model('books', 'BookPosition')
 
 
-# HOME PAGE VIEW
 def home_view(request, *args, **kwargs):
 	return render(request, 'home.html', {})
 
@@ -56,6 +55,7 @@ def login_view(request):
 	return render(request, 'users/login.html', context)
 
 
+# DETAILS OF ACCOUNT VIEW
 def account_view(request):
 	user = User.objects.get(pk=request.user.id)
 	books = user.books_added.all()
@@ -67,15 +67,7 @@ def account_view(request):
 	return render(request, 'users/account.html', context)
 
 
-def library_view(request):
-	user = User.objects.get(pk=request.user.id)
-	books = user.books_added.all()
-	context = {
-		'books': books,
-	}
-	return render(request, 'users/library.html', context)
-
-
+# UPDATE USER'S INFORMATION VIEW
 def update_view(request):
 	if request.method == 'POST':
 		user = User.objects.get(pk=request.user.id)
@@ -91,10 +83,26 @@ def update_view(request):
 	return render(request, 'users/update.html', context)
 
 
+# LIBRARY OF USER'S BOOKS
+def library_view(request):
+	user = User.objects.get(pk=request.user.id)
+	books = user.books_added.all()
+
+	context = {
+		'books': books,
+	}
+	return render(request, 'users/library.html', context)
+
+
+# ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
 def book_add_view(request):
 	if request.method == 'GET':
+
+		# READING BOOK ID FROM JQUERY SCRIPT
 		book_id = request.GET['book_id']
 		book = Book.objects.get(id=book_id)
+
+		# ADDING OR DELETING BOOK FROM USER'S LIBRARY
 		if request.user in book.user.all():
 			book.user.remove(request.user)
 			book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
@@ -110,10 +118,13 @@ def book_add_view(request):
 		return HttpResponse("unsuccesful")
 
 
+# DETAILS OF BOOK VIEW
 def book_options_view(request):
 	if request.method == 'POST':
 		form = BookOptionsForm(request.POST)
 		if form.is_valid():
+
+			# READING ID OF BOOK FROM FORM
 			book_id = form.cleaned_data.get('id')
 			request.session['book_id'] = book_id
 
@@ -126,6 +137,7 @@ def book_options_view(request):
 			return render(request, 'users/book_options.html', {'book': book, 'book_position': book_position})
 
 
+# UPDATE BOOK'S INFORMATION VIEW
 def book_update_view(request):
 	if request.method == 'POST':
 		form = BookUpdateForm(request.POST)
@@ -134,6 +146,7 @@ def book_update_view(request):
 			book = Book.objects.get(id=book_id)
 			book_position = BookPosition.objects.get(user=request.user, book=book)
 
+			# SETTING GENRE AND MONTH OF BOOK
 			genre = form.cleaned_data.get('genre')
 			month = form.cleaned_data.get('month')
 			book_position.month = month
