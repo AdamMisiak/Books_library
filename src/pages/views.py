@@ -85,11 +85,18 @@ def update_view(request):
 
 # LIBRARY OF USER'S BOOKS
 def library_view(request):
+	users_book_positions = []
 	user = User.objects.get(pk=request.user.id)
+
+	# FILTERING ONLY USER'S ADDED BOOKS
+	for book_position in BookPosition.objects.filter(user=user):
+		if book_position.value == 'Add':
+			users_book_positions.append(book_position)
 	books = user.books_added.all()
 
 	context = {
 		'books': books,
+		'users_book_positions': users_book_positions
 	}
 	return render(request, 'users/library.html', context)
 
