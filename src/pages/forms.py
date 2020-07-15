@@ -34,7 +34,15 @@ class BookOptionsForm(forms.Form):
 	id = forms.IntegerField(label='id')
 
 
+STATUS_CHOICES = (
+	("To do", "To do"),
+	("In progress", "In progress"),
+	("Done", "Done"),
+)
+
+
 # UPDATING USER'S BOOK INFORMATION
 class BookUpdateForm(forms.Form):
 	genre = forms.ChoiceField(label='Genre', choices=GENRE_CHOICES, widget=forms.Select())
 	month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, widget=forms.Select())
+	status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES, widget=forms.Select())

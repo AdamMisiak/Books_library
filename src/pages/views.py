@@ -153,10 +153,13 @@ def book_update_view(request):
 			book = Book.objects.get(id=book_id)
 			book_position = BookPosition.objects.get(user=request.user, book=book)
 
-			# SETTING GENRE AND MONTH OF BOOK
+			# SETTING GENRE, MONTH AND STATUS OF BOOK
 			genre = form.cleaned_data.get('genre')
 			month = form.cleaned_data.get('month')
+			status = form.cleaned_data.get('status')
+
 			book_position.month = month
+			book_position.status = status
 			book.genre_1 = genre
 
 			book_position.save()
