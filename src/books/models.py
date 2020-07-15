@@ -28,7 +28,7 @@ BOOK_CHOICES = (
 
 STATUS_CHOICES = (
 	("To do", "To do"),
-	("In Progress", "In progress"),
+	("In progress", "In progress"),
 	("Done", "Done"),
 )
 
