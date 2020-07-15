@@ -60,6 +60,9 @@
     </div>
 </div>
 
+
+<div id="To do" class="tabcontent">
+
 {% if books|length == 0 %}
 <div class="container">
      <div class="row justify-content-center">
@@ -89,7 +92,7 @@
                     <img src="{{ book.image }}" class="center">
                 </div>
 
-                     <div class="col-10">
+                 <div class="col-10">
                         <div class="row mb-3">
                             <div class="col-6">
                                 <p><strong class="text-muted">{{ book.title }}</strong></p>
@@ -117,15 +120,28 @@
                         <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
                     </form>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+
 {% endfor %}
 
 {% endif %}
+
+</div>
+
+<div id="In progress" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Done" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
 
 
 <!--AJAX SCRIPT TO SEND BOOK ID TO VIEW AND CHANGE CLASS AND TEXT OF BUTTON-->
