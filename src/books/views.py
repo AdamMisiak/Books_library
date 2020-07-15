@@ -7,6 +7,7 @@ from .functions import books_finder
 from .models import Book, BookPosition
 
 
+# SEARCHING FOR BOOK VIEW
 @login_required(login_url="login")
 def find_book_view(request):
 	form = SearchingForm(request.POST or None)
@@ -14,20 +15,25 @@ def find_book_view(request):
 		request.session['form'] = form.cleaned_data
 
 		return HttpResponseRedirect('/book_result/')
+
 	context = {
 		'form': form
 	}
 	return render(request, 'books/find_book.html', context)
 
 
+# RESULTS OF SEARCHING BOOKS VIEW
 @login_required(login_url="login")
 def book_results_view(request):
 	form = request.session['form']
+
+	# ERROR EXCEPTION HANDLING
 	try:
 		results = books_finder(form['title'])
 	except:
 		return render(request, 'books/finding_failed.html')
 
+	# READING DATA FROM API FUNCTION
 	for number, book in enumerate(results):
 		book_id = book['id']
 		book_title = book['title']
@@ -44,6 +50,7 @@ def book_results_view(request):
 			if str(book_id) == str(book_added.id):
 				results[number]['status'] = 'added'
 
+		# SAVING BOOK DATA IN DB
 		book = Book(id=book_id, title=book_title, author=book_author, image=book_image,
 					description=book_description)
 
@@ -58,10 +65,12 @@ def book_results_view(request):
 	return render(request, 'books/book_result.html', context)
 
 
+# ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
 def book_add_view(request):
 	if request.method == 'GET':
 		book_id = request.GET['book_id']
 		book = Book.objects.get(id=book_id)
+
 		if request.user in book.user.all():
 			book.user.remove(request.user)
 			book_position, created = BookPosition.objects.get_or_create(user=request.user, book=book)
@@ -77,6 +86,7 @@ def book_add_view(request):
 		return HttpResponse("unsuccesful")
 
 
+# BOOK SEARCHING FAILED VIEW
 def finding_failed(request, *args, **kwargs):
 	return render(request, 'finding_failed.html', {})
 

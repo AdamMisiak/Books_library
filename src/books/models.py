@@ -33,6 +33,7 @@ STATUS_CHOICES = (
 )
 
 
+# MODEL FOR CONNECTING USER WITH BOOK
 class BookPosition(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)

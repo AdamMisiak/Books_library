@@ -16,58 +16,59 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-grey">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.jpg' %}" width="90" height="80"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.jpg' %}" width="90" height="80"></a>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-      <li class="nav-item">
-        <a class="nav-link" href="">About</a>
-      </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">About</a>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'find_book' %}">Find books</a>
-      </li>
-    </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'find_book' %}">Find books</a>
+            </li>
 
-    <ul class="nav navbar-nav navbar-right">
-    {% if user.is_authenticated == False %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
+        </ul>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
-    {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated == False %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
 
-    {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
-    {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
 
-      {% if user.is_authenticated == True %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'library' %}">Library</a>
-      </li>
-      {% endif %}
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% endif %}
 
-      {% if user.get_username == '' %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'register' %}">Guest</a>
-      </li>
-      {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'account' %}">{{ user.username }}</a>
-      </li>
-      {% endif %}
+        {% if user.is_authenticated == True %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'library' %}">Library</a>
+            </li>
+        {% endif %}
 
-    </ul>
-  </div>
+        {% if user.get_username == '' %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Guest</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account' %}">{{ user.username }}</a>
+            </li>
+        {% endif %}
+
+        </ul>
+    </div>
 </nav>
 
 {% block content %}

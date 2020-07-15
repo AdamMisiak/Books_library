@@ -43,6 +43,6 @@ STATUS_CHOICES = (
 
 # UPDATING USER'S BOOK INFORMATION
 class BookUpdateForm(forms.Form):
-	genre = forms.ChoiceField(label='Genre', choices=GENRE_CHOICES, widget=forms.Select())
+	genre = forms.ChoiceField(label='Genre', choices=GENRE_CHOICES, initial=GENRE_CHOICES[0], widget=forms.Select())
 	month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, widget=forms.Select())
 	status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES, widget=forms.Select())

@@ -1,4 +1,5 @@
 GENRE_CHOICES = (
+	("N/A", "N/A"),
 	("Fantasy", "Fantasy"),
 	("Adventure", "Adventure"),
 	("Romance", "Romance"),

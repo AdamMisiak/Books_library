@@ -54,13 +54,14 @@
 
 <div class="card-body p-3">
     <div class="tab" >
-      <button class="tablinks" onclick="openCategory(event, 'To do')" id="defaultOpen">To do</button>
-      <button class="tablinks" onclick="openCategory(event, 'In progress')">In progress</button>
+      <button class="tablinks" onclick="openCategory(event, 'To do')">To do</button>
+      <button class="tablinks" onclick="openCategory(event, 'In progress')" id="defaultOpen">In progress</button>
       <button class="tablinks" onclick="openCategory(event, 'Done')">Done</button>
     </div>
 </div>
 
 
+<!--TO DO TAB DIV-->
 <div id="To do" class="tabcontent">
 
 {% if books|length == 0 %}
@@ -137,6 +138,7 @@
 </div>
 
 
+<!--IN PROGRESS TAB DIV-->
 <div id="In progress" class="tabcontent">
 
 {% if books|length == 0 %}
@@ -212,6 +214,8 @@
 {% endif %}
 </div>
 
+
+<!--DONE TAB DIV-->
 <div id="Done" class="tabcontent">
 
 {% if books|length == 0 %}

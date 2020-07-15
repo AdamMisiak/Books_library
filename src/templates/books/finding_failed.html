@@ -2,17 +2,17 @@
 
 {% block content %}
 
-  <div class="row justify-content-center">
+<div class="row justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title">Searching of your's title failed!</h3>
-          <div class="alert alert-danger" role="alert">
-            Whops! We haven't got this title in out API base. Maybe try to find another book.
-          </div>
-          <a href="{% url 'find_book' %}" class="btn btn-secondary btn-block">Find books again</a>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Searching of your's title failed!</h3>
+                <div class="alert alert-danger" role="alert">
+                Whops! We haven't got this title in out API base. Maybe try to find another book.
+                </div>
+                <a href="{% url 'find_book' %}" class="btn btn-secondary btn-block">Find books again</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}

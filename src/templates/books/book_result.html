@@ -4,81 +4,81 @@
 
 {% for book in results %}
 <div class="card mb-2" style="margin-left:10%; margin-right:10%;">
-  <div class="card-body p-3" >
-    <div class="row">
-      <div class="col-2">
-          <img src="{{ book.image }}" class="center">
-      </div>
-
-        <div class="col-10">
-            <div class="row mb-3">
-              <div class="col-6">
-                <p><strong class="text-dark">{{ book.title }}</strong></p>
-                <small class="text-muted">{{ book.author }}</small>
-                  <br>
-              </div>
-                <div class="col-6" style="text-align:right;">
-                <small class="text-muted">ID: {{ book.id }}</small>
-                </div>
+    <div class="card-body p-3" >
+        <div class="row">
+            <div class="col-2">
+                <img src="{{ book.image }}" class="center">
             </div>
 
-            <hr class="my-4">
-            {% if book.description == None %}
-            There is no description :(
+    <div class="col-10">
+        <div class="row mb-3">
+            <div class="col-6">
+                <p><strong class="text-dark">{{ book.title }}</strong></p>
+                <small class="text-muted">{{ book.author }}</small>
+                <br>
+            </div>
+            <div class="col-6" style="text-align:right;">
+                <small class="text-muted">ID: {{ book.id }}</small>
+            </div>
+        </div>
+
+        <hr class="my-4">
+        {% if book.description == None %}
+        There is no description :(
+        {% else %}
+        {{ book.description }}
+        {% endif %}
+        {{ book.user }}
+        <p>
+             <br>
+            {% load define_action %}
+            {% ifequal book.status|stringformat:"s" "added" %}
+                {% define "Delete" as action %}
+                {% define "danger" as color %}
             {% else %}
-            {{ book.description }}
-            {% endif %}
-            {{ book.user }}
-            <p>
-                 <br>
-                {% load define_action %}
-                {% ifequal book.status|stringformat:"s" "added" %}
-                    {% define "Delete" as action %}
-                    {% define "danger" as color %}
-                {% else %}
-                    {% define "Add" as action %}
-                    {% define "primary" as color %}
-                {% endifequal %}
+                {% define "Add" as action %}
+                {% define "primary" as color %}
+            {% endifequal %}
 
-                    <div type="text/css" class = "container"></div>
-                    <a class="addbutton btn btn-{{ color }} btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">{{ action }}</a>
-                    </p><p id="message{{book.id}}"></p>
-                    </div>
-
+                <div type="text/css" class = "container"></div>
+                <a class="addbutton btn btn-{{ color }} btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">{{ action }}</a>
+                </p><p id="message{{book.id}}"></p>
+                </div>
             </p>
+
         </div>
     </div>
-  </div>
 </div>
+
 
 {% endfor %}
 
-        <script type="text/javascript">
-            $('.addbutton').click(function(){
-            var id;
-            id = $(this).attr("data-catid");
-            $.ajax(
-            {
-                type:"GET",
-                url: "add_book",
-                data:{
-                         book_id: id
-            },
-            success: function( data )
-            {
-                if($( '#like'+ id ).text() == 'Add'){
-                    $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
-                    $( '#like'+ id ).text('Delete');
-                    $( '#like'+ id ).addClass('btn btn-danger btn-lg');
-                }
-                else if($( '#like'+ id ).text() == 'Delete'){
-                    $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
-                    $( '#like'+ id ).text('Add');
-                    $( '#like'+ id ).addClass('btn btn-primary btn-lg');
-                }
-             }
-             })
-             });
-        </script>
+    <script type="text/javascript">
+        $('.addbutton').click(function(){
+        var id;
+        id = $(this).attr("data-catid");
+        $.ajax(
+        {
+            type:"GET",
+            url: "add_book",
+            data:{
+                     book_id: id
+        },
+        success: function( data )
+        {
+            if($( '#like'+ id ).text() == 'Add'){
+                $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
+                $( '#like'+ id ).text('Delete');
+                $( '#like'+ id ).addClass('btn btn-danger btn-lg');
+            }
+            else if($( '#like'+ id ).text() == 'Delete'){
+                $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
+                $( '#like'+ id ).text('Add');
+                $( '#like'+ id ).addClass('btn btn-primary btn-lg');
+            }
+         }
+         })
+         });
+    </script>
 
 {% endblock %}
