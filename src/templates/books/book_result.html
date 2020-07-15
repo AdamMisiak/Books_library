@@ -13,7 +13,7 @@
         <div class="col-10">
             <div class="row mb-3">
               <div class="col-6">
-                <p><strong class="text-muted">{{ book.title }}</strong></p>
+                <p><strong class="text-dark">{{ book.title }}</strong></p>
                 <small class="text-muted">{{ book.author }}</small>
                   <br>
               </div>
@@ -22,6 +22,7 @@
                 </div>
             </div>
 
+            <hr class="my-4">
             {% if book.description == None %}
             There is no description :(
             {% else %}
