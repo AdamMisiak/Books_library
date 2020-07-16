@@ -13,7 +13,7 @@ BookPosition = apps.get_model('books', 'BookPosition')
 
 
 def home_view(request, *args, **kwargs):
-	
+
 	# NAVBAR SEARCHING FORM HANDLING
 	if request.POST:
 		form = NavbarSearchingForm(request.POST)

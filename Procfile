@@ -1,1 +1,1 @@
-web: gunicorn books_library.wsgi --log-file -
+web: gunicorn run:src
