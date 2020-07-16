@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath src books_library.wsgi --log-file -
