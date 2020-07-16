@@ -18,8 +18,9 @@ class BookForm(forms.ModelForm):
 		]
 
 
-class SearchingForm(forms.Form):
-	title = forms.CharField(label='Title')
+# SEARCHING BOOKS FORM
+class SearchingForm(forms.ModelForm):
+	title = forms.CharField(label='Title', widget=forms.TextInput(attrs={"placeholder": "Book title"}))
 
 	class Meta:
 		model = Book

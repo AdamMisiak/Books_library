@@ -3,8 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, SearchingForm
-
+from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, NavbarSearchingForm
 from django.apps import apps
 
 
@@ -14,17 +13,15 @@ BookPosition = apps.get_model('books', 'BookPosition')
 
 
 def home_view(request, *args, **kwargs):
+	
+	# NAVBAR SEARCHING FORM HANDLING
 	if request.POST:
-		form = SearchingForm(request.POST)
-		print('text1')
+		form = NavbarSearchingForm(request.POST)
 		if form.is_valid():
-			print('text2')
 			request.session['form'] = form.cleaned_data
-
 			return HttpResponseRedirect('/book_result/')
-		print(form.errors)
 	else:
-		form = SearchingForm()
+		form = NavbarSearchingForm()
 
 	context = {
 		'form': form
