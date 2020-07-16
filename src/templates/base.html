@@ -37,12 +37,14 @@
 
 
 <!--NAVBAR SEARCHING FORM-->
+        {% if user.is_authenticated == True %}
         <form action="/" class="form-inline my-2 my-lg-0" method="POST">
             {% csrf_token %}
             <input id="title" name="title" class="form-control mr-sm-2" type="text"
                    placeholder="Search..." aria-label="Search">
             <input class="btn btn-outline-secondary my-2 my-sm-0" type="Submit" value="Find book" />
         </form>
+        {% endif %}
 
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated == False %}
