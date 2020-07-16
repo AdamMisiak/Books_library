@@ -6,7 +6,6 @@ from .forms import BookForm, SearchingForm
 from .functions import books_finder
 from .models import Book, BookPosition
 
-
 # SEARCHING FOR BOOK VIEW
 @login_required(login_url="login")
 def find_book_view(request):
