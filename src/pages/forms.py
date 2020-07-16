@@ -46,3 +46,14 @@ class BookUpdateForm(forms.Form):
 	genre = forms.ChoiceField(label='Genre', choices=GENRE_CHOICES, initial=GENRE_CHOICES[0], widget=forms.Select())
 	month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, widget=forms.Select())
 	status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES, widget=forms.Select())
+
+
+class SearchingForm(forms.ModelForm):
+	title = forms.CharField(label='Title', widget=forms.TextInput(attrs={"placeholder": "Book title"}))
+
+	class Meta:
+		model = Book
+		fields = [
+			'title',
+		]
+

@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,13 @@
 
         </ul>
 
+    <form action="/" class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+        {{ form }}
+<!--        <input id="Title" name="Title" class="form-control mr-sm-2" type="text" placeholder="Find book" aria-label="Search">-->
+        <input class="btn btn-outline-secondary my-2 my-sm-0" type="Submit" value="Find book" />
+    </form>
+
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated == False %}
                 <li class="nav-item">
@@ -45,17 +53,7 @@
                 </li>
             {% endif %}
 
-        {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-        {% endif %}
 
-        {% if user.is_authenticated == True %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'library' %}">Library</a>
-            </li>
-        {% endif %}
 
         {% if user.get_username == '' %}
             <li class="nav-item">
@@ -67,7 +65,20 @@
             </li>
         {% endif %}
 
+        {% if user.is_authenticated == True %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'library' %}">Library</a>
+            </li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% endif %}
+
         </ul>
+
     </div>
 </nav>
 

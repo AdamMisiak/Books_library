@@ -3,8 +3,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm
+from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, SearchingForm
+
 from django.apps import apps
+
 
 # MODELS IMPORTED
 Book = apps.get_model('books', 'Book')
@@ -12,7 +14,22 @@ BookPosition = apps.get_model('books', 'BookPosition')
 
 
 def home_view(request, *args, **kwargs):
-	return render(request, 'home.html', {})
+	if request.POST:
+		form = SearchingForm(request.POST)
+		print('text1')
+		if form.is_valid():
+			print('text2')
+			request.session['form'] = form.cleaned_data
+
+			return HttpResponseRedirect('/book_result/')
+		print(form.errors)
+	else:
+		form = SearchingForm()
+
+	context = {
+		'form': form
+	}
+	return render(request, 'home.html', context)
 
 
 def contact_view(request, *args, **kwargs):
