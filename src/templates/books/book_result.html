@@ -53,32 +53,15 @@
 
 {% endfor %}
 
-    <script type="text/javascript">
-        $('.addbutton').click(function(){
-        var id;
-        id = $(this).attr("data-catid");
-        $.ajax(
-        {
-            type:"GET",
-            url: "add_book",
-            data:{
-                     book_id: id
-        },
-        success: function( data )
-        {
-            if($( '#like'+ id ).text() == 'Add'){
-                $( '#like'+ id ).removeClass('btn btn-primary btn-lg');
-                $( '#like'+ id ).text('Delete');
-                $( '#like'+ id ).addClass('btn btn-danger btn-lg');
-            }
-            else if($( '#like'+ id ).text() == 'Delete'){
-                $( '#like'+ id ).removeClass('btn btn-danger btn-lg');
-                $( '#like'+ id ).text('Add');
-                $( '#like'+ id ).addClass('btn btn-primary btn-lg');
-            }
-         }
-         })
-         });
-    </script>
+
+
+<footer>
+    <p><small><em>Typography and color scheme based on <a href="http://typespiration.com/design/the-signal/">"The Signal"</a>.</em></small></p>
+    <a id="back-to-top" href="#">Top</a>
+</footer>
+<script src="/static/js/script.js"></script>
+<script type="text/javascript">
+
+</script>
 
 {% endblock %}
