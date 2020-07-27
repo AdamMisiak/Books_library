@@ -7,5 +7,6 @@ urlpatterns = [
 	path('add/', add_book_view, name='add'),
 	path('find/', find_book_view, name='find'),
 	path('results/', results_book_view, name='results'),
-	path('finding_failed/', find_book_failed_view, name='finding_failed'),
+	path('find_failed/', find_book_failed_view, name='find_failed'),
+
 ]

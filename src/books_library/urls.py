@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from pages.views import home_view, contact_view
 from books.views import find_book_failed_view
-from pages.views import register_view, login_view, account_view, update_view, library_view, book_options_view,\
+from pages.views import register_user_view, login_user_view, account_view, update_user_view, library_view, book_options_view,\
                         book_update_view
 from django.contrib.auth.views import LogoutView
 import debug_toolbar
@@ -27,6 +27,7 @@ import debug_toolbar
 
 urlpatterns = [
     path('books/', include('books.urls')),
+    path('users/', include('pages.urls')),
 
     path('', home_view, name='home'),
     path('admin/', admin.site.urls),
@@ -34,14 +35,13 @@ urlpatterns = [
 
     path('book_options/', book_options_view, name='book_options'),
     path('update_book/', book_update_view, name='update_book'),
-    path('finding_failed/', find_book_failed_view, name='finding_failed'),
-    path('register/', register_view, name='register'),
-    path('login/', login_view, name='login'),
-    path('account/', account_view, name='account'),
 
-    path('library/', library_view, name='library'),
+    path('register/', register_user_view, name='register'),
+    path('login/', login_user_view, name='login'),
+    # path('account/', account_view, name='account'),
 
-    path('update/', update_view, name='update'),
+
+    path('update/', update_user_view, name='update'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
     path('__debug__', include(debug_toolbar.urls)),

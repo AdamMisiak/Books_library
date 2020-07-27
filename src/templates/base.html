@@ -66,13 +66,13 @@
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'account' %}">{{ user.username }}</a>
+                <a class="nav-link" href="{% url 'users:account' %}">{{ user.username }}</a>
             </li>
         {% endif %}
 
         {% if user.is_authenticated == True %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'library' %}">Library</a>
+                <a class="nav-link" href="{% url 'users:library' %}">Library</a>
             </li>
         {% endif %}
 

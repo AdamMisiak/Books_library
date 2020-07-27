@@ -36,7 +36,7 @@ def contact_view(request, *args, **kwargs):
 	return render(request, 'contact.html', context)
 
 
-def register_view(request):
+def register_user_view(request):
 	if request.method == 'POST':
 		form = RegisterForm(request.POST)
 		if form.is_valid():
@@ -54,7 +54,7 @@ def register_view(request):
 	return render(request, 'users/register.html', context)
 
 
-def login_view(request):
+def login_user_view(request):
 	if request.method == 'POST':
 		form = AuthenticationForm(data=request.POST)
 		if form.is_valid():
@@ -83,13 +83,13 @@ def account_view(request):
 
 
 # UPDATE USER'S INFORMATION VIEW
-def update_view(request):
+def update_user_view(request):
 	if request.method == 'POST':
 		user = User.objects.get(pk=request.user.id)
 		form = UpdateForm(request.POST, instance=request.user)
 		if form.is_valid():
 			form.save()
-			return redirect('/account')
+			return HttpResponseRedirect(reverse('users:account'))
 	else:
 		form = UpdateForm(instance=request.user)
 	context = {

@@ -32,7 +32,7 @@ def results_book_view(request):
 	try:
 		results = books_finder(form['title'])
 	except:
-		return HttpResponseRedirect(reverse('books:finding_failed'))
+		return HttpResponseRedirect(reverse('books:find_failed'))
 
 	# READING DATA FROM API FUNCTION
 	for number, book in enumerate(results):
