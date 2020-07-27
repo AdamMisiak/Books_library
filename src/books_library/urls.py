@@ -26,10 +26,12 @@ import debug_toolbar
 
 
 urlpatterns = [
+    path('books/', include('books.urls')),
+
+    path('', home_view, name='home'),
     path('admin/', admin.site.urls),
     path('contact/', contact_view, name='contact'),
-    #path('book_result/', book_results_view, name='book_result'),
-    path('find_book/', find_book_view, name='find_book'),
+
     path('book_options/', book_options_view, name='book_options'),
     path('update_book/', book_update_view, name='update_book'),
     path('finding_failed/', finding_failed, name='finding_failed'),
@@ -41,11 +43,11 @@ urlpatterns = [
 
     path('update/', update_view, name='update'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('', home_view, name='home'),
-    path('__debug__', include(debug_toolbar.urls)),
-    #path('ajax/', include('books.urls')),
 
-    path('book_result/', include('books.urls', namespace='books'), name='book_result'),
+    path('__debug__', include(debug_toolbar.urls)),
+
+
+
     path('library/', include('pages.urls', namespace='pages'), name='library'),
 
 
