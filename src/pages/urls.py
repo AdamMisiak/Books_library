@@ -15,6 +15,6 @@ urlpatterns = [
 	path('logout/', LogoutView.as_view(), name='logout'),
 
 
-	path('book_options/', info_book_view, name='book_options'),
+	path('info_book/', info_book_view, name='info_book'),
 	path('update_book/', update_book_view, name='update_book'),
 ]

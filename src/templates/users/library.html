@@ -73,7 +73,7 @@
                             <p>
                             <br>
 
-                             <form method="post" action="{% url 'users:book_options' %}">
+                             <form method="post" action="{% url 'users:info_book' %}">
                                 {%csrf_token%}
                                 <div type="text/css" class = "container"></div>
                                 <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
@@ -150,7 +150,7 @@
                                 <p>
                                 <br>
 
-                                 <form method="post" action="{% url 'users:book_options' %}">
+                                 <form method="post" action="{% url 'users:info_book' %}">
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
@@ -227,7 +227,7 @@
                                 <p>
                                 <br>
 
-                                 <form method="post" action="{% url 'users:book_options' %}">
+                                 <form method="post" action="{% url 'users:info_book' %}">
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
