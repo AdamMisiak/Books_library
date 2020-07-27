@@ -50,11 +50,11 @@
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated == False %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
                 </li>
             {% endif %}
 
@@ -62,7 +62,7 @@
 
         {% if user.get_username == '' %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Guest</a>
+                <a class="nav-link" href="{% url 'users:register' %}">Guest</a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -78,7 +78,7 @@
 
         {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
             </li>
         {% endif %}
 

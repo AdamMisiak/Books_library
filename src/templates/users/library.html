@@ -32,7 +32,7 @@
                 right there!</p>
                 <hr class="my-4">
 
-            <a class="btn btn-primary" href="{% url 'find_book' %}" role="button">Find books</a> <a href='../'>Cancel</a>
+            <a class="btn btn-primary" href="{% url 'books:find' %}" role="button">Find books</a> <a href='../'>Cancel</a>
             </form>
           </div>
         </div>
@@ -73,7 +73,7 @@
                             <p>
                             <br>
 
-                             <form method="post" action="{% url 'book_options' %}">
+                             <form method="post" action="{% url 'users:book_options' %}">
                                 {%csrf_token%}
                                 <div type="text/css" class = "container"></div>
                                 <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
@@ -109,7 +109,7 @@
                 right there!</p>
                 <hr class="my-4">
 
-            <a class="btn btn-primary" href="{% url 'find_book' %}" role="button">Find books</a> <a href='../'>Cancel</a>
+            <a class="btn btn-primary" href="{% url 'books:find' %}" role="button">Find books</a> <a href='../'>Cancel</a>
             </form>
           </div>
         </div>
@@ -150,7 +150,7 @@
                                 <p>
                                 <br>
 
-                                 <form method="post" action="{% url 'book_options' %}">
+                                 <form method="post" action="{% url 'users:book_options' %}">
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
@@ -186,7 +186,7 @@
                 right there!</p>
                 <hr class="my-4">
 
-            <a class="btn btn-primary" href="{% url 'find_book' %}" role="button">Find books</a> <a href='../'>Cancel</a>
+            <a class="btn btn-primary" href="{% url 'books:find' %}" role="button">Find books</a> <a href='../'>Cancel</a>
             </form>
           </div>
         </div>
@@ -227,7 +227,7 @@
                                 <p>
                                 <br>
 
-                                 <form method="post" action="{% url 'book_options' %}">
+                                 <form method="post" action="{% url 'users:book_options' %}">
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>

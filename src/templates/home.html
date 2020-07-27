@@ -36,7 +36,7 @@
             {% if user.get_username == '' %}
             <p>Register to start your challange!</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" id="register_user" href="{% url 'register' %}" role="button">Register!</a>
+                    <a class="btn btn-primary btn-lg" id="register_user" href="{% url 'users:register' %}" role="button">Register!</a>
             {% else %}
             <p>Start with finding a book!</p>
                 <p class="lead">

@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import book_add_view, library_view, account_view
+from django.contrib.auth.views import LogoutView
+from .views import book_add_view, library_view, account_view, register_user_view, login_user_view, update_user_view, \
+	info_book_view, update_book_view
 
 app_name = 'users'
 
@@ -7,4 +9,12 @@ urlpatterns = [
 	path('delete_book/', book_add_view, name='delete_book'),
 	path('library/', library_view, name='library'),
 	path('account/', account_view, name='account'),
+	path('register/', register_user_view, name='register'),
+	path('login/', login_user_view, name='login'),
+	path('update/', update_user_view, name='update'),
+	path('logout/', LogoutView.as_view(), name='logout'),
+
+
+	path('book_options/', info_book_view, name='book_options'),
+	path('update_book/', update_book_view, name='update_book'),
 ]

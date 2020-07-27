@@ -141,7 +141,7 @@ def book_add_view(request):
 
 
 # DETAILS OF BOOK VIEW
-def book_options_view(request):
+def info_book_view(request):
 	if request.method == 'POST':
 		form = BookOptionsForm(request.POST)
 		if form.is_valid():
@@ -156,11 +156,17 @@ def book_options_view(request):
 			book_title = book.title
 			request.session['book_title'] = book_title
 
-			return render(request, 'users/book_options.html', {'book': book, 'book_position': book_position})
+			context = {
+				'book': book,
+				'book_position': book_position
+			}
+
+			#return HttpResponseRedirect(reverse('users:book_options'))
+			return render(request, 'users/book_options.html', context)
 
 
 # UPDATE BOOK'S INFORMATION VIEW
-def book_update_view(request):
+def update_book_view(request):
 	if request.method == 'POST':
 		form = BookUpdateForm(request.POST)
 		if form.is_valid():
@@ -179,7 +185,7 @@ def book_update_view(request):
 
 			book_position.save()
 			book.save()
-			return redirect('/library')
+			return HttpResponseRedirect(reverse('users:library'))
 	else:
 		form = BookUpdateForm()
 
