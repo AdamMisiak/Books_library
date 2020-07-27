@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import BookForm, SearchingForm
 from .functions import books_finder
 from .models import Book, BookPosition
+
 
 # SEARCHING FOR BOOK VIEW
 @login_required(login_url="login")
@@ -13,7 +15,7 @@ def find_book_view(request):
 	if form.is_valid():
 		request.session['form'] = form.cleaned_data
 
-		return HttpResponseRedirect('/book_result/')
+		return HttpResponseRedirect(reverse('books:results'))
 
 	context = {
 		'form': form
@@ -23,14 +25,14 @@ def find_book_view(request):
 
 # RESULTS OF SEARCHING BOOKS VIEW
 @login_required(login_url="login")
-def book_results_view(request):
+def results_book_view(request):
 	form = request.session['form']
 
 	# ERROR EXCEPTION HANDLING
 	try:
 		results = books_finder(form['title'])
 	except:
-		return render(request, 'books/finding_failed.html')
+		return HttpResponseRedirect(reverse('books:finding_failed'))
 
 	# READING DATA FROM API FUNCTION
 	for number, book in enumerate(results):
@@ -65,7 +67,7 @@ def book_results_view(request):
 
 
 # ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
-def book_add_view(request):
+def add_book_view(request):
 	if request.method == 'GET':
 		book_id = request.GET['book_id']
 		book = Book.objects.get(id=book_id)
@@ -86,6 +88,6 @@ def book_add_view(request):
 
 
 # BOOK SEARCHING FAILED VIEW
-def finding_failed(request, *args, **kwargs):
-	return render(request, 'finding_failed.html', {})
+def find_book_failed_view(request):
+	return render(request, 'books/finding_failed.html', {})
 

@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from pages.views import home_view, contact_view
-from books.views import book_results_view, find_book_view, finding_failed
+from books.views import find_book_failed_view
 from pages.views import register_view, login_view, account_view, update_view, library_view, book_options_view,\
                         book_update_view
 from django.contrib.auth.views import LogoutView
@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('book_options/', book_options_view, name='book_options'),
     path('update_book/', book_update_view, name='update_book'),
-    path('finding_failed/', finding_failed, name='finding_failed'),
+    path('finding_failed/', find_book_failed_view, name='finding_failed'),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('account/', account_view, name='account'),

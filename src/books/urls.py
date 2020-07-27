@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import book_results_view, book_add_view, find_book_view
+from .views import results_book_view, add_book_view, find_book_view, find_book_failed_view
 
 app_name = 'books'
 
 urlpatterns = [
-	#path('', book_results_view, name='index'),
-	path('add/', book_add_view, name='add'),
+	path('add/', add_book_view, name='add'),
 	path('find/', find_book_view, name='find'),
-	path('results/', book_results_view, name='results'),
+	path('results/', results_book_view, name='results'),
+	path('finding_failed/', find_book_failed_view, name='finding_failed'),
 ]
