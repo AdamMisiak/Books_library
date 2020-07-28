@@ -17,7 +17,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <input class="btn btn-primary btn-lg" type="Submit" value="Update" /> <a href='../'>Cancel</a>
+                    <input class="btn btn-primary btn-lg" type="Submit" value="Update" /> <a href="{% url 'users:library' %}">Cancel</a>
                 </form>
             </div>
         </div>
