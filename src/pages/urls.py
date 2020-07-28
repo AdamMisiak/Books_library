@@ -1,12 +1,12 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import book_add_view, library_view, account_view, register_user_view, login_user_view, update_user_view, \
+from .views import add_book_view, library_view, account_view, register_user_view, login_user_view, update_user_view, \
 	info_book_view, update_book_view
 
 app_name = 'users'
 
 urlpatterns = [
-	path('delete_book/', book_add_view, name='delete_book'),
+	path('delete/', add_book_view, name='delete'),
 	path('library/', library_view, name='library'),
 	path('account/', account_view, name='account'),
 	path('register/', register_user_view, name='register'),

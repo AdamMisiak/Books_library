@@ -4,7 +4,7 @@
     $.ajax(
     {
         type:"GET",
-        url: "add_book",
+        url: '/books/add',
         data:{
                  book_id: id
     },

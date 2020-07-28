@@ -117,7 +117,7 @@ def library_view(request):
 
 
 # ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
-def book_add_view(request):
+def add_book_view(request):
 	if request.method == 'GET':
 
 		# READING BOOK ID FROM JQUERY SCRIPT

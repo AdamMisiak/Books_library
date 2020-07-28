@@ -4,9 +4,9 @@ $('.addbutton').click(function(){
 var id;
 id = $(this).attr("data-catid");
 $.ajax(
-{
+  {
     type:"GET",
-    url: "delete_book",
+    url: '/users/delete',
     data:{
              book_id: id
 },
