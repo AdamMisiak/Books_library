@@ -161,8 +161,7 @@ def info_book_view(request):
 				'book_position': book_position
 			}
 
-			#return HttpResponseRedirect(reverse('users:book_options'))
-			return render(request, 'users/book_options.html', context)
+			return render(request, 'users/info_book.html', context)
 
 
 # UPDATE BOOK'S INFORMATION VIEW
@@ -193,4 +192,4 @@ def update_book_view(request):
 		'form': form,
 	}
 
-	return render(request, 'users/book_update.html', context)
+	return render(request, 'users/update_book.html', context)

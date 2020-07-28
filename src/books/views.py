@@ -63,7 +63,7 @@ def results_book_view(request):
 		'results': results,
 	}
 
-	return render(request, 'books/book_result.html', context)
+	return render(request, 'books/results_book.html', context)
 
 
 # ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
@@ -89,5 +89,5 @@ def add_book_view(request):
 
 # BOOK SEARCHING FAILED VIEW
 def find_book_failed_view(request):
-	return render(request, 'books/finding_failed.html', {})
+	return render(request, 'books/find_book_failed.html', {})
 
