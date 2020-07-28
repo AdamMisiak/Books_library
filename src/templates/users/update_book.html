@@ -19,14 +19,6 @@
                     {{ form|crispy }}
                     <input class="btn btn-primary btn-lg" type="Submit" value="Update" /> <a href='../'>Cancel</a>
                 </form>
-
-                 <form method="POST" action="{% url 'users:update_book' %}">
-                    {%csrf_token%}
-                    <div type="text/css" class = "container"></div>
-                    <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" href="#" data-catid="{{ book.id }}">Delete</a>
-                    <input name="id" value="{{ book.id }}">
-                    <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
-                </form>
             </div>
         </div>
     </div>

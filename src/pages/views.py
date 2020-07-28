@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, NavbarSearchingForm
 from django.apps import apps
-
+from datetime import datetime
 
 # MODELS IMPORTED
 Book = apps.get_model('books', 'Book')

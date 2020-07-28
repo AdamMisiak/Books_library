@@ -21,11 +21,11 @@ GENRE_CHOICES = (
 	("History", "History"),
 	("Travel", "Travel"),
 	("Guide", "Guide"),
-	("Financials", "Financials"),
-	("Programming", "Programming"),
 	("Families & Relationships", "Families & Relationships"),
 	("Humor", "Humor"),
 	("Children's", "Children's"),
+	("Programming", "Programming"),
+	("Financials", "Financials")
 )
 
 MONTH_CHOICES = (
@@ -41,4 +41,10 @@ MONTH_CHOICES = (
 	("10", "October"),
 	("11", "November"),
 	("12", "December"),
+)
+
+STATUS_CHOICES = (
+	("To do", "To do"),
+	("In progress", "In progress"),
+	("Done", "Done"),
 )
