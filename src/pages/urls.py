@@ -13,6 +13,7 @@ urlpatterns = [
 	path('login/', login_user_view, name='login'),
 	path('update/', update_user_view, name='update'),
 	path('logout/', LogoutView.as_view(), name='logout'),
+	path('update_image/', NEW VIEW HERE, name='update_image'),
 
 
 	path('info_book/', info_book_view, name='info_book'),

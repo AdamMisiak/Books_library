@@ -4,8 +4,10 @@ from django.db import models
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .choices import GENRE_CHOICES, MONTH_CHOICES, STATUS_CHOICES
+from .models import UserImage
 
 from django.apps import apps
+
 Book = apps.get_model('books', 'Book')
 BookPosition = apps.get_model('books', 'BookPosition')
 
@@ -46,6 +48,15 @@ class BookUpdateForm(forms.Form):
 	current_month = today.month
 
 	genre = forms.ChoiceField(label='Genre', choices=GENRE_CHOICES, initial=GENRE_CHOICES[26], widget=forms.Select())
-	month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, initial=MONTH_CHOICES[current_month-1], widget=forms.Select())
+	month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, initial=MONTH_CHOICES[current_month - 1],
+							  widget=forms.Select())
 	status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES, initial=STATUS_CHOICES[1], widget=forms.Select())
 
+
+class ImageForm(forms.ModelForm):
+	class Meta:
+		model = UserImage
+		fields = [
+			'user',
+			'image',
+		]
