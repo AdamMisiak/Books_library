@@ -44,8 +44,11 @@ def register_user_view(request):
 			form.save()
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username=username, password=raw_password)
-			return redirect('/login')
+			authenticate(username=username, password=raw_password)
+			user = User.objects.get(username=username)
+			image = UserImage(user=user)
+			image.save()
+			return redirect('/users/login')
 	else:
 		form = RegisterForm()
 
