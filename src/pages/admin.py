@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import UserPhoto
+from .models import UserImage
 
 
-admin.site.register(UserPhoto)
+admin.site.register(UserImage)
 

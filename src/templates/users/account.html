@@ -27,8 +27,9 @@
         <div class="card-body p-3" >
             <div class="row">
 
-                <div class="col-3" style="margin-top:15%;">
-                    <img src="{{ user.userphoto }}" class="center">
+                <div class="col-3" style="">
+
+                    <img src="{{ request.user.userimage.image.url }}" alt="connect" style="max-height:220px; max-width:220px;">
                 </div>
 
                 <div class="col-7">
@@ -37,7 +38,7 @@
                         <p class="lead">Email: {{ user.email }}</p>
                     <hr class="my-4">
                     <a class="btn btn-primary btn-lg" href="{% url 'users:update' %}" role="button">Update</a>
-                    <a class="infobutton btn btn-secondary btn-lg" href="" role="button">Update photo</a>
+                    <a class="infobutton btn btn-secondary btn-lg" href="{% url 'users:update_image' %}" role="button">Update photo</a>
                 </div>
             </div>
         </div>
