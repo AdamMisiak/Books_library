@@ -53,10 +53,11 @@ class BookUpdateForm(forms.Form):
 	status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES, initial=STATUS_CHOICES[1], widget=forms.Select())
 
 
-class ImageForm(forms.ModelForm):
+# ADD/UPDATE USER'S IMAGE
+class ImageUpdateForm(forms.ModelForm):
 	class Meta:
 		model = UserImage
 		fields = [
-			'user',
-			'image',
+			'image'
 		]
+

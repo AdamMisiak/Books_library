@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from .models import UserImage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.shortcuts import render, redirect
-from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, NavbarSearchingForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import RegisterForm, UpdateForm, BookOptionsForm, BookUpdateForm, NavbarSearchingForm, ImageUpdateForm
 from django.apps import apps
 
 
@@ -199,13 +199,16 @@ def update_book_view(request):
 	return render(request, 'users/update_book.html', context)
 
 
+# UPDATE USER'S IMAGE VIEW
 def add_image_view(request):
 	if request.method == 'POST':
-		form = UserImage(request.POST, request.FILES)
+		form = ImageUpdateForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.save()
-			#img_obj = form.instance
-			return render(request, 'users/update_image.html', {'form': form})
+			user = User.objects.get(id=request.user.id)
+			userimage = UserImage.objects.get(user=user)
+			userimage.image = request.FILES['image']
+			userimage.save()
+			return render(request, 'users/account.html', {'form': form})
 	else:
-		form = UserImage()
+		form = ImageUpdateForm()
 	return render(request, 'users/update_image.html', {'form': form})
