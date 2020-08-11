@@ -36,17 +36,6 @@
 
         </ul>
 
-
-<!--NAVBAR SEARCHING FORM-->
-        {% if user.is_authenticated == True %}
-        <form action="/" class="form-inline my-2 my-lg-0" method="POST">
-            {% csrf_token %}
-            <input id="title" name="title" class="form-control mr-sm-2" type="text"
-                   placeholder="Search..." aria-label="Search">
-            <input class="btn btn-outline-secondary my-2 my-sm-0" type="Submit" value="Find book" />
-        </form>
-        {% endif %}
-
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated == False %}
                 <li class="nav-item">
@@ -58,28 +47,27 @@
                 </li>
             {% endif %}
 
-
-
-        {% if user.get_username == '' %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:register' %}">Guest</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:account' %}">{{ user.username }}</a>
-            </li>
-        {% endif %}
-
         {% if user.is_authenticated == True %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:library' %}">Library</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle article-img" src="{{ request.user.userimage.image.url }}" style="max-height:20px; max-width:20px; width:20%; height:20%">
+                    {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'users:library' %}">Library</a>
+                      <a class="dropdown-item" href="{% url 'users:account' %}">Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a>
+                </div>
             </li>
-        {% endif %}
 
-        {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
-            </li>
+            <!--NAVBAR SEARCHING FORM-->
+        <form action="/" class="form-inline my-2 my-lg-0" method="POST">
+            {% csrf_token %}
+            <input id="title" name="title" class="form-control mr-sm-2" type="text"
+                   placeholder="Search..." aria-label="Search">
+            <input class="btn btn-outline-secondary my-2 my-sm-0" type="Submit" value="Find book" />
+        </form>
         {% endif %}
 
         </ul>
