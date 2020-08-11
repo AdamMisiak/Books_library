@@ -200,7 +200,7 @@ def update_book_view(request):
 
 
 # UPDATE USER'S IMAGE VIEW
-def add_image_view(request):
+def update_image_view(request):
 	if request.method == 'POST':
 		form = ImageUpdateForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -208,7 +208,7 @@ def add_image_view(request):
 			userimage = UserImage.objects.get(user=user)
 			userimage.image = request.FILES['image']
 			userimage.save()
-			return render(request, 'users/account.html', {'form': form})
+			return HttpResponseRedirect(reverse('users:account'))
 	else:
 		form = ImageUpdateForm()
 	return render(request, 'users/update_image.html', {'form': form})
