@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 from django.test import Client
 
 
+@pytest.fixture
+def login_user():
+	client = Client()
+	logged_in = client.login(username='adam', password='adam')
+	return logged_in
+
+
 def test_home_view_status_code(client):
 	url = reverse('home')
 	response = client.get(url)
@@ -23,24 +30,46 @@ def test_login_view_status_code(client):
 
 
 @pytest.mark.django_db
-def test_account_view_status_code(client):
+def test_account_view_status_code(client, login_user):
 	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	client = Client()
-	logged_in = client.login(username='adam', password='adam')
-	if logged_in:
+	if login_user:
 		url = reverse('users:account')
 		response = client.get(url)
 		assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_update_user_view_status_code(client):
-	#need to add feature for logging user
+def test_update_user_view_status_code(client, login_user):
 	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	client = Client()
-	logged_in = client.login(username='adam', password='adam')
-	if logged_in:
+	if login_user:
 		url = reverse('users:update')
+		response = client.get(url)
+		assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_library_view_status_code(client, login_user):
+	User.objects.create_user('adam', 'adam@test.com', 'adam')
+	if login_user:
+		url = reverse('users:library')
+		response = client.get(url)
+		assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_info_book_view_status_code(client, login_user):
+	User.objects.create_user('adam', 'adam@test.com', 'adam')
+	if login_user:
+		url = reverse('users:info_book')
+		response = client.get(url)
+		assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_update_book_view_status_code(client, login_user):
+	User.objects.create_user('adam', 'adam@test.com', 'adam')
+	if login_user:
+		url = reverse('users:update_book')
 		response = client.get(url)
 		assert response.status_code == 200
 
