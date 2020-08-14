@@ -34,6 +34,18 @@ def test_account_view_status_code(client):
 
 
 @pytest.mark.django_db
+def test_update_user_view_status_code(client):
+	#need to add feature for logging user
+	User.objects.create_user('adam', 'adam@test.com', 'adam')
+	client = Client()
+	logged_in = client.login(username='adam', password='adam')
+	if logged_in:
+		url = reverse('users:update')
+		response = client.get(url)
+		assert response.status_code == 200
+
+
+@pytest.mark.django_db
 def test_user_create():
 	User.objects.create_user('adam', 'adam@test.com', 'adam')
 	assert User.objects.count() == 1
