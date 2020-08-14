@@ -9,7 +9,7 @@ from .models import Book, BookPosition
 
 
 # SEARCHING FOR BOOK VIEW
-@login_required(login_url="login")
+@login_required(login_url="users:login")
 def find_book_view(request):
 	form = SearchingForm(request.POST or None)
 	if form.is_valid():
@@ -24,7 +24,7 @@ def find_book_view(request):
 
 
 # RESULTS OF SEARCHING BOOKS VIEW
-@login_required(login_url="login")
+@login_required(login_url="users:login")
 def results_book_view(request):
 	form = request.session['form']
 

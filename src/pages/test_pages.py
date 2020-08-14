@@ -10,19 +10,19 @@ def test_home_view_status_code(client):
 
 
 def test_register_view_status_code(client):
-	url = reverse('register')
+	url = reverse('users:register')
 	response = client.get(url)
 	assert response.status_code == 200
 
 
 def test_login_view_status_code(client):
-	url = reverse('login')
+	url = reverse('users:login')
 	response = client.get(url)
 	assert response.status_code == 200
 
 
 def test_find_book_view_status_code(client):
-	url = reverse('find_book')
+	url = reverse('books:find')
 	response = client.get(url)
 	assert response.status_code == 302
 
