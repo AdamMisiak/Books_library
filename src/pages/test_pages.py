@@ -11,76 +11,73 @@ def login_user():
 	return logged_in
 
 
-def test_home_view_status_code(client):
-	url = reverse('home')
-	response = client.get(url)
-	assert response.status_code == 200
+class TestPagesViews:
 
-
-def test_register_view_status_code(client):
-	url = reverse('users:register')
-	response = client.get(url)
-	assert response.status_code == 200
-
-
-def test_login_view_status_code(client):
-	url = reverse('users:login')
-	response = client.get(url)
-	assert response.status_code == 200
-
-
-@pytest.mark.django_db
-def test_account_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:account')
+	def test_home_view_status_code(self):
+		client = Client()
+		url = reverse('home')
 		response = client.get(url)
 		assert response.status_code == 200
 
-
-@pytest.mark.django_db
-def test_update_user_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:update')
+	def test_register_view_status_code(self):
+		client = Client()
+		url = reverse('users:register')
 		response = client.get(url)
 		assert response.status_code == 200
 
-
-@pytest.mark.django_db
-def test_library_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:library')
+	def test_login_view_status_code(self):
+		client = Client()
+		url = reverse('users:login')
 		response = client.get(url)
 		assert response.status_code == 200
 
+	@pytest.mark.django_db
+	def test_account_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:account')
+			response = client.get(url)
+			assert response.status_code == 200
 
-@pytest.mark.django_db
-def test_info_book_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:info_book')
-		response = client.get(url)
-		assert response.status_code == 200
+	@pytest.mark.django_db
+	def test_update_user_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:update')
+			response = client.get(url)
+			assert response.status_code == 200
 
+	@pytest.mark.django_db
+	def test_library_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:library')
+			response = client.get(url)
+			assert response.status_code == 200
 
-@pytest.mark.django_db
-def test_update_book_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:update_book')
-		response = client.get(url)
-		assert response.status_code == 200
+	@pytest.mark.django_db
+	def test_info_book_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:info_book')
+			response = client.get(url)
+			assert response.status_code == 200
 
+	@pytest.mark.django_db
+	def test_update_book_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:update_book')
+			response = client.get(url)
+			assert response.status_code == 200
 
-@pytest.mark.django_db
-def test_update_image_view_status_code(client, login_user):
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	if login_user:
-		url = reverse('users:update_image')
-		response = client.get(url)
-		assert response.status_code == 200
+	@pytest.mark.django_db
+	def test_update_image_view_status_code(client, login_user):
+		User.objects.create_user('adam', 'adam@test.com', 'adam')
+		if login_user:
+			url = reverse('users:update_image')
+			response = client.get(url)
+			assert response.status_code == 200
 
 
 @pytest.mark.django_db
