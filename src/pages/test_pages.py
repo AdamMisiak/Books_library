@@ -75,6 +75,15 @@ def test_update_book_view_status_code(client, login_user):
 
 
 @pytest.mark.django_db
+def test_update_image_view_status_code(client, login_user):
+	User.objects.create_user('adam', 'adam@test.com', 'adam')
+	if login_user:
+		url = reverse('users:update_image')
+		response = client.get(url)
+		assert response.status_code == 200
+
+
+@pytest.mark.django_db
 def test_user_create():
 	User.objects.create_user('adam', 'adam@test.com', 'adam')
 	assert User.objects.count() == 1
