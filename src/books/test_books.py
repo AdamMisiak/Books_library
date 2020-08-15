@@ -2,13 +2,7 @@ import pytest
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
-
-
-# @pytest.mark.django_db
-# def test_book_create():
-# 	Book.objects.create_user('title', 'author')
-# 	assert Book.objects.count() == 1
-# 	assert Book.objects.get(id=1).title == 'title'
+from .functions import books_finder
 
 
 @pytest.fixture
@@ -43,3 +37,13 @@ class TestBooksViews:
 			url = reverse('books:find_failed')
 			response = client.get(url)
 			assert response.status_code == 200
+
+
+class TestBooksFunctions():
+
+	def test_books_finder(self):
+		result = books_finder('Wspomnienia Gracza Giełdowego')
+		assert type(result) == list
+		assert type(result[0]) == dict
+		assert result[0]['id'].isnumeric() == True
+		assert 'Wspomnienia Gracza Giełdowego' in result[0]['title']
