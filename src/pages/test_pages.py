@@ -80,9 +80,23 @@ class TestPagesViews:
 			assert response.status_code == 200
 
 
-@pytest.mark.django_db
-def test_user_create():
-	User.objects.create_user('adam', 'adam@test.com', 'adam')
-	assert User.objects.count() == 1
-	assert User.objects.get(id=1).email == 'adam@test.com'
-	assert User.objects.get(id=1).username == 'adam'
+class TestUserModel:
+
+	@pytest.mark.django_db
+	def test_user_create(self):
+		self.test_user = User.objects.create_user('adam', 'adam@test.com', 'adam')
+		assert User.objects.count() == 1
+		assert User.objects.get(id=1).email == 'adam@test.com'
+		assert User.objects.get(id=1).username == 'adam'
+		assert isinstance(self.test_user, User)
+
+	@pytest.mark.django_db
+	def test_default_user_is_active(self):
+		self.test_user = User.objects.create_user('adam', 'adam@test.com', 'adam')
+		assert self.test_user.is_active
+
+	@pytest.mark.django_db
+	def test_first_name_label(self):
+		self.test_user = User.objects.create_user('adam', 'adam@test.com', 'adam')
+		field_label = self.test_user._meta.get_field('email').verbose_name
+		assert field_label == 'email address'

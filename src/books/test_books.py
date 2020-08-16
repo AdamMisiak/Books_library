@@ -39,7 +39,7 @@ class TestBooksViews:
 			assert response.status_code == 200
 
 
-class TestBooksFunctions():
+class TestBooksFunctions:
 
 	def test_books_finder(self):
 		result = books_finder('Wspomnienia Gracza Giełdowego')
