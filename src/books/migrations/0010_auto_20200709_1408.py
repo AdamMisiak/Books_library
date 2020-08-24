@@ -8,21 +8,21 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('books', '0009_auto_20200623_1551'),
+        ("books", "0009_auto_20200623_1551"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book',
-            name='description',
+            model_name="book",
+            name="description",
             field=models.CharField(blank=True, default=None, max_length=2000),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='user',
-            field=models.ManyToManyField(blank=True, related_name='books_added', to=settings.AUTH_USER_MODEL),
+            model_name="book",
+            name="user",
+            field=models.ManyToManyField(
+                blank=True, related_name="books_added", to=settings.AUTH_USER_MODEL
+            ),
         ),
-        migrations.DeleteModel(
-            name='BookPosition',
-        ),
+        migrations.DeleteModel(name="BookPosition",),
     ]

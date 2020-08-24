@@ -8,12 +8,9 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pages', '0001_initial'),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
-        migrations.RenameModel(
-            old_name='UserPhoto',
-            new_name='UserImage',
-        ),
+        migrations.RenameModel(old_name="UserPhoto", new_name="UserImage",),
     ]

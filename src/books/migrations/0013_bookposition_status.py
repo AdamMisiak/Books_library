@@ -6,13 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0012_bookposition_month'),
+        ("books", "0012_bookposition_month"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bookposition',
-            name='status',
-            field=models.CharField(choices=[('To do', 'To do'), ('In Progress', 'In progress'), ('Done', 'Done')], default='To do', max_length=20),
+            model_name="bookposition",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("To do", "To do"),
+                    ("In Progress", "In progress"),
+                    ("Done", "Done"),
+                ],
+                default="To do",
+                max_length=20,
+            ),
         ),
     ]

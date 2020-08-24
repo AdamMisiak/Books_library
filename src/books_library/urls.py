@@ -7,18 +7,15 @@ import debug_toolbar
 
 
 urlpatterns = [
-    path('books/', include('books.urls')),
-    path('users/', include('pages.urls')),
-
-    path('', home_view, name='home'),
-    path('admin/', admin.site.urls),
-    path('contact/', contact_view, name='contact'),
-
-    path('__debug__', include(debug_toolbar.urls)),
+    path("books/", include("books.urls")),
+    path("users/", include("pages.urls")),
+    path("", home_view, name="home"),
+    path("admin/", admin.site.urls),
+    path("contact/", contact_view, name="contact"),
+    path("__debug__", include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:
 
-    urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

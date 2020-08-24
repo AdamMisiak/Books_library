@@ -9,18 +9,22 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pages', '0002_auto_20200808_1428'),
+        ("pages", "0002_auto_20200808_1428"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userimage',
-            name='image',
-            field=models.ImageField(default='images/user.png', upload_to='images/'),
+            model_name="userimage",
+            name="image",
+            field=models.ImageField(default="images/user.png", upload_to="images/"),
         ),
         migrations.AlterField(
-            model_name='userimage',
-            name='user',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="userimage",
+            name="user",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

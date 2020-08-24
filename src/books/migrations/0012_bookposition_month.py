@@ -7,13 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0011_bookposition'),
+        ("books", "0011_bookposition"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bookposition',
-            name='month',
-            field=models.IntegerField(blank=True, default=1, validators=[django.core.validators.MaxValueValidator(12), django.core.validators.MinValueValidator(1)]),
+            model_name="bookposition",
+            name="month",
+            field=models.IntegerField(
+                blank=True,
+                default=1,
+                validators=[
+                    django.core.validators.MaxValueValidator(12),
+                    django.core.validators.MinValueValidator(1),
+                ],
+            ),
         ),
     ]

@@ -3,4 +3,3 @@ from .models import UserImage
 
 
 admin.site.register(UserImage)
-
