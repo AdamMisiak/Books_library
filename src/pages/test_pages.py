@@ -12,19 +12,19 @@ def login_user():
 
 
 class TestPagesViews:
-    def test_home_view_status_code(self):
+    def test_home_view_status_code(self, client):
         client = Client()
         url = reverse("home")
         response = client.get(url)
         assert response.status_code == 200
 
-    def test_register_view_status_code(self):
+    def test_register_view_status_code(self, client):
         client = Client()
         url = reverse("users:register")
         response = client.get(url)
         assert response.status_code == 200
 
-    def test_login_view_status_code(self):
+    def test_login_view_status_code(self, client):
         client = Client()
         url = reverse("users:login")
         response = client.get(url)
@@ -103,3 +103,5 @@ class TestUserModel:
         assert email_label == "email address"
         assert username == "username"
         assert password == "password"
+
+
