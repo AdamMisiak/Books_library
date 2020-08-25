@@ -2,19 +2,6 @@
 
 {% block content %}
 
-<!--<div class="row justify-content-center">-->
-<!--    <div class="col-lg-8 col-md-10 col-sm-12">-->
-<!--        <div class="card">-->
-<!--            <div class="card-body">-->
-<!--                <p class="lead">Username: {{ request.user.username }}</p>-->
-<!--                <hr class="my-4">-->
-<!--                <p class="lead">Email: {{ user.email }}</p>-->
-<!--                <hr class="my-4">-->
-<!--                <a class="btn btn-primary btn-lg" href="{% url 'users:update' %}" role="button">Update</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <div class="container">
 
@@ -28,7 +15,6 @@
             <div class="row">
 
                 <div class="col-3" style="">
-
                     <img src="{{ request.user.userimage.image.url }}" alt="connect" style="max-height:220px; max-width:220px;">
                 </div>
 

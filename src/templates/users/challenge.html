@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+   <h1 class="text-center logo my-4">
+      {{ request.user.username }}'s Challenge
+   </h1>
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <div style="float:left;">
+            <p class="lead">Current month: {{ current_month }} </p>
+        </div>
+
+        <div style="float:left;">
+            <a class="january" id="january" href="#" data-catid="{{ book.id }}">January</a>
+        </div>
+
+        <div style="float:left;">
+            <a class="addbutton btn btn-black btn-lg" id="february" href="#" data-catid="{{ book.id }}">February</a>
+        </div>
+
+        <div style="float:left;">
+            <a class="addbutton btn btn-black btn-lg" id="march" href="#" data-catid="{{ book.id }}">March</a>
+        </div>
+
+        <div style="float:left;">
+            <a class="addbutton btn btn-black btn-lg" id="april" href="#" data-catid="{{ book.id }}">April</a>
+        </div>
+
+        <br>
+   </div>
+</div>
+
+{% endblock %}

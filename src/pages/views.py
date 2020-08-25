@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -100,7 +101,7 @@ def update_user_view(request):
     return render(request, "users/update.html", context)
 
 
-# LIBRARY OF USER'S BOOKS
+# LIBRARY OF USER'S BOOKS VIEW
 def library_view(request):
     users_book_positions = []
     user = User.objects.get(pk=request.user.id)
@@ -113,6 +114,18 @@ def library_view(request):
 
     context = {"books": books, "users_book_positions": users_book_positions}
     return render(request, "users/library.html", context)
+
+
+# USER'S CHALLENGE VIEW
+def challenge_view(request):
+    today = datetime.now()
+    current_month = today.strftime("%B")
+
+    context = {
+        "current_month": current_month,
+    }
+
+    return render(request, "users/challenge.html", context)
 
 
 # ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
