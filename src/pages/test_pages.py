@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
+from .models import UserImage
 
 
 @pytest.fixture
@@ -82,23 +83,23 @@ class TestPagesViews:
 class TestUserModel:
     @pytest.mark.django_db
     def test_user_create(self):
-        self.test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
         assert User.objects.count() == 1
         assert User.objects.get(id=1).email == "adam@test.com"
         assert User.objects.get(id=1).username == "adam"
-        assert isinstance(self.test_user, User)
+        assert isinstance(test_user, User)
 
     @pytest.mark.django_db
     def test_default_user_is_active(self):
-        self.test_user = User.objects.create_user("adam", "adam@test.com", "adam")
-        assert self.test_user.is_active
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        assert test_user.is_active
 
     @pytest.mark.django_db
     def test_user_labels(self):
-        self.test_user = User.objects.create_user("adam", "adam@test.com", "adam")
-        email_label = self.test_user._meta.get_field("email").verbose_name
-        username = self.test_user._meta.get_field("username").verbose_name
-        password = self.test_user._meta.get_field("password").verbose_name
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        email_label = test_user._meta.get_field("email").verbose_name
+        username = test_user._meta.get_field("username").verbose_name
+        password = test_user._meta.get_field("password").verbose_name
 
         assert email_label == "email address"
         assert username == "username"

@@ -51,8 +51,8 @@ class TestBooksFunctions:
 class TestBookModel:
     @pytest.mark.django_db
     def test_book_create(self):
-        self.test_user = User.objects.create_user("adam", "adam@test.com", "adam")
-        self.test_book = Book.objects.create(
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_book = Book.objects.create(
             id=1,
             title="title",
             author="author",
@@ -61,7 +61,7 @@ class TestBookModel:
             description="description",
             genre_1="genre",
         )
-        self.test_book.user.add(self.test_user)
+        test_book.user.add(test_user)
 
         assert Book.objects.count() == 1
         assert Book.objects.get(id=1).title == "title"
@@ -70,4 +70,6 @@ class TestBookModel:
         assert Book.objects.get(id=1).sites == 10
         assert Book.objects.get(id=1).description == "description"
         assert Book.objects.get(id=1).genre_1 == "genre"
-        assert isinstance(self.test_book, Book)
+        assert str(Book.objects.get(id=1).user.all()) in "<QuerySet [<User: adam>]>"
+        assert str(User.objects.get(id=1).books_added.all()) in "<QuerySet [<Book: title>]>"
+        assert isinstance(test_book, Book)
