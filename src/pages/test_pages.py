@@ -98,11 +98,31 @@ class TestUserModel:
     def test_user_labels(self):
         test_user = User.objects.create_user("adam", "adam@test.com", "adam")
         email_label = test_user._meta.get_field("email").verbose_name
-        username = test_user._meta.get_field("username").verbose_name
-        password = test_user._meta.get_field("password").verbose_name
+        username_label = test_user._meta.get_field("username").verbose_name
+        password_label = test_user._meta.get_field("password").verbose_name
 
         assert email_label == "email address"
-        assert username == "username"
-        assert password == "password"
+        assert username_label == "username"
+        assert password_label == "password"
 
 
+class TestUserImageModel:
+    @pytest.mark.django_db
+    def test_user_create(self):
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_user_image = UserImage.objects.create(user=test_user)
+
+        assert UserImage.objects.count() == 1
+        assert str(UserImage.objects.get(id=1).user) in "<User: adam>"
+        assert UserImage.objects.get(id=1).image == "images/user.png"
+        assert isinstance(test_user_image, UserImage)
+
+    @pytest.mark.django_db
+    def test_user_image_labels(self):
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_user_image = UserImage.objects.create(user=test_user)
+        user_label = test_user_image._meta.get_field("user").verbose_name
+        image_label = test_user_image._meta.get_field("image").verbose_name
+
+        assert user_label == "user"
+        assert image_label == "image"

@@ -71,5 +71,8 @@ class TestBookModel:
         assert Book.objects.get(id=1).description == "description"
         assert Book.objects.get(id=1).genre_1 == "genre"
         assert str(Book.objects.get(id=1).user.all()) in "<QuerySet [<User: adam>]>"
-        assert str(User.objects.get(id=1).books_added.all()) in "<QuerySet [<Book: title>]>"
+        assert (
+            str(User.objects.get(id=1).books_added.all())
+            in "<QuerySet [<Book: title>]>"
+        )
         assert isinstance(test_book, Book)
