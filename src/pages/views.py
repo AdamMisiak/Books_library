@@ -103,13 +103,14 @@ def update_user_view(request):
 
 # LIBRARY OF USER'S BOOKS VIEW
 def library_view(request):
-    users_book_positions = []
     user = User.objects.get(pk=request.user.id)
 
     # FILTERING ONLY USER'S ADDED BOOKS
-    for book_position in BookPosition.objects.filter(user=user):
-        if book_position.value == "Add":
-            users_book_positions.append(book_position)
+    users_book_positions = [
+        book_position
+        for book_position in BookPosition.objects.filter(user=user)
+        if book_position.value == "Add"
+    ]
     books = user.books_added.all()
 
     context = {"books": books, "users_book_positions": users_book_positions}
@@ -121,8 +122,20 @@ def challenge_view(request):
     today = datetime.now()
     current_month = today.strftime("%B")
 
+    user = User.objects.get(pk=request.user.id)
+    books = user.books_added.all()
+
+    users_book_positions = [
+        book_position
+        for book_position in BookPosition.objects.filter(user=user)
+        if book_position.value == "Add"
+    ]
+
     context = {
         "current_month": current_month,
+        "user": user,
+        "books": books,
+        "users_book_positions": users_book_positions,
     }
 
     return render(request, "users/challenge.html", context)
