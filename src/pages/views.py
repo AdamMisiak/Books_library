@@ -14,6 +14,7 @@ from .forms import (
     NavbarSearchingForm,
     ImageUpdateForm,
 )
+from .choices import MONTH_CHOICES
 from django.apps import apps
 
 
@@ -136,6 +137,8 @@ def challenge_view(request):
         "user": user,
         "books": books,
         "users_book_positions": users_book_positions,
+        "MONTH_CHOICES": MONTH_CHOICES,
+
     }
 
     return render(request, "users/challenge.html", context)
