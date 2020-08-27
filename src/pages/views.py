@@ -107,11 +107,7 @@ def library_view(request):
     user = User.objects.get(pk=request.user.id)
 
     # FILTERING ONLY USER'S ADDED BOOKS
-    users_book_positions = [
-        book_position
-        for book_position in BookPosition.objects.filter(user=user)
-        if book_position.value == "Add"
-    ]
+    users_book_positions = BookPosition.objects.filter(user=user, value="Add")
     books = user.books_added.all()
 
     context = {"books": books, "users_book_positions": users_book_positions}
@@ -126,11 +122,7 @@ def challenge_view(request):
     user = User.objects.get(pk=request.user.id)
     books = user.books_added.all()
 
-    users_book_positions = [
-        book_position
-        for book_position in BookPosition.objects.filter(user=user)
-        if book_position.value == "Add"
-    ]
+    users_book_positions = BookPosition.objects.filter(user=user, value="Add")
 
     context = {
         "current_month": current_month,
