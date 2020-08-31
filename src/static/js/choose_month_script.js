@@ -10,19 +10,20 @@ function chooseMonth(clicked_id) {
     elements = document.querySelectorAll('[id=block]');
     counter = 0;
     console.log(used_flag)
-    if (used_flag == true) {
+
+
+    if (String(month) == 'Year') {
         for (var i = 0; i < elements.length; i++) {
             elements[i].style.display = "block";
             used_flag = false;
         }
-    } else if (used_flag == false) {
+    } else {
         for (var i = 0; i < elements.length; i++) {
             if (String(elements[i].children[0].children[0].children[1].children[0].children[1].children[3].innerHTML) != String(month)) {
                 elements[i].style.display = "none";
             } else {
                 elements[i].style.display = "block";
             }
-            used_flag = true;
         }
     }
 }
