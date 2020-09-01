@@ -74,3 +74,8 @@ class ImageUpdateForm(forms.ModelForm):
     class Meta:
         model = UserImage
         fields = ["image"]
+
+
+# REVIEW BOOK FORM
+class ReviewBookForm(forms.Form):
+    review = forms.TextInput()

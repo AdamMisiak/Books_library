@@ -48,6 +48,7 @@ class BookPosition(models.Model):
     month = models.CharField(blank=True, default=current_month, max_length=20)
     year = models.IntegerField(blank=True, default=current_year)
     status = models.CharField(choices=STATUS_CHOICES, default="To do", max_length=20)
+    review = models.TextField(blank=True, max_length=1000)
 
     def __str__(self):
         return str(self.book)

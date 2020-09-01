@@ -13,6 +13,7 @@ from .forms import (
     BookUpdateForm,
     NavbarSearchingForm,
     ImageUpdateForm,
+    ReviewBookForm,
 )
 from .choices import MONTH_CHOICES
 from django.apps import apps
@@ -230,3 +231,36 @@ def update_image_view(request):
     else:
         form = ImageUpdateForm()
     return render(request, "users/update_image.html", {"form": form})
+
+
+# REVIEW BOOK VIEW
+def review_book_view(request):
+    # if request.method == "POST":
+    #     form = ReviewBookForm(request.POST)
+    #     if form.is_valid():
+    #         book_id = request.session["book_id"]
+    #         book = Book.objects.get(id=book_id)
+    #         book_position = BookPosition.objects.get(user=request.user, book=book)
+    #
+    #         # SETTING GENRE, MONTH AND STATUS OF BOOK
+    #         genre = form.cleaned_data.get("genre")
+    #         month = form.cleaned_data.get("month")
+    #         year = form.cleaned_data.get("year")
+    #         status = form.cleaned_data.get("status")
+    #
+    #         book_position.month = month
+    #         book_position.year = year
+    #         book_position.status = status
+    #         book.genre_1 = genre
+    #
+    #         book_position.save()
+    #         book.save()
+    #         return HttpResponseRedirect(reverse("users:library"))
+    # else:
+    #     form = BookUpdateForm()
+
+    # context = {
+    #     "form": form,
+    # }
+
+    return render(request, "users/review_book.html")

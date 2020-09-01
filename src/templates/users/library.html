@@ -81,7 +81,7 @@
                                 {%csrf_token%}
                                 <div type="text/css" class = "container"></div>
                                 <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
-                                <a class="addbutton btn btn-primary btn-lg" href="#" data-catid="{{ book.id }}">Review</a>
+                                <a class="addbutton btn btn-primary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
                                 <input type="hidden"  name="id" value="{{ book.id }}">
                                 <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
                             </form>
@@ -163,7 +163,7 @@
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
-                                    <a class="addbutton btn btn-primary btn-lg" href="#" data-catid="{{ book.id }}">Review</a>
+                                    <a class="addbutton btn btn-primary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
                                     <input type="hidden"  name="id" value="{{ book.id }}">
                                     <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
                                 </form>
@@ -245,7 +245,8 @@
                                     {%csrf_token%}
                                     <div type="text/css" class = "container"></div>
                                     <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
-                                    <a class="addbutton btn btn-primary btn-lg" href="#" data-catid="{{ book.id }}">Review</a>
+                                    <a class="addbutton btn btn-primary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
+                                 REVIEW PRZENIESC DO UPDATE EKRANU, PO NACISNIECIU UPDATE OSOBNY BUTTON NA REVIEW ( bo zapisuje ksiazke do sesji) albo zrobic JQuery
                                     <input type="hidden"  name="id" value="{{ book.id }}">
                                     <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
                                 </form>

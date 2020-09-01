@@ -11,6 +11,7 @@ from .views import (
     info_book_view,
     update_book_view,
     update_image_view,
+    review_book_view,
 )
 
 app_name = "users"
@@ -27,4 +28,5 @@ urlpatterns = [
     path("update_image/", update_image_view, name="update_image"),
     path("info_book/", info_book_view, name="info_book"),
     path("update_book/", update_book_view, name="update_book"),
+    path("review_book/", review_book_view, name="review_book"),
 ]
