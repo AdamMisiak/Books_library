@@ -130,7 +130,6 @@ def challenge_view(request):
         "books": books,
         "users_book_positions": users_book_positions,
         "MONTH_CHOICES": MONTH_CHOICES,
-
     }
 
     return render(request, "users/challenge.html", context)

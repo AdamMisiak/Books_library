@@ -45,10 +45,8 @@ class BookPosition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     value = models.CharField(choices=BOOK_CHOICES, default="Delete", max_length=10)
-    month = models.CharField(
-        blank=True, default=current_month, max_length=20)
-    year = models.IntegerField(
-        blank=True, default=current_year)
+    month = models.CharField(blank=True, default=current_month, max_length=20)
+    year = models.IntegerField(blank=True, default=current_year)
     status = models.CharField(choices=STATUS_CHOICES, default="To do", max_length=20)
 
     def __str__(self):

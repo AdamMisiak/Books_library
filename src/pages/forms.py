@@ -59,7 +59,7 @@ class BookUpdateForm(forms.Form):
         initial=MONTH_CHOICES[current_month - 1],
         widget=forms.Select(),
     )
-    year = forms.IntegerField(label='Year')
+    year = forms.IntegerField(label="Year")
     status = forms.ChoiceField(
         label="Status",
         choices=STATUS_CHOICES,

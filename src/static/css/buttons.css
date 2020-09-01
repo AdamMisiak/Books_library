@@ -1,0 +1,99 @@
+/* Month's button styles */
+.january {
+  background-color: #1076A9;
+}
+.february {
+  background-color: #69AED1;
+}
+.march {
+  background-color: #3BA70F;
+}
+.april {
+  background-color: #7CE152;
+}
+.may {
+  background-color: #EBEB0B;
+}
+.june {
+  background-color: #ECB71D;
+}
+.july {
+  background-color: #E4900F;
+}
+.august {
+  background-color: #E64A0F;
+}
+.september {
+  background-color: #DF2761;
+}
+.october {
+  background-color: #C5307D;
+}
+.november {
+  background-color: #7B21D6;
+}
+.december {
+  background-color: #4E3AC2;
+}
+.year {
+  background-color: #C2C1C7;
+}
+
+
+/* Month's name text */
+.january-text {
+  color: #1076A9;
+}
+.february-text {
+  color: #69AED1;
+}
+.march-text {
+  color: #3BA70F;
+}
+.april-text {
+  color: #7CE152;
+}
+.may-text {
+  color: #EBEB0B;
+}
+.june-text {
+  color: #ECB71D;
+}
+.july-text {
+  color: #E4900F;
+}
+.august-text {
+  color: #E64A0F;
+}
+.september-text {
+  color: #DF2761;
+}
+.october-text {
+  color: #C5307D;
+}
+.november-text {
+  color: #7B21D6;
+}
+.december-text {
+  color: #4E3AC21;
+}
+
+
+/* Button's style */
+.month-button {
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.month-button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
