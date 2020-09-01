@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import datetime
 
 
 # Create your models here.
@@ -34,6 +35,10 @@ STATUS_CHOICES = (
     ("Done", "Done"),
 )
 
+today = datetime.now()
+current_year = today.year
+current_month = str(today.strftime("%B"))
+
 
 # MODEL FOR CONNECTING USER WITH BOOK
 class BookPosition(models.Model):
@@ -41,7 +46,9 @@ class BookPosition(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     value = models.CharField(choices=BOOK_CHOICES, default="Delete", max_length=10)
     month = models.CharField(
-        blank=True, default="January", max_length=20)
+        blank=True, default=current_month, max_length=20)
+    year = models.IntegerField(
+        blank=True, default=current_year)
     status = models.CharField(choices=STATUS_CHOICES, default="To do", max_length=20)
 
     def __str__(self):

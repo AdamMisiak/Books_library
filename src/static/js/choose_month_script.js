@@ -9,8 +9,6 @@ function chooseMonth(clicked_id) {
     month = capitalize(clicked_id);
     elements = document.querySelectorAll('[id=block]');
     counter = 0;
-    console.log(used_flag)
-
 
     if (String(month) == 'Year') {
         for (var i = 0; i < elements.length; i++) {

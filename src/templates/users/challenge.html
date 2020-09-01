@@ -54,6 +54,7 @@
                                             <br>
                                             <small class="text-muted">{{ book_position.status }} in </small>
                                             <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                            <small class="text-muted" id="year-text">{{ book_position.year }}</small>
                                         </div>
                                     </div>
 
@@ -84,5 +85,6 @@
 {% endfor %}
 
 <script src="/static/js/choose_month_script.js"></script>
+<script src="/static/js/library_script.js"></script>
 
 {% endblock %}
