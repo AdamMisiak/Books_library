@@ -46,6 +46,7 @@ class BookOptionsForm(forms.Form):
 class BookUpdateForm(forms.Form):
     today = datetime.now()
     current_month = today.month
+    current_year = today.year
 
     genre = forms.ChoiceField(
         label="Genre",
@@ -59,7 +60,7 @@ class BookUpdateForm(forms.Form):
         initial=MONTH_CHOICES[current_month - 1],
         widget=forms.Select(),
     )
-    year = forms.IntegerField(label="Year")
+    year = forms.IntegerField(label="Year", initial=current_year)
     status = forms.ChoiceField(
         label="Status",
         choices=STATUS_CHOICES,
