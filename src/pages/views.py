@@ -197,9 +197,11 @@ def update_book_view(request):
             # SETTING GENRE, MONTH AND STATUS OF BOOK
             genre = form.cleaned_data.get("genre")
             month = form.cleaned_data.get("month")
+            year = form.cleaned_data.get("year")
             status = form.cleaned_data.get("status")
 
             book_position.month = month
+            book_position.year = year
             book_position.status = status
             book.genre_1 = genre
 
