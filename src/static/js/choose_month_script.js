@@ -10,10 +10,12 @@ function chooseMonth(clicked_id) {
     month = capitalize(clicked_id);
     elements = document.querySelectorAll('[id=block]');
 
-
     if (String(month) == 'Year') {
         for (var i = 0; i < elements.length; i++) {
-            elements[i].style.display = "block";
+            if (String(elements[i].children[0].children[0].children[1].children[0].children[1].children[4].innerHTML) == String(chosen_year)) {
+                elements[i].style.display = "block";
+            }
+
         }
     } else {
         for (var i = 0; i < elements.length; i++) {
@@ -39,8 +41,7 @@ function chooseYear(clicked_id) {
         }
     } else {
         for (var i = 0; i < elements.length; i++) {
-            if (String(elements[i].children[0].children[0].children[1].children[0].children[1].children[4].innerHTML) == String(year) &&
-                String(elements[i].children[0].children[0].children[1].children[0].children[1].children[3].innerHTML) == String(chosen_month)) {
+            if (String(elements[i].children[0].children[0].children[1].children[0].children[1].children[4].innerHTML) == String(year)) {
                 elements[i].style.display = "block";
             } else {
                 elements[i].style.display = "none";
