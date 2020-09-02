@@ -35,13 +35,6 @@
                             <p>
                             <br>
 
-                             <form method="post" action="{% url 'users:info_book' %}">
-                                {%csrf_token%}
-                                <div type="text/css" class = "container"></div>
-                                <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
-                                <input type="hidden"  name="id" value="{{ book.id }}">
-                                <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
-                            </form>
 
                         </div>
                     </div>
