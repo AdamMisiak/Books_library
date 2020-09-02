@@ -244,11 +244,9 @@ def review_book_view(request):
 
             # SETTING REVIEW
             review = form.cleaned_data.get("review")
-
-            book.review = review
-
+            book_position.review = review
             book_position.save()
-            book.save()
+
             return HttpResponseRedirect(reverse("users:library"))
     else:
         form = ReviewBookForm()
