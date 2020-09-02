@@ -39,7 +39,7 @@
                         <a class="btn btn-primary btn-lg" href="{% url 'users:update_book' %}" role="button">Update</a>
                         <a class="addbutton btn btn-secondary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
                 </div>
-            </div
+            </div>
         </div>
     </div>
 </div>
@@ -48,12 +48,13 @@
 <br>
 <br>
 
+
+{% if book_position.review %}
 <div class="container">
 
    <h1 class="text-center logo my-4">
       Reviews section
    </h1>
-
 
     <div class="card mb-2" style="margin-left:5%; margin-right:10%;">
         <div class="card-body p-3" >
@@ -65,5 +66,7 @@
         </div>
     </div>
 </div>
+{% endif %}
+
 
 {% endblock %}

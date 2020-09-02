@@ -39,9 +39,10 @@ def home_view(request, *args, **kwargs):
     return render(request, "home.html", context)
 
 
-def contact_view(request, *args, **kwargs):
-    context = {}
-    return render(request, "contact.html", context)
+def about_view(request, *args, **kwargs):
+
+    return render(request, "about.html")
+
 
 
 def register_user_view(request):

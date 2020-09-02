@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        {% if user.get_username == '' %}
+        <h1 class="display-4">Hello, New awesome books reader!</h1>
+        {% else %}
+        <h1 class="display-4">Hello, {{ request.user|title }}!</h1>
+        {% endif %}
+        <h2>This is a Books Library about page. </h2>
+        <p class="lead">Some Reading Challenge rules: </p>
+        <ul>
+            <li>
+                Choose a book (or books) you want to read in current month. You can also add book that you have already read in previous months/years.
+            </li>
+            <li>
+                Choose a date of reading and review a book.
+            </li>
+            <li>
+                Invite your family and friends to this challenge.
+            </li>
+            <li>
+                If you don't make it, choose something you need to do (for example donate some $ to charity,
+                give food to homeless people or take your boyfriend/girlfriend for a treat. It's all up to you.)
+            </li>
+            <li>
+                You can check other player's profiles and find some inspiration for following months.
+            </li>
+            <li>
+                Check statistics to find out yours favourite book type.
+            </li>
+
+
+        </ul>
+        <hr class="my-4">
+            {% if user.get_username == '' %}
+            <p>Register to start your challenge!</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" id="register_user" href="{% url 'users:register' %}" role="button">Register!</a>
+            {% else %}
+            <p>Start with finding a book!</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" id="find_book" href="{% url 'books:find' %}" role="button">Find book!</a>
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+{% endblock %}
