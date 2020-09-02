@@ -25,6 +25,7 @@ BookPosition = apps.get_model("books", "BookPosition")
 
 
 def home_view(request, *args, **kwargs):
+    book_with_reviews = BookPosition.objects.filter(review__isnull=False)
 
     # NAVBAR SEARCHING FORM HANDLING
     if request.POST:
@@ -35,14 +36,15 @@ def home_view(request, *args, **kwargs):
     else:
         form = NavbarSearchingForm()
 
-    context = {"form": form}
+    context = {
+        "form": form,
+        "book_with_reviews": book_with_reviews,
+    }
     return render(request, "home.html", context)
 
 
 def about_view(request, *args, **kwargs):
-
     return render(request, "about.html")
-
 
 
 def register_user_view(request):

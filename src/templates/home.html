@@ -2,4 +2,52 @@
 
 {% block content %}
 
+{% for book_position in book_with_reviews reversed %}
+
+<div class="card mb-2" style="margin-left:10%; margin-right:10%;" id="div{{ book.id }}">
+                <div class="card-body p-3">
+                    <div class="row">
+
+                        <div class="col-2">
+                            <img src="{{ book_position.book.image }}" class="center">
+                        </div>
+
+                         <div class="col-10">
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <p><strong class="text-dark">{{ book_position.book.title }}</strong></p>
+                                        <small class="text-muted">{{ book_position.book.author }}</small>
+                                        <br>
+                                    </div>
+                                    <div class="col-6" style="text-align:right;">
+                                        <small class="text-muted">ID: {{ book_position.book.id }}</small>
+                                        <br>
+                                        <small class="text-muted">{{ book_position.status }} in </small>
+                                        <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                        <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                    </div>
+                                </div>
+
+                            <hr class="my-4">
+                            {{ book_position.user|title }}'s review:
+                            <p>
+                            {{ book_position.review }}
+                            <p>
+                            <br>
+
+                             <form method="post" action="{% url 'users:info_book' %}">
+                                {%csrf_token%}
+                                <div type="text/css" class = "container"></div>
+                                <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
+                                <input type="hidden"  name="id" value="{{ book.id }}">
+                                <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{% endfor %}
 {% endblock %}
