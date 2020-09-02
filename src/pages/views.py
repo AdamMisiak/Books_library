@@ -270,7 +270,7 @@ def delete_review_view(request):
         book = Book.objects.get(id=book_id)
         book_position = BookPosition.objects.get(user=request.user, book=book)
 
-        book_position.review = ""
+        book_position.review = None
         book_position.save()
 
         return HttpResponse("success")
