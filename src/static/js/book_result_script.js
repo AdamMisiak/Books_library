@@ -6,7 +6,7 @@
         type:"GET",
         url: '/books/add',
         data:{
-                 book_id: id
+            book_id: id
     },
     success: function( data )
     {

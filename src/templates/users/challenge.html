@@ -64,6 +64,10 @@
                                             <small class="text-muted">{{ book_position.status }} in </small>
                                             <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
                                             <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                            <br>
+                                            {% if book_position.review %}
+                                                <small class="text-muted" id="reviewed">Reviewed by You</small>
+                                            {% endif %}
                                         </div>
                                     </div>
 

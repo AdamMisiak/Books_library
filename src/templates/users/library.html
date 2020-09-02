@@ -52,21 +52,25 @@
                             <img src="{{ book.image }}" class="center">
                         </div>
 
-                         <div class="col-10">
-                                <div class="row mb-3">
-                                    <div class="col-6">
-                                        <p><strong class="text-dark">{{ book.title }}</strong></p>
-                                        <small class="text-muted">{{ book.author }}</small>
-                                        <br>
-                                    </div>
-                                    <div class="col-6" style="text-align:right;">
-                                        <small class="text-muted">ID: {{ book.id }}</small>
-                                        <br>
-                                        <small class="text-muted">{{ book_position.status }} in </small>
-                                        <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
-                                        <small class="text-muted" id="year-text">{{ book_position.year }}</small>
-                                    </div>
+                        <div class="col-10">
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <p><strong class="text-dark">{{ book.title }}</strong></p>
+                                    <small class="text-muted">{{ book.author }}</small>
+                                    <br>
                                 </div>
+                                <div class="col-6" style="text-align:right;">
+                                    <small class="text-muted">ID: {{ book.id }}</small>
+                                    <br>
+                                    <small class="text-muted">{{ book_position.status }} in </small>
+                                    <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                    <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                    <br>
+                                    {% if book_position.review %}
+                                        <small class="text-muted" id="reviewed">Reviewed by You</small>
+                                    {% endif %}
+                                </div>
+                            </div>
 
                             <hr class="my-4">
                             {% if book.description == None %}
@@ -77,13 +81,13 @@
                             <p>
                             <br>
 
-                             <form method="post" action="{% url 'users:info_book' %}">
-                                {%csrf_token%}
-                                <div type="text/css" class = "container"></div>
-                                <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
-                                <input type="hidden"  name="id" value="{{ book.id }}">
-                                <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
-                            </form>
+                        <form method="post" action="{% url 'users:info_book' %}">
+                            {%csrf_token%}
+                            <div type="text/css" class = "container"></div>
+                            <a class="addbutton btn btn-danger btn-lg" id="like{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
+                            <input type="hidden"  name="id" value="{{ book.id }}">
+                            <button class="infobutton btn btn-secondary btn-lg" type="submit">Update</button>
+                        </form>
 
                         </div>
                     </div>
@@ -146,6 +150,10 @@
                                             <small class="text-muted">{{ book_position.status }} in </small>
                                             <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
                                             <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                            <br>
+                                            {% if book_position.review %}
+                                                <small class="text-muted" id="reviewed">Reviewed by You</small>
+                                            {% endif %}
                                         </div>
                                     </div>
 
@@ -227,6 +235,10 @@
                                             <small class="text-muted">{{ book_position.status }} in </small>
                                             <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
                                             <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                            <br>
+                                            {% if book_position.review %}
+                                                <small class="text-muted" id="reviewed">Reviewed by You</small>
+                                            {% endif %}
                                         </div>
                                     </div>
 

@@ -9,6 +9,7 @@ import debug_toolbar
 urlpatterns = [
     path("books/", include("books.urls")),
     path("users/", include("pages.urls")),
+
     path("", home_view, name="home"),
     path("about/", about_view, name="about"),
     path("admin/", admin.site.urls),

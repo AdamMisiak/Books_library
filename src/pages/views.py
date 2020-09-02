@@ -139,7 +139,7 @@ def challenge_view(request):
     return render(request, "users/challenge.html", context)
 
 
-# ADDING/DELETING BOOK TO USER'S LIBRARY VIEW
+# ADD/DELETE BOOK TO USER'S LIBRARY VIEW
 def add_book_view(request):
     if request.method == "GET":
 
@@ -259,3 +259,20 @@ def review_book_view(request):
     }
 
     return render(request, "users/review_book.html", context)
+
+
+# DELETE BOOK'S REVIEW VIEW
+def delete_review_view(request):
+    if request.method == "GET":
+
+        # READING BOOK ID FROM JQUERY SCRIPT
+        book_id = request.GET["book_id"]
+        book = Book.objects.get(id=book_id)
+        book_position = BookPosition.objects.get(user=request.user, book=book)
+
+        book_position.review = ""
+        book_position.save()
+
+        return HttpResponse("success")
+    else:
+        return HttpResponse("unsuccesful")

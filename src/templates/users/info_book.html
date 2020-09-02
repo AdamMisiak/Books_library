@@ -37,7 +37,7 @@
                         <p class="lead">Status: {{ book_position.status }}</p>
                     <hr class="my-4">
                         <a class="btn btn-primary btn-lg" href="{% url 'users:update_book' %}" role="button">Update</a>
-                        <a class="addbutton btn btn-secondary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
+                        <a class="btn btn-secondary btn-lg" href="{% url 'users:review_book' %}">Review</a>
                 </div>
             </div>
         </div>
@@ -50,10 +50,10 @@
 
 
 {% if book_position.review %}
-<div class="container">
+<div id="review" class="container">
 
    <h1 class="text-center logo my-4">
-      Reviews section
+      Review section
    </h1>
 
     <div class="card mb-2" style="margin-left:5%; margin-right:10%;">
@@ -61,6 +61,12 @@
             <div class="row">
                 <div class="col-6">
                     <p class="lead">{{ request.user|title }}'s review: {{ book_position.review }}</p>
+                    <hr class="my-4">
+
+                    <div type="text/css" class = "container"></div>
+                    <a class="deletebutton btn btn-danger btn-lg" id="delete{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>
+                    </p><p id="message{{book.id}}"></p>
+
                 </div>
             </div>
         </div>
@@ -68,5 +74,6 @@
 </div>
 {% endif %}
 
+<script src="/static/js/delete_review_script.js"></script>
 
 {% endblock %}
