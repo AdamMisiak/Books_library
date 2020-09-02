@@ -37,6 +37,7 @@
                         <p class="lead">Status: {{ book_position.status }}</p>
                     <hr class="my-4">
                         <a class="btn btn-primary btn-lg" href="{% url 'users:update_book' %}" role="button">Update</a>
+                        <a class="addbutton btn btn-secondary btn-lg" href="{% url 'users:review_book' %}" data-catid="{{ book.id }}">Review</a>
                 </div>
             </div>
         </div>

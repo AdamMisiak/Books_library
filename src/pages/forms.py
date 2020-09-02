@@ -77,5 +77,7 @@ class ImageUpdateForm(forms.ModelForm):
 
 
 # REVIEW BOOK FORM
-class ReviewBookForm(forms.Form):
-    review = forms.TextInput()
+class ReviewBookForm(forms.ModelForm):
+    class Meta:
+        model = BookPosition
+        fields = ["review"]
