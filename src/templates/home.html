@@ -7,7 +7,7 @@
         {% if user.get_username == '' %}
         <h1 class="display-4">Hello, New awesome books reader!</h1>
         {% else %}
-        <h1 class="display-4">Hello, {{ request.user }}!</h1>
+        <h1 class="display-4">Hello, {{ request.user|title }}!</h1>
         {% endif %}
         <h2>This is a Books Library home page. </h2>
         <p class="lead">Some Reading Challange rules: </p>
