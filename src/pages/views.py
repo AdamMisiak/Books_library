@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .models import UserImage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import (
     RegisterForm,
     UpdateForm,
@@ -15,10 +15,9 @@ from .forms import (
     ImageUpdateForm,
     ReviewBookForm,
 )
-from .choices import MONTH_CHOICES
 from django.apps import apps
 
-
+from django.views.decorators.csrf import csrf_exempt
 # MODELS IMPORTED
 Book = apps.get_model("books", "Book")
 BookPosition = apps.get_model("books", "BookPosition")
@@ -119,11 +118,11 @@ def library_view(request):
 
 
 # LIBRARY OF USER'S BOOKS VIEW
+@csrf_exempt
 def user_library_view(request):
-    # if request.method == "GET":
-
-        # READING BOOK ID FROM JQUERY SCRIPT
-        # username = request.GET["username"]
+    if request.method == "POST":
+        username = request.POST["username"]
+        print(username)
 
 
     # user = User.objects.get(pk=request.user.id)

@@ -1,10 +1,14 @@
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
+$('.username').click(function(){
+var id;
+username = $(this).attr("id");
 
-function chooseUsername(clicked_id) {
-    username = capitalize(clicked_id);
-    alert(username)
+$.ajax(
+  {
+    type:"POST",
+    url: '/users/user_library/',
+    data:{
+             username: username
+},
 
-}
+ })
+ });
