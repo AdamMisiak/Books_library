@@ -2,6 +2,9 @@
 
 {% block content %}
 
+<h1 class="text-center logo my-4">
+    Recently reviewed
+</h1>
 
 {% if book_with_reviews|length == 0 %}
 <div class="container">
@@ -14,7 +17,7 @@
                 <p class="lead">You can review some books by clicking on "Library" button in menu!</p>
                 <hr class="my-4">
 
-            <a class="btn btn-primary" href="{% url 'books:library' %}" role="button">Find books</a> <a href='../'>Cancel</a>
+                <a class="btn btn-primary" href="{% url 'books:library' %}" role="button">Find books</a> <a href='../'>Cancel</a>
             </form>
           </div>
         </div>
@@ -44,16 +47,20 @@
                                         <small class="text-muted">{{ book_position.status }} in </small>
                                         <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
                                         <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                        <br>
+                                        {% if book_position.review %}
+                                            <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
+                                        {% endif %}
                                     </div>
                                 </div>
 
                             <hr class="my-4">
-                            {{ book_position.user|title }}'s review:
                             <p>
+                            <a id="username" href="{% url 'users:user_library' %}">{{ book_position.user|title }}</a>
+                            's review:
+                            </p>
                             {{ book_position.review }}
-                            <p>
                             <br>
-
 
                         </div>
                     </div>

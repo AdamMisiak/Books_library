@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1 class="text-center logo my-4">
+    {{ request.user|title }}'s Library
+</h1>
+
+<div class="card-body p-3">
+    <div class="tab" >
+      <button class="tablinks" onclick="openCategory(event, 'To do')" id="defaultOpen">To do</button>
+      <button class="tablinks" onclick="openCategory(event, 'In progress')">In progress</button>
+      <button class="tablinks" onclick="openCategory(event, 'Done')">Done</button>
+    </div>
+</div>
+
+
+<!--TO DO TAB DIV-->
+<div id="To do" class="tabcontent">
+
+</div>
+
+
+<!--IN PROGRESS TAB DIV-->
+<div id="In progress" class="tabcontent">
+
+
+</div>
+
+
+<!--DONE TAB DIV-->
+<div id="Done" class="tabcontent">
+
+</div>
+
+
+<script src="/static/js/back_to_top_script.js"></script>
+
+{% endblock %}

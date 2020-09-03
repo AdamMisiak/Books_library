@@ -118,6 +118,18 @@ def library_view(request):
     return render(request, "users/library.html", context)
 
 
+# LIBRARY OF USER'S BOOKS VIEW
+def user_library_view(request):
+    # user = User.objects.get(pk=request.user.id)
+    #
+    # # FILTERING ONLY USER'S ADDED BOOKS
+    # users_book_positions = BookPosition.objects.filter(user=user, value="Add")
+    # books = user.books_added.all()
+    #
+    # context = {"books": books, "users_book_positions": users_book_positions}
+    return render(request, "users/user_library.html")
+
+
 # USER'S CHALLENGE VIEW
 def challenge_view(request):
     today = datetime.now()

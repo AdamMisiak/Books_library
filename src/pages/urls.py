@@ -13,6 +13,7 @@ from .views import (
     update_image_view,
     review_book_view,
     delete_review_view,
+    user_library_view,
 )
 
 app_name = "users"
@@ -20,6 +21,7 @@ app_name = "users"
 urlpatterns = [
     path("delete/", add_book_view, name="delete"),
     path("library/", library_view, name="library"),
+    path("user_library/", user_library_view, name="user_library"),
     path("account/", account_view, name="account"),
     path("challenge/", challenge_view, name="challenge"),
     path("register/", register_user_view, name="register"),
