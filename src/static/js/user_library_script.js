@@ -1,14 +1,6 @@
-$('.username').click(function(){
-var id;
-username = $(this).attr("id");
+function chooseUsername(clicked_id) {
+    console.log(clicked_id)
+    var data = {'username': clicked_id};
 
-$.ajax(
-  {
-    type:"POST",
-    url: '/users/user_library/',
-    data:{
-             username: username
-},
-
- })
- });
+    $.get("/users/user_library/", data);
+}
