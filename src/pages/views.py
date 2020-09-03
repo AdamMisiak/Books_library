@@ -120,6 +120,12 @@ def library_view(request):
 
 # LIBRARY OF USER'S BOOKS VIEW
 def user_library_view(request):
+    # if request.method == "GET":
+
+        # READING BOOK ID FROM JQUERY SCRIPT
+        # username = request.GET["username"]
+
+
     # user = User.objects.get(pk=request.user.id)
     #
     # # FILTERING ONLY USER'S ADDED BOOKS
@@ -145,7 +151,6 @@ def challenge_view(request):
         "user": user,
         "books": books,
         "users_book_positions": users_book_positions,
-        "MONTH_CHOICES": MONTH_CHOICES,
     }
 
     return render(request, "users/challenge.html", context)
