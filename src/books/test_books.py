@@ -76,3 +76,31 @@ class TestBookModel:
             in "<QuerySet [<Book: title>]>"
         )
         assert isinstance(test_book, Book)
+
+    @pytest.mark.django_db
+    def test_book_labels(self):
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_book = Book.objects.create(
+            id=1,
+            title="title",
+            author="author",
+            image="image",
+            sites=10,
+            description="description",
+            genre_1="genre",
+        )
+        test_book.user.add(test_user)
+
+        title_label = test_book._meta.get_field("title").verbose_name
+        author_label = test_book._meta.get_field("author").verbose_name
+        image_label = test_book._meta.get_field("image").verbose_name
+        sites_label = test_book._meta.get_field("sites").verbose_name
+        description_label = test_book._meta.get_field("description").verbose_name
+        genre_1_label = test_book._meta.get_field("genre_1").verbose_name
+
+        assert title_label == "title"
+        assert author_label == "author"
+        assert image_label == "image"
+        assert sites_label == "sites"
+        assert description_label == "description"
+        assert genre_1_label == "genre 1"

@@ -13,9 +13,16 @@ def login_user():
 
 
 class TestPagesViews:
+    @pytest.mark.django_db
     def test_home_view_status_code(self, client):
         client = Client()
         url = reverse("home")
+        response = client.get(url)
+        assert response.status_code == 200
+
+    def test_about_view_status_code(self, client):
+        client = Client()
+        url = reverse("about")
         response = client.get(url)
         assert response.status_code == 200
 

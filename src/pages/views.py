@@ -120,7 +120,7 @@ def library_view(request):
 # LIBRARY OF USER'S BOOKS VIEW
 @csrf_exempt
 def user_library_view(request):
-    
+
     # REVIEW'S USERNAME CLICKED
     if request.is_ajax():
         username = request.GET["username"]
