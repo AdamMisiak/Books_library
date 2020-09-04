@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .functions import books_finder
-from .models import Book
+from .models import Book, BookPosition
 
 
 @pytest.fixture
@@ -104,3 +104,75 @@ class TestBookModel:
         assert sites_label == "sites"
         assert description_label == "description"
         assert genre_1_label == "genre 1"
+
+
+class TestBookPositionModel:
+    @pytest.mark.django_db
+    def test_book_position_create(self):
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_book = Book.objects.create(
+            id=1,
+            title="title",
+            author="author",
+            image="image",
+            sites=10,
+            description="description",
+            genre_1="genre",
+        )
+        test_book.user.add(test_user)
+        test_book_position = BookPosition.objects.create(
+            user=test_user,
+            book=test_book,
+            value="Add",
+            month="June",
+            year=2020,
+            status="Done",
+            review="Great",
+        )
+
+        assert BookPosition.objects.count() == 1
+        assert str(BookPosition.objects.get(id=1).user) == "adam"
+        assert str(BookPosition.objects.get(id=1).book) == "title"
+        assert BookPosition.objects.get(id=1).value == "Add"
+        assert BookPosition.objects.get(id=1).month == "June"
+        assert BookPosition.objects.get(id=1).year == 2020
+        assert BookPosition.objects.get(id=1).status == "Done"
+        assert BookPosition.objects.get(id=1).review == "Great"
+        assert isinstance(test_book_position, BookPosition)
+
+    @pytest.mark.django_db
+    def test_book_position_labels(self):
+        test_user = User.objects.create_user("adam", "adam@test.com", "adam")
+        test_book = Book.objects.create(
+            id=1,
+            title="title",
+            author="author",
+            image="image",
+            sites=10,
+            description="description",
+            genre_1="genre",
+        )
+        test_book.user.add(test_user)
+        test_book_position = BookPosition.objects.create(
+            user=test_user,
+            book=test_book,
+            value="Add",
+            month="June",
+            year=2020,
+            status="Done",
+            review="Great",
+        )
+
+        user_label = test_book_position._meta.get_field("user").verbose_name
+        book_label = test_book_position._meta.get_field("book").verbose_name
+        value_label = test_book_position._meta.get_field("value").verbose_name
+        month_label = test_book_position._meta.get_field("month").verbose_name
+        year_label = test_book_position._meta.get_field("year").verbose_name
+        review_label = test_book_position._meta.get_field("review").verbose_name
+
+        assert user_label == "user"
+        assert book_label == "book"
+        assert value_label == "value"
+        assert month_label == "month"
+        assert year_label == "year"
+        assert review_label == "review"
