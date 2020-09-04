@@ -16,7 +16,6 @@ from .forms import (
     ReviewBookForm,
 )
 from django.apps import apps
-from django.views.decorators.csrf import csrf_exempt
 
 # MODELS IMPORTED
 Book = apps.get_model("books", "Book")
@@ -118,25 +117,18 @@ def library_view(request):
 
 
 # LIBRARY OF USER'S BOOKS VIEW
-@csrf_exempt
-def user_library_view(request):
+def user_library_view(request, id):
 
     # REVIEW'S USERNAME CLICKED
-    if request.is_ajax():
-        username = request.GET["username"]
-        username = username[0].lower() + username[1:]
-        print(username)
+    user = User.objects.get(id=id)
+    users_book_positions = BookPosition.objects.filter(user=user, value="Add")
+    books = user.books_added.all()
 
-        # user = User.objects.get(username=username)
-        # users_book_positions = BookPosition.objects.filter(user=user, value="Add")
-        # books = user.books_added.all()
-
-    # context = {"books": books,
-    #            "users_book_positions": users_book_positions,
-    #            "user": user,
-    #            }
-
-    return render(request, "users/user_library.html")
+    context = {"books": books,
+               "users_book_positions": users_book_positions,
+               "user": user,
+               }
+    return render(request, "users/user_library.html", context)
 
 
 # USER'S CHALLENGE VIEW

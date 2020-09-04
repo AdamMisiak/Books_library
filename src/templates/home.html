@@ -56,7 +56,7 @@
 
                             <hr class="my-4">
                             <p>
-                                <a onclick="chooseUsername(this.id)" class="username" id="{{ book_position.user|title }}" href="{% url 'users:user_library' %}">{{ book_position.user|title }}</a>
+                                <a href="{% url 'users:user_library' book_position.user.id %}">{{ book_position.user|title }}</a>
                                 's review:
                             </p>
                             {{ book_position.review }}
@@ -70,8 +70,5 @@
 
 {% endfor %}
 {% endif %}
-
-
-<script src="/static/js/user_library_script.js"></script>
 
 {% endblock %}

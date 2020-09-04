@@ -18,12 +18,114 @@
 <!--TO DO TAB DIV-->
 <div id="To do" class="tabcontent">
 
+{% for book_position in users_book_positions %}
+    {% for book in books %}
+        {% ifequal book.title|stringformat:"s" book_position.book|stringformat:"s" %}
+            {% ifequal book_position.status|stringformat:"s" "To do" %}
+            <div class="card mb-2" style="margin-left:10%; margin-right:10%;" id="div{{ book.id }}">
+                <div class="card-body p-3">
+                    <div class="row">
+
+                        <div class="col-2">
+                            <img src="{{ book.image }}" class="center">
+                        </div>
+
+                        <div class="col-10">
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <p><strong class="text-dark">{{ book.title }}</strong></p>
+                                    <small class="text-muted">{{ book.author }}</small>
+                                    <br>
+                                </div>
+                                <div class="col-6" style="text-align:right;">
+                                    <small class="text-muted">ID: {{ book.id }}</small>
+                                    <br>
+                                    <small class="text-muted">{{ book_position.status }} in </small>
+                                    <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                    <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                    <br>
+                                    {% if book_position.review %}
+                                        <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            {% if book.description == None %}
+                            There is no description :(
+                            {% else %}
+                            {{ book.description }}
+                            {% endif %}
+                            <p>
+                            <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endifequal %}
+        {% endifequal %}
+    {% endfor %}
+{% endfor %}
+
 </div>
+
 
 
 <!--IN PROGRESS TAB DIV-->
 <div id="In progress" class="tabcontent">
 
+{% for book_position in users_book_positions %}
+    {% for book in books %}
+        {% ifequal book.title|stringformat:"s" book_position.book|stringformat:"s" %}
+            {% ifequal book_position.status|stringformat:"s" "In progress" %}
+                <div class="card mb-2" style="margin-left:10%; margin-right:10%;" id="div{{ book.id }}">
+                    <div class="card-body p-3">
+                        <div class="row">
+
+                            <div class="col-2">
+                                <img src="{{ book.image }}" class="center">
+                            </div>
+
+                             <div class="col-10">
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <p><strong class="text-dark">{{ book.title }}</strong></p>
+                                            <small class="text-muted">{{ book.author }}</small>
+                                            <br>
+                                        </div>
+                                        <div class="col-6" style="text-align:right;">
+                                            <small class="text-muted">ID: {{ book.id }}</small>
+                                            <br>
+                                            <small class="text-muted">{{ book_position.status }} in </small>
+                                            <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                            <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                            <br>
+                                            {% if book_position.review %}
+                                                <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                <hr class="my-4">
+                                {% if book.description == None %}
+                                There is no description :(
+                                {% else %}
+                                {{ book.description }}
+                                {% endif %}
+                                <p>
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endifequal %}
+        {% endifequal %}
+    {% endfor %}
+{% endfor %}
 
 </div>
 
@@ -31,9 +133,60 @@
 <!--DONE TAB DIV-->
 <div id="Done" class="tabcontent">
 
+{% for book_position in users_book_positions %}
+    {% for book in books %}
+        {% ifequal book.title|stringformat:"s" book_position.book|stringformat:"s" %}
+            {% ifequal book_position.status|stringformat:"s" "Done" %}
+                <div class="card mb-2" style="margin-left:10%; margin-right:10%;" id="div{{ book.id }}">
+                    <div class="card-body p-3">
+                        <div class="row">
+
+                            <div class="col-2">
+                                <img src="{{ book.image }}" class="center">
+                            </div>
+
+                             <div class="col-10">
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <p><strong class="text-dark">{{ book.title }}</strong></p>
+                                            <small class="text-muted">{{ book.author }}</small>
+                                            <br>
+                                        </div>
+                                        <div class="col-6" style="text-align:right;">
+                                            <small class="text-muted">ID: {{ book.id }}</small>
+                                            <br>
+                                            <small class="text-muted">{{ book_position.status }} in </small>
+                                            <small id="month" class="{{ book_position.month|lower }}-text ">{{ book_position.month }}</small>
+                                            <small class="text-muted" id="year-text">{{ book_position.year }}</small>
+                                            <br>
+                                            {% if book_position.review %}
+                                                <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                <hr class="my-4">
+                                {% if book.description == None %}
+                                There is no description :(
+                                {% else %}
+                                {{ book.description }}
+                                {% endif %}
+                                <p>
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endifequal %}
+        {% endifequal %}
+    {% endfor %}
+{% endfor %}
+
 </div>
 
-
+<script src="/static/js/library_script.js"></script>
 <script src="/static/js/back_to_top_script.js"></script>
 
 {% endblock %}
