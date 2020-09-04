@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1 class="text-center logo my-4">
-    {{ user.username }}'s Library
+    {{ user.username|title }}'s Library
 </h1>
 
 <div class="card-body p-3">
@@ -50,14 +50,23 @@
                                 </div>
                             </div>
 
-                            <hr class="my-4">
-                            {% if book.description == None %}
-                            There is no description :(
-                            {% else %}
-                            {{ book.description }}
-                            {% endif %}
-                            <p>
-                            <br>
+                                <hr class="my-4">
+                                    {% if book.description == None %}
+                                    There is no description :(
+                                    {% else %}
+                                    {{ book.description }}
+                                    {% endif %}
+                                    <p>
+
+                                {% if book_position.review != None %}
+                                <hr class="my-4">
+                                    <p>
+                                    <a>{{ book_position.user|title }}</a>
+                                    's review:
+                                    </p>
+                                    {{ book_position.review }}
+                                <br>
+                                {% endif %}
 
                         </div>
                     </div>
@@ -108,14 +117,23 @@
                                         </div>
                                     </div>
 
-                                <hr class="my-4">
-                                {% if book.description == None %}
-                                There is no description :(
-                                {% else %}
-                                {{ book.description }}
-                                {% endif %}
-                                <p>
-                                <br>
+                                    <hr class="my-4">
+                                        {% if book.description == None %}
+                                        There is no description :(
+                                        {% else %}
+                                        {{ book.description }}
+                                        {% endif %}
+                                        <p>
+
+                                    {% if book_position.review != None %}
+                                    <hr class="my-4">
+                                        <p>
+                                        <a>{{ book_position.user|title }}</a>
+                                        's review:
+                                        </p>
+                                        {{ book_position.review }}
+                                    <br>
+                                    {% endif %}
 
                             </div>
                         </div>
@@ -162,17 +180,27 @@
                                             {% if book_position.review %}
                                                 <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
                                             {% endif %}
+
                                         </div>
                                     </div>
 
-                                <hr class="my-4">
-                                {% if book.description == None %}
-                                There is no description :(
-                                {% else %}
-                                {{ book.description }}
-                                {% endif %}
-                                <p>
-                                <br>
+                                    <hr class="my-4">
+                                        {% if book.description == None %}
+                                        There is no description :(
+                                        {% else %}
+                                        {{ book.description }}
+                                        {% endif %}
+                                        <p>
+
+                                    {% if book_position.review != None %}
+                                    <hr class="my-4">
+                                        <p>
+                                        <a>{{ book_position.user|title }}</a>
+                                        's review:
+                                        </p>
+                                        {{ book_position.review }}
+                                    <br>
+                                    {% endif %}
 
                             </div>
                         </div>
