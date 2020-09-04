@@ -124,10 +124,11 @@ def user_library_view(request, id):
     users_book_positions = BookPosition.objects.filter(user=user, value="Add")
     books = user.books_added.all()
 
-    context = {"books": books,
-               "users_book_positions": users_book_positions,
-               "user": user,
-               }
+    context = {
+        "books": books,
+        "users_book_positions": users_book_positions,
+        "user": user,
+    }
     return render(request, "users/user_library.html", context)
 
 
