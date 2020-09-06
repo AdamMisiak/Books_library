@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import Client
 from .functions import books_finder
 from .models import Book, BookPosition
+from .forms import BookForm
 
 
 @pytest.fixture
@@ -176,3 +177,9 @@ class TestBookPositionModel:
         assert month_label == "month"
         assert year_label == "year"
         assert review_label == "review"
+
+
+class TestBookForm:
+    def test_book_form_title_field_label(self):
+        form = BookForm()
+        assert form.fields['title'].label is None or form.fields['title'].label == 'Title'
