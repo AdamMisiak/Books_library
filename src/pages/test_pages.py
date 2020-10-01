@@ -3,6 +3,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
+from .forms import RegisterForm
 
 
 @pytest.fixture
@@ -133,3 +134,40 @@ class TestUserImageModel:
 
         assert user_label == "user"
         assert image_label == "image"
+
+
+class TestRegisterForm:
+    def test_register_form_fields_labels(self):
+        form = RegisterForm()
+        assert (
+            form.fields["username"].label is None
+            or form.fields["username"].label == "Username"
+        )
+        assert (
+            form.fields["email"].label is None
+            or form.fields["email"].label == "Email address"
+        )
+        assert (
+            form.fields["password1"].label is None
+            or form.fields["password1"].label == "Password"
+        )
+        assert (
+            form.fields["password2"].label is None
+            or form.fields["password2"].label == "Password confirmation"
+        )
+
+    def test_register_form_fields_help_texts(self):
+        form = RegisterForm()
+        assert (
+            form.fields["username"].help_text
+            == "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        )
+        assert form.fields["email"].help_text == ""
+        assert (
+            form.fields["password1"].help_text
+            == "<ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul>"
+        )
+        assert (
+            form.fields["password2"].help_text
+            == "Enter the same password as before, for verification."
+        )

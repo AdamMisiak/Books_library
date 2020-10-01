@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.test import Client
 from .functions import books_finder
 from .models import Book, BookPosition
-from .forms import BookForm
+from .forms import BookForm, SearchingForm
 
 
 @pytest.fixture
@@ -182,14 +182,36 @@ class TestBookPositionModel:
 class TestBookForm:
     def test_book_form_fields_labels(self):
         form = BookForm()
-        assert form.fields['title'].label is None or form.fields['title'].label == 'Title'
-        assert form.fields['author'].label is None or form.fields['author'].label == 'Author'
-        assert form.fields['sites'].label is None or form.fields['sites'].label == 'Sites'
-        assert form.fields['genre_1'].label is None or form.fields['genre_1'].label == 'Genre'
+        assert (
+            form.fields["title"].label is None or form.fields["title"].label == "Title"
+        )
+        assert (
+            form.fields["author"].label is None
+            or form.fields["author"].label == "Author"
+        )
+        assert (
+            form.fields["sites"].label is None or form.fields["sites"].label == "Sites"
+        )
+        assert (
+            form.fields["genre_1"].label is None
+            or form.fields["genre_1"].label == "Genre"
+        )
 
     def test_book_form_fields_help_texts(self):
         form = BookForm()
-        assert form.fields['title'].help_text == ''
-        assert form.fields['author'].help_text == ''
-        assert form.fields['sites'].help_text == ''
-        assert form.fields['genre_1'].help_text == ''
+        assert form.fields["title"].help_text == ""
+        assert form.fields["author"].help_text == ""
+        assert form.fields["sites"].help_text == ""
+        assert form.fields["genre_1"].help_text == ""
+
+
+class TestSearchingForm:
+    def test_searching_form_fields_labels(self):
+        form = SearchingForm()
+        assert (
+            form.fields["title"].label is None or form.fields["title"].label == "Title"
+        )
+
+    def test_searching_form_fields_help_texts(self):
+        form = SearchingForm()
+        assert form.fields["title"].help_text == ""

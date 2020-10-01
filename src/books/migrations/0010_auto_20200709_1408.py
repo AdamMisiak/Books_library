@@ -24,5 +24,7 @@ class Migration(migrations.Migration):
                 blank=True, related_name="books_added", to=settings.AUTH_USER_MODEL
             ),
         ),
-        migrations.DeleteModel(name="BookPosition",),
+        migrations.DeleteModel(
+            name="BookPosition",
+        ),
     ]

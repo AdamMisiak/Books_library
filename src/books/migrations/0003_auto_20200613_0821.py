@@ -19,6 +19,8 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterField(
-            model_name="book", name="sites", field=models.IntegerField(blank=True),
+            model_name="book",
+            name="sites",
+            field=models.IntegerField(blank=True),
         ),
     ]
