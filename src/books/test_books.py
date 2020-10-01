@@ -180,6 +180,16 @@ class TestBookPositionModel:
 
 
 class TestBookForm:
-    def test_book_form_title_field_label(self):
+    def test_book_form_fields_labels(self):
         form = BookForm()
         assert form.fields['title'].label is None or form.fields['title'].label == 'Title'
+        assert form.fields['author'].label is None or form.fields['author'].label == 'Author'
+        assert form.fields['sites'].label is None or form.fields['sites'].label == 'Sites'
+        assert form.fields['genre_1'].label is None or form.fields['genre_1'].label == 'Genre'
+
+    def test_book_form_fields_help_texts(self):
+        form = BookForm()
+        assert form.fields['title'].help_text == ''
+        assert form.fields['author'].help_text == ''
+        assert form.fields['sites'].help_text == ''
+        assert form.fields['genre_1'].help_text == ''
