@@ -2,6 +2,7 @@ from datetime import datetime
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import UserImage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -25,6 +26,10 @@ BookPosition = apps.get_model("books", "BookPosition")
 def home_view(request, *args, **kwargs):
     book_with_reviews = BookPosition.objects.filter(review__isnull=False)
 
+    paginator = Paginator(book_with_reviews, 4)
+    page = request.GET.get('page')
+    paged_book_with_reviews = paginator.get_page(page)
+
     # NAVBAR SEARCHING FORM HANDLING
     if request.POST:
         form = NavbarSearchingForm(request.POST)
@@ -36,7 +41,7 @@ def home_view(request, *args, **kwargs):
 
     context = {
         "form": form,
-        "book_with_reviews": book_with_reviews,
+        "book_with_reviews": paged_book_with_reviews,
     }
     return render(request, "home.html", context)
 
