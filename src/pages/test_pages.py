@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
@@ -223,6 +224,10 @@ class TestBookOptionsForm:
 
 class TestBookUpdateForm:
     def test_book_update_form_fields_labels(self):
+        today = datetime.now()
+        current_month = today.month
+        current_year = today.year
+
         form = BookUpdateForm()
         assert (
             form.fields["genre"].label is None
@@ -231,6 +236,28 @@ class TestBookUpdateForm:
         assert (form.fields["genre"].choices[0] == GENRE_CHOICES[0])
         assert (form.fields["genre"].initial == ('Financials', 'Financials'))
         assert 'Select' in str(form.fields["genre"].widget)
+
+        assert (
+            form.fields["month"].label is None
+            or form.fields["month"].label == "Month"
+        )
+        assert (form.fields["month"].choices[0] == MONTH_CHOICES[0])
+        assert str(MONTH_CHOICES[current_month - 1]) in str(form.fields["month"].initial)
+        assert 'Select' in str(form.fields["month"].widget)
+
+        assert (
+            form.fields["year"].label is None
+            or form.fields["year"].label == "Year"
+        )
+        assert str(current_year) in str(form.fields["year"].initial)
+
+        assert (
+            form.fields["status"].label is None
+            or form.fields["status"].label == "Status"
+        )
+        assert (form.fields["status"].choices[0] == STATUS_CHOICES[0])
+        assert 'In progress' in str(form.fields["status"].initial)
+        assert 'Select' in str(form.fields["status"].widget)
 
     def test_book_update_form_fields_help_texts(self):
         form = BookUpdateForm()
