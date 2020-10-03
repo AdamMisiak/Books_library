@@ -148,8 +148,7 @@ STATICFILES_DIRS = [
 ]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
 LOGOUT_REDIRECT_URL = "home"
 
