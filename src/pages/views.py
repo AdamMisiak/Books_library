@@ -27,7 +27,7 @@ def home_view(request, *args, **kwargs):
     book_with_reviews = BookPosition.objects.filter(review__isnull=False)
 
     paginator = Paginator(book_with_reviews, 4)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     paged_book_with_reviews = paginator.get_page(page)
 
     # NAVBAR SEARCHING FORM HANDLING

@@ -4,7 +4,15 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
-from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm, BookUpdateForm, ImageUpdateForm, ReviewBookForm
+from .forms import (
+    RegisterForm,
+    UpdateForm,
+    NavbarSearchingForm,
+    BookOptionsForm,
+    BookUpdateForm,
+    ImageUpdateForm,
+    ReviewBookForm,
+)
 from .choices import GENRE_CHOICES, MONTH_CHOICES, STATUS_CHOICES
 
 
@@ -186,7 +194,7 @@ class TestUpdateForm:
             form.fields["email"].label is None
             or form.fields["email"].label == "Email address"
         )
-        
+
     def test_update_form_fields_help_texts(self):
         form = UpdateForm()
         assert (
@@ -200,8 +208,7 @@ class TestNavbarSearchingForm:
     def test_navbar_search_form_fields_labels(self):
         form = NavbarSearchingForm()
         assert (
-            form.fields["title"].label is None
-            or form.fields["title"].label == "Title"
+            form.fields["title"].label is None or form.fields["title"].label == "Title"
         )
 
     def test_navbar_search_form_fields_help_texts(self):
@@ -212,10 +219,7 @@ class TestNavbarSearchingForm:
 class TestBookOptionsForm:
     def test_book_options_form_fields_labels(self):
         form = BookOptionsForm()
-        assert (
-            form.fields["id"].label is None
-            or form.fields["id"].label == "id"
-        )
+        assert form.fields["id"].label is None or form.fields["id"].label == "id"
 
     def test_book_options_form_fields_help_texts(self):
         form = BookOptionsForm()
@@ -230,34 +234,31 @@ class TestBookUpdateForm:
 
         form = BookUpdateForm()
         assert (
-            form.fields["genre"].label is None
-            or form.fields["genre"].label == "Genre"
+            form.fields["genre"].label is None or form.fields["genre"].label == "Genre"
         )
-        assert (form.fields["genre"].choices[0] == GENRE_CHOICES[0])
-        assert (form.fields["genre"].initial == ('Financials', 'Financials'))
-        assert 'Select' in str(form.fields["genre"].widget)
+        assert form.fields["genre"].choices[0] == GENRE_CHOICES[0]
+        assert form.fields["genre"].initial == ("Financials", "Financials")
+        assert "Select" in str(form.fields["genre"].widget)
 
         assert (
-            form.fields["month"].label is None
-            or form.fields["month"].label == "Month"
+            form.fields["month"].label is None or form.fields["month"].label == "Month"
         )
-        assert (form.fields["month"].choices[0] == MONTH_CHOICES[0])
-        assert str(MONTH_CHOICES[current_month - 1]) in str(form.fields["month"].initial)
-        assert 'Select' in str(form.fields["month"].widget)
+        assert form.fields["month"].choices[0] == MONTH_CHOICES[0]
+        assert str(MONTH_CHOICES[current_month - 1]) in str(
+            form.fields["month"].initial
+        )
+        assert "Select" in str(form.fields["month"].widget)
 
-        assert (
-            form.fields["year"].label is None
-            or form.fields["year"].label == "Year"
-        )
+        assert form.fields["year"].label is None or form.fields["year"].label == "Year"
         assert str(current_year) in str(form.fields["year"].initial)
 
         assert (
             form.fields["status"].label is None
             or form.fields["status"].label == "Status"
         )
-        assert (form.fields["status"].choices[0] == STATUS_CHOICES[0])
-        assert 'In progress' in str(form.fields["status"].initial)
-        assert 'Select' in str(form.fields["status"].widget)
+        assert form.fields["status"].choices[0] == STATUS_CHOICES[0]
+        assert "In progress" in str(form.fields["status"].initial)
+        assert "Select" in str(form.fields["status"].widget)
 
     def test_book_update_form_fields_help_texts(self):
         form = BookUpdateForm()
@@ -271,8 +272,7 @@ class TestImageUpdateForm:
     def test_image_update_form_fields_labels(self):
         form = ImageUpdateForm()
         assert (
-            form.fields["image"].label is None
-            or form.fields["image"].label == "Image"
+            form.fields["image"].label is None or form.fields["image"].label == "Image"
         )
 
     def test_image_update_form_fields_help_texts(self):
