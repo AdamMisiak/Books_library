@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
-from .forms import RegisterForm
+from .forms import RegisterForm, UpdateForm
 
 
 @pytest.fixture
@@ -171,3 +171,26 @@ class TestRegisterForm:
             form.fields["password2"].help_text
             == "Enter the same password as before, for verification."
         )
+
+
+class TestUpdateForm:
+    def test_update_form_fields_labels(self):
+        form = UpdateForm()
+        assert (
+            form.fields["username"].label is None
+            or form.fields["username"].label == "Username"
+        )
+        assert (
+            form.fields["email"].label is None
+            or form.fields["email"].label == "Email address"
+        )
+        
+
+    def test_update_form_fields_help_texts(self):
+        form = UpdateForm()
+        assert (
+            form.fields["username"].help_text
+            == "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        )
+        assert form.fields["email"].help_text == ""
+
