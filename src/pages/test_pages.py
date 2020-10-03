@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
-from .forms import RegisterForm, UpdateForm
+from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm
 
 
 @pytest.fixture
@@ -185,7 +185,6 @@ class TestUpdateForm:
             or form.fields["email"].label == "Email address"
         )
         
-
     def test_update_form_fields_help_texts(self):
         form = UpdateForm()
         assert (
@@ -193,4 +192,30 @@ class TestUpdateForm:
             == "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         )
         assert form.fields["email"].help_text == ""
+
+
+class TestNavbarSearchingForm:
+    def test_navbar_search_form_fields_labels(self):
+        form = NavbarSearchingForm()
+        assert (
+            form.fields["title"].label is None
+            or form.fields["title"].label == "Title"
+        )
+
+    def test_navbar_search_form_fields_help_texts(self):
+        form = NavbarSearchingForm()
+        assert form.fields["title"].help_text == ""
+
+
+class TestBookOptionsForm:
+    def test_book_options_form_fields_labels(self):
+        form = BookOptionsForm()
+        assert (
+            form.fields["id"].label is None
+            or form.fields["id"].label == "id"
+        )
+
+    def test_book_options_form_fields_help_texts(self):
+        form = BookOptionsForm()
+        assert form.fields["id"].help_text == ""
 
