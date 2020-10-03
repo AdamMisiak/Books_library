@@ -3,7 +3,8 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
-from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm
+from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm, BookUpdateForm
+from .choices import GENRE_CHOICES, MONTH_CHOICES, STATUS_CHOICES
 
 
 @pytest.fixture
@@ -218,4 +219,21 @@ class TestBookOptionsForm:
     def test_book_options_form_fields_help_texts(self):
         form = BookOptionsForm()
         assert form.fields["id"].help_text == ""
+
+
+class TestBookUpdateForm:
+    def test_book_update_form_fields_labels(self):
+        form = BookUpdateForm()
+        assert (
+            form.fields["genre"].label is None
+            or form.fields["genre"].label == "Genre"
+        )
+        assert (form.fields["genre"].choices[0] == GENRE_CHOICES[0])
+        assert (form.fields["genre"].initial == ('Financials', 'Financials'))
+        assert 'Select' in str(form.fields["genre"].widget)
+
+    def test_book_update_form_fields_help_texts(self):
+        form = BookUpdateForm()
+        assert form.fields["genre"].help_text == ""
+
 
