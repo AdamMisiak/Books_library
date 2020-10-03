@@ -4,7 +4,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.test import Client
 from .models import UserImage
-from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm, BookUpdateForm
+from .forms import RegisterForm, UpdateForm, NavbarSearchingForm, BookOptionsForm, BookUpdateForm, ImageUpdateForm, ReviewBookForm
 from .choices import GENRE_CHOICES, MONTH_CHOICES, STATUS_CHOICES
 
 
@@ -262,5 +262,32 @@ class TestBookUpdateForm:
     def test_book_update_form_fields_help_texts(self):
         form = BookUpdateForm()
         assert form.fields["genre"].help_text == ""
+        assert form.fields["month"].help_text == ""
+        assert form.fields["year"].help_text == ""
+        assert form.fields["status"].help_text == ""
 
 
+class TestImageUpdateForm:
+    def test_image_update_form_fields_labels(self):
+        form = ImageUpdateForm()
+        assert (
+            form.fields["image"].label is None
+            or form.fields["image"].label == "Image"
+        )
+
+    def test_image_update_form_fields_help_texts(self):
+        form = ImageUpdateForm()
+        assert form.fields["image"].help_text == ""
+
+
+class TestReviewBookForm:
+    def test_review_book_form_fields_labels(self):
+        form = ReviewBookForm()
+        assert (
+            form.fields["review"].label is None
+            or form.fields["review"].label == "Review"
+        )
+
+    def test_review_book_form_fields_help_texts(self):
+        form = ReviewBookForm()
+        assert form.fields["review"].help_text == ""
