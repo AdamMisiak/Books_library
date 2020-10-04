@@ -11,9 +11,9 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BookPositionAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "book", "value", "month", "year", "status", "review")
+    list_display = ("id", "user", "book", "value", "month", "year", "status", "review", "rate")
     list_display_links = ("id", "user")
-    list_filter = ("month", "year", "status")
+    list_filter = ("month", "year", "status", "rate")
     list_per_page = 20
 
 

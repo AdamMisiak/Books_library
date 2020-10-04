@@ -49,7 +49,7 @@
 <br>
 
 
-{% if book_position.review %}
+{% if book_position.review or book_position.rate %}
 <div id="review" class="container">
 
    <h1 class="text-center logo my-4">
@@ -62,6 +62,9 @@
                 <div class="col-6">
                     <p class="lead">{{ request.user|title }}'s review: {{ book_position.review }}</p>
                     <hr class="my-4">
+                    <p class="lead">{{ request.user|title }}'s review: {{ book_position.rate }}</p>
+                    <hr class="my-4">
+                    
 
                     <div type="text/css" class = "container"></div>
                     <a class="deletebutton btn btn-danger btn-lg" id="delete{{ book.id }}" style="color: white;" data-catid="{{ book.id }}">Delete</a>

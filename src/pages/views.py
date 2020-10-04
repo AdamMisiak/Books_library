@@ -265,7 +265,9 @@ def review_book_view(request):
 
             # SETTING REVIEW
             review = form.cleaned_data.get("review")
+            rate = form.cleaned_data.get("rate")
             book_position.review = review
+            book_position.rate = rate
             book_position.save()
 
             return HttpResponseRedirect(reverse("users:library"))
@@ -289,6 +291,7 @@ def delete_review_view(request):
         book_position = BookPosition.objects.get(user=request.user, book=book)
 
         book_position.review = None
+        book_position.rate = None
         book_position.save()
 
         return HttpResponse("success")

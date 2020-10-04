@@ -80,4 +80,4 @@ class ImageUpdateForm(forms.ModelForm):
 class ReviewBookForm(forms.ModelForm):
     class Meta:
         model = BookPosition
-        fields = ["review"]
+        fields = ["review", "rate"]

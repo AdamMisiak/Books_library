@@ -49,6 +49,7 @@ class BookPosition(models.Model):
     year = models.IntegerField(blank=True, default=current_year)
     status = models.CharField(choices=STATUS_CHOICES, default="To do", max_length=20)
     review = models.TextField(blank=True, null=True, max_length=1000)
+    rate = models.PositiveIntegerField(blank=True, default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
         return str(self.book)
