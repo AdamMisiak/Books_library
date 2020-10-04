@@ -162,6 +162,7 @@ class TestBookPositionModel:
             year=2020,
             status="Done",
             review="Great",
+            rate=5
         )
 
         user_label = test_book_position._meta.get_field("user").verbose_name
@@ -170,6 +171,7 @@ class TestBookPositionModel:
         month_label = test_book_position._meta.get_field("month").verbose_name
         year_label = test_book_position._meta.get_field("year").verbose_name
         review_label = test_book_position._meta.get_field("review").verbose_name
+        rate_label = test_book_position._meta.get_field("rate").verbose_name
 
         assert user_label == "user"
         assert book_label == "book"
@@ -177,6 +179,7 @@ class TestBookPositionModel:
         assert month_label == "month"
         assert year_label == "year"
         assert review_label == "review"
+        assert rate_label == "rate"
 
 
 class TestBookForm:

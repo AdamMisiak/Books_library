@@ -287,7 +287,12 @@ class TestReviewBookForm:
             form.fields["review"].label is None
             or form.fields["review"].label == "Review"
         )
+        assert (
+            form.fields["rate"].label is None
+            or form.fields["rate"].label == "Rate"
+        )
 
     def test_review_book_form_fields_help_texts(self):
         form = ReviewBookForm()
         assert form.fields["review"].help_text == ""
+        assert form.fields["rate"].help_text == ""
