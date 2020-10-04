@@ -66,7 +66,13 @@
                                             <small class="text-muted" id="year-text">{{ book_position.year }}</small>
                                             <br>
                                             {% if book_position.review %}
-                                                <small class="text-muted" id="reviewed">Reviewed by You</small>
+                                                <small class="text-muted" id="reviewed">Reviewed by You </small>
+                                            {% endif %}
+                                            {% if book_position.review and book_position.rate != 0 %}
+                                            <small class="text-muted" id="reviewed">|</small>
+                                            {% endif %}
+                                            {% if book_position.rate != 0 %}
+                                                <small class="text-muted" id="reviewed">Rated on {{ book_position.rate }}/5</small>
                                             {% endif %}
                                         </div>
                                     </div>

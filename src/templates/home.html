@@ -51,6 +51,12 @@
                                         {% if book_position.review %}
                                             <small class="text-muted" id="reviewed">Reviewed by {{ book_position.user|title }}</small>
                                         {% endif %}
+                                        {% if book_position.review and book_position.rate != 0 %}
+                                            <small class="text-muted" id="reviewed">|</small>
+                                        {% endif %}
+                                        {% if book_position.rate != 0 %}
+                                            <small class="text-muted" id="reviewed">Rated {{ book_position.rate }}/5 by {{ book_position.user|title }}</small>
+                                        {% endif %}
                                     </div>
                                 </div>
 
