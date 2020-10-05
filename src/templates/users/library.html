@@ -2,6 +2,8 @@
 
 {% load crispy_forms_tags %}
 
+{% block title %} | {{ request.user.username | title }}'s Library{% endblock %}
+
 {% block content %}
 
 <h1 class="text-center logo my-4">
