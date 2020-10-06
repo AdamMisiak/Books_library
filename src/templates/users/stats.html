@@ -11,5 +11,22 @@
 </h1>
 
 
+<div class="container">
+    <div class="jumbotron">
+        <table class="table">
+            <tbody>
+
+            {% for key, value in stats.items %}
+                <tr>
+                    <th scope="row">{{ key }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 {% endblock %}

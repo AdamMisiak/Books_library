@@ -301,13 +301,17 @@ def delete_review_view(request):
 
 # STATS OF USER VIEW
 def stats_view(request):
+    stats = {}
     user = User.objects.get(pk=request.user.id)
 
     # FILTERING ONLY USER'S ADDED BOOKS
     users_book_positions = BookPosition.objects.filter(user=user, value="Add")
     books = user.books_added.all()
 
-    context = {
+    stats['Books in library'] = users_book_positions.count()
+    stats['Books To Do'] = users_book_positions.filter(status="To do").count()
 
+    context = {
+        "stats": stats,
      }
     return render(request, "users/stats.html", context)
