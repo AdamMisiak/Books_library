@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Count
 from .models import UserImage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -302,15 +303,28 @@ def delete_review_view(request):
 # STATS OF USER VIEW
 def stats_view(request):
     stats = {}
+    temp_dict = {}
     user = User.objects.get(pk=request.user.id)
 
     # FILTERING ONLY USER'S ADDED BOOKS
     users_book_positions = BookPosition.objects.filter(user=user, value="Add")
-    books = user.books_added.all()
+    user_books = user.books_added.all()
+
+    # FINDING THE FAV GENRE
+    for element in users_book_positions:
+        if element.book.genre_1 in temp_dict.keys():
+            temp_dict[element.book.genre_1] += 1
+        elif element.book.genre_1 != '':
+            temp_dict[element.book.genre_1] = 1
+    print(max(temp_dict, key= lambda x: temp_dict[x]))
 
     stats['Books in library'] = users_book_positions.count()
     stats['Books To Do'] = users_book_positions.filter(status="To do").count()
+    stats['Books In Progress'] = users_book_positions.filter(status="In progress").count()
+    stats['Books Done'] = users_book_positions.filter(status="Done").count()
+    stats['Favourite Genre'] = max(temp_dict, key= lambda x: temp_dict[x])
 
+    
     context = {
         "stats": stats,
      }

@@ -42,8 +42,8 @@ current_month = str(today.strftime("%B"))
 
 # MODEL FOR CONNECTING USER WITH BOOK
 class BookPosition(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book')
     value = models.CharField(choices=BOOK_CHOICES, default="Delete", max_length=10)
     month = models.CharField(blank=True, default=current_month, max_length=20)
     year = models.IntegerField(blank=True, default=current_year)
