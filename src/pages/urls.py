@@ -14,6 +14,7 @@ from .views import (
     review_book_view,
     delete_review_view,
     user_library_view,
+    stats_view,
 )
 
 app_name = "users"
@@ -21,6 +22,7 @@ app_name = "users"
 urlpatterns = [
     path("delete/", add_book_view, name="delete"),
     path("library/", library_view, name="library"),
+    path("stats/", stats_view, name="stats"),
     path("user_library/<int:id>/", user_library_view, name="user_library"),
     path("account/", account_view, name="account"),
     path("challenge/", challenge_view, name="challenge"),

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} | {{ request.user.username | title }}'s Stats{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center logo my-4">
+    {{ request.user|title }}'s Stats
+</h1>
+
+
+
+{% endblock %}

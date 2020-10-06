@@ -297,3 +297,17 @@ def delete_review_view(request):
         return HttpResponse("success")
     else:
         return HttpResponse("unsuccesful")
+
+
+# STATS OF USER VIEW
+def stats_view(request):
+    user = User.objects.get(pk=request.user.id)
+
+    # FILTERING ONLY USER'S ADDED BOOKS
+    users_book_positions = BookPosition.objects.filter(user=user, value="Add")
+    books = user.books_added.all()
+
+    context = {
+
+     }
+    return render(request, "users/stats.html", context)
