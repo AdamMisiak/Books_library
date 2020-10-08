@@ -48,6 +48,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -55,7 +56,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "books_library.urls"
@@ -149,7 +149,7 @@ STATICFILES_DIRS = [
 ]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGOUT_REDIRECT_URL = "home"
 
@@ -162,3 +162,5 @@ if "DATABASE_URL" in os.environ:
     import dj_database_url
 
     DATABASES = {"default": dj_database_url.config()}
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
