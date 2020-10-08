@@ -316,6 +316,7 @@ def stats_view(request):
     stats['Books Done'] = users_book_positions.filter(status="Done").count()
     stats['Reviews written'] = users_book_positions.filter(review__isnull=False).count()
     stats['Average rate'] = round(list(users_book_positions.aggregate(Avg('rate')).values())[0], 2)
+    stats['Favourite author'] = find_fav(users_book_positions, 'author')
     stats['Favourite genre'] = find_fav(users_book_positions, 'genre')
     stats['Favourite month'] = find_fav(users_book_positions, 'month')
     stats['Favourite year'] = find_fav(users_book_positions, 'year')
