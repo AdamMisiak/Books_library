@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Count
+from django.db.models import Count, Avg, Value
 from .models import UserImage
 from .functions import find_fav
 from django.http import HttpResponseRedirect, HttpResponse
@@ -314,8 +314,11 @@ def stats_view(request):
     stats['Books To Do'] = users_book_positions.filter(status="To do").count()
     stats['Books In Progress'] = users_book_positions.filter(status="In progress").count()
     stats['Books Done'] = users_book_positions.filter(status="Done").count()
-    stats['Favourite Genre'] = find_fav(users_book_positions, 'genre')
-    stats['Favourite Month'] = find_fav(users_book_positions, 'month')
+    stats['Reviews written'] = users_book_positions.filter(review__isnull=False).count()
+    stats['Average rate'] = round(list(users_book_positions.aggregate(Avg('rate')).values())[0], 2)
+    stats['Favourite genre'] = find_fav(users_book_positions, 'genre')
+    stats['Favourite month'] = find_fav(users_book_positions, 'month')
+    stats['Favourite year'] = find_fav(users_book_positions, 'year')
 
     
     context = {
