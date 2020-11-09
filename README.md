@@ -3,7 +3,6 @@
 Live version: https://books-library-app.herokuapp.com/
 
 Website preseting books profiles of users (currently reading, read and planning to read books). Using Goodreads API. On website implemented Reading Challenge for every user. Created with Django framework.\
-Status: In progress
 
 
 ## Table of contents
